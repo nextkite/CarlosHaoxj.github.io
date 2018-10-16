@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spring," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="spring - AOPAOP （aspect object programming） 称为面向切面编程。可以理解为一个拦截框架，类似 Servlet 中的 Filter ，思想相同。 AOP基本概念 连接点（Jointpoint）：表示需要在程序中插入横切关注点的扩展点，连接点可能是类初始化、方法执行、方法调用、字段调用或处理异常等等，Spring只支持方法执行连接点，在AOP中表示为“在哪里干">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring - AOP">
+<meta property="og:url" content="http://yoursite.com/2018/07/20/Spring-AOP/index.html">
+<meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="spring - AOPAOP （aspect object programming） 称为面向切面编程。可以理解为一个拦截框架，类似 Servlet 中的 Filter ，思想相同。 AOP基本概念 连接点（Jointpoint）：表示需要在程序中插入横切关注点的扩展点，连接点可能是类初始化、方法执行、方法调用、字段调用或处理异常等等，Spring只支持方法执行连接点，在AOP中表示为“在哪里干">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-30T02:00:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring - AOP">
+<meta name="twitter:description" content="spring - AOPAOP （aspect object programming） 称为面向切面编程。可以理解为一个拦截框架，类似 Servlet 中的 Filter ，思想相同。 AOP基本概念 连接点（Jointpoint）：表示需要在程序中插入横切关注点的扩展点，连接点可能是类初始化、方法执行、方法调用、字段调用或处理异常等等，Spring只支持方法执行连接点，在AOP中表示为“在哪里干">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/20/Spring-AOP/"/>
+
+
+
+
+
+  <title>spring - AOP | CarlosHaoxj's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CarlosHaoxj's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天道酬勤    宁静致远</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/Spring-AOP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CarlosHaoxj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CarlosHaoxj's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">spring - AOP</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T18:25:31+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/框架/" itemprop="url" rel="index">
+                    <span itemprop="name">框架</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/框架/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,377
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="spring-AOP"><a href="#spring-AOP" class="headerlink" title="spring - AOP"></a>spring - AOP</h1><p>AOP （aspect object programming） 称为面向切面编程。可以理解为一个拦截框架，类似 Servlet 中的 Filter ，思想相同。</p>
+<h2 id="AOP基本概念"><a href="#AOP基本概念" class="headerlink" title="AOP基本概念"></a>AOP基本概念</h2><ul>
+<li>连接点（Jointpoint）：表示需要在程序中插入横切关注点的扩展点，连接点可能是类初始化、方法执行、方法调用、字段调用或处理异常等等，Spring只支持方法执行连接点，在AOP中表示为“在哪里干”；</li>
+<li>切入点（Pointcut）：选择一组相关连接点的模式，即可以认为连接点的集合，Spring支持perl5正则表达式和AspectJ切入点模式，Spring默认使用AspectJ语法，在AOP中表示为“在哪里干的集合”；</li>
+<li>通知（Advice）：在连接点上执行的行为，通知提供了在AOP中需要在切入点所选择的连接点处进行扩展现有行为的手段；包括前置通知（before advice）、后置通知(after advice)、环绕通知（around advice），在Spring中通过代理模式实现AOP，并通过拦截器模式以环绕连接点的拦截器链织入通知；在AOP中表示为“干什么”；</li>
+<li>方面/切面（Aspect）：横切关注点的模块化，比如上边提到的日志组件。可以认为是通知、引入和切入点的组合；在Spring中可以使用Schema和@AspectJ方式进行组织实现；在AOP中表示为“在哪干和干什么集合”；</li>
+<li>引入（inter-type declaration）：也称为内部类型声明，为已有的类添加额外新的字段或方法，Spring允许引入新的接口（必须对应一个实现）到所有被代理对象（目标对象）, 在AOP中表示为“干什么（引入什么）”；</li>
+<li>目标对象（Target Object）：需要被织入横切关注点的对象，即该对象是切入点选择的对象，需要被通知的对象，从而也可称为“被通知对象”；由于Spring AOP 通过代理模式实现，从而这个对象永远是被代理对象，在AOP中表示为“对谁干”；</li>
+<li>AOP代理（AOP Proxy）：AOP框架使用代理模式创建的对象，从而实现在连接点处插入通知（即应用切面），就是通过代理来对目标对象应用切面。在Spring中，AOP代理可以用JDK动态代理或CGLIB代理实现，而通过拦截器模型应用切面。</li>
+<li>织入（Weaving）：织入是一个过程，是将切面应用到目标对象从而创建出AOP代理对象的过程，织入可以在编译期、类装载期、运行期进行。</li>
+</ul>
+<h3 id="通知分类"><a href="#通知分类" class="headerlink" title="通知分类"></a>通知分类</h3><ol>
+<li>前置通知（Before Advice）：在切入点选择的连接点处的方法之前执行的通知，该通知不影响正常程序执行流程（除非该通知抛出异常，该异常将中断当前方法链的执行而返回）；<ol start="2">
+<li>环绕通知（Around Advices）：环绕着在切入点选择的连接点处的方法所执行的通知，环绕通知可以在方法调用之前和之后自定义任何行为，并且可以决定是否执行连接点处的方法、替换返回值、抛出异常等等。</li>
+<li>后置通知（After Advice）:在切入点选择的连接点处的方法之后执行的通知，包括如下类型的后置通知：</li>
+<li>后置返回通知（After returning Advice）:在切入点选择的连接点处的方法正常执行完毕时执行的通知，必须是连接点处的方法没抛出任何异常正常返回时才调用后置通知。</li>
+<li>后置异常通知（After throwing Advice）: 在切入点选择的连接点处的方法抛出异常返回时执行的通知，必须是连接点处的方法抛出任何异常返回时才调用异常通知。</li>
+<li>后置最终通知（After finally Advice）: 在切入点选择的连接点处的方法返回时执行的通知，不管抛没抛出异常都执行，类似于Java中的finally块。</li>
+</ol>
+</li>
+</ol>
+<h2 id="AOP-注解使用"><a href="#AOP-注解使用" class="headerlink" title="AOP 注解使用"></a>AOP 注解使用</h2><p>编写切入点 <code>execution(* 方法所属类.方法(..))</code></p>
+<ul>
+<li>@Aspect                                    指定一个类为切面类</li>
+<li>@Pointcut(“execution(* com.carlos.pointCut(..))”)  指定切入点表达式</li>
+<li>@Before(“pointCut()”)                前置通知: 目标方法之前执行</li>
+<li>@After(“pointCut()”)                后置通知：目标方法之后执行（始终执行）</li>
+<li>@AfterReturning(“pointCut()”)            返回后通知： 执行方法结束前执行(异常不执行)</li>
+<li>@AfterThrowing(“pointCut()”)            异常通知:  出现异常时候执行</li>
+<li>@Around(“pointCut()”)                环绕通知： 环绕目标方法执行</li>
+</ul>
+<h2 id="execution"><a href="#execution" class="headerlink" title="execution"></a>execution</h2><p>execution是使用的最多的一种Pointcut表达式，表示某个方法的执行，其标准语法如下。<code>execution(modifiers-pattern? ret-type-pattern declaring-type-pattern? name-pattern(param-pattern) throws-pattern?)</code></p>
+<p><strong>modifiers-pattern</strong>表示方法的访问类型，public等；（修饰类型，可以不写）</p>
+<p><strong>ret-type-pattern</strong>表示方法的返回值类型，如String表示返回类型是String，“*”表示所有的返回类型；（方法返回值类型，必写）</p>
+<p><strong>declaring-type-pattern</strong>表示方法的声明类，如“com.elim..*”表示com.elim包及其子包下面的所有类型；（方法声明类型，可以不写）</p>
+<p><strong>name-pattern</strong>表示方法的名称，如“add*”表示所有以add开头的方法名；（要匹配的名称，括号里是方法的参数）</p>
+<p><strong>param-pattern</strong>表示方法参数的类型，name-pattern(param-pattern)其实是一起的表示的方法集对应的参数类型，如“add()”表示不带参数的add方法，“add(<em>)”表示带一个任意类型的参数的add方法，“add(</em>,String)”则表示带两个参数，且第二个参数是String类型的add方法；</p>
+<p><strong>throws-pattern</strong>表示异常类型；其中以问号结束的部分都是可以省略的。（方法抛出的异常类型，可以不写）</p>
+<ol>
+<li>“execution(* add())”匹配所有的不带参数的add()方法。</li>
+<li>“execution(public <em> com.elim..</em>.add*(..))”匹配所有com.elim包及其子包下所有类的以add开头的所有public方法。</li>
+<li>“execution(<em> </em>(..) throws Exception)”匹配所有抛出Exception的方法。</li>
+</ol>
+<h2 id="AOP-XML文件使用"><a href="#AOP-XML文件使用" class="headerlink" title="AOP XML文件使用"></a>AOP XML文件使用</h2><ul>
+<li><a href="aop:config" target="_blank" rel="noopener">aop:config</a>                大多数 <a href="aop:*" target="_blank" rel="noopener">aop:*</a> 元素都需要在<a href="aop:config" target="_blank" rel="noopener">aop:config</a>元素内</li>
+<li><a href="aop:before" target="_blank" rel="noopener">aop:before</a>                前置通知</li>
+<li><a href="aop:after" target="_blank" rel="noopener">aop:after</a>                后置通知（不论被通知方法是否执行）</li>
+<li><a href="aop:aspect" target="_blank" rel="noopener">aop:aspect</a>                定义一个切面</li>
+<li><a href="aop:pointcut" target="_blank" rel="noopener">aop:pointcut</a>            定义一个切点</li>
+<li><a href="aop:after-returning" target="_blank" rel="noopener">aop:after-returning</a>        返回通知</li>
+<li><a href="aop:after-throwing" target="_blank" rel="noopener">aop:after-throwing</a>        异常通知</li>
+<li><a href="aop:around" target="_blank" rel="noopener">aop:around</a>                环绕通知</li>
+<li><a href="aop:declare-parents" target="_blank" rel="noopener">aop:declare-parents</a>         以透明方式为被通知的对象引入额外的接口</li>
+<li><a href="aop:advisor" target="_blank" rel="noopener">aop:advisor</a>                定义通知器</li>
+<li><a href="aop:aspectj-autoproxy" target="_blank" rel="noopener">aop:aspectj-autoproxy</a>    启用@AspectJ注解驱动的切面</li>
+</ul>
+<p><strong>以上我们对于 AOP 的使用有一个初步的认识，接下来通过一个实例，实践 AOP 的功能应用。分别使用注解方式与 XML 文件配置方式实现</strong></p>
+<h2 id="AOP-使用实例"><a href="#AOP-使用实例" class="headerlink" title="AOP 使用实例"></a>AOP 使用实例</h2><h3 id="创建实例接口"><a href="#创建实例接口" class="headerlink" title="创建实例接口"></a>创建实例接口</h3><pre><code>package com.spring;
+public interface ISomeService {
+    void doFirst();
+
+    String doSecond();
+
+    void doThird();
+}
+</code></pre><h4 id="使用-XML-文件实现-AOP"><a href="#使用-XML-文件实现-AOP" class="headerlink" title="使用 XML 文件实现 AOP"></a>使用 XML 文件实现 AOP</h4><pre><code>package com.spring;
+public class SomeServiceImpl implements ISomeService {
+    @Override
+    public void doFirst() {
+        // 执行 doFIrst() 方法
+        System.out.println(&quot;SomeService first&quot;);
+    }
+    @Override
+    public String doSecond() {
+        // 执行 doSecond() 方法
+        System.out.println(&quot;SomeService second&quot;);
+        return &quot;Second&quot;;
+    }
+    @Override
+    public void doThird() {
+        // 执行 doThird() 方法
+        System.out.println(&quot;SomeService third&quot;);
+    }
+}
+</code></pre><h4 id="编写目标类"><a href="#编写目标类" class="headerlink" title="编写目标类"></a>编写目标类</h4><pre><code>package com.spring;
+import org.aspectj.lang.ProceedingJoinPoint;
+public class MyAspect {
+    // 执行前调用
+    public void before(){
+        System.out.println(&quot;before&quot;);
+    }    
+    // 执行后调用
+    public void after(){
+        System.out.println(&quot;after&quot;);
+    }    
+    public void around(ProceedingJoinPoint pj) throws Throwable{
+        System.out.println(&quot;around before&quot;);
+        pj.proceed();
+        System.out.println(&quot;around after&quot;);
+    }
+}
+</code></pre><p>注意：使用环绕通知必须要使用 ProceedingJoinPoint 。使用它来调用被通知的方法，需要调用 proceed() 方法来实现功能。如果忘记调用此方法，会阻塞对被通知的方法的调用。</p>
+<h4 id="创建-XML-文件-ApplicationContext-xml"><a href="#创建-XML-文件-ApplicationContext-xml" class="headerlink" title="创建 XML 文件 ApplicationContext.xml"></a>创建 XML 文件 ApplicationContext.xml</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd&quot;&gt;
+
+&lt;!-- 注册目标对象 --&gt;
+&lt;bean id=&quot;someService&quot; class=&quot;com.spring.SomeServiceImpl&quot; /&gt;
+
+&lt;!-- 注册切面 --&gt;
+&lt;bean id=&quot;myAspect&quot; class=&quot;com.spring.MyAspect&quot;/&gt;
+
+&lt;aop:config&gt;
+    &lt;aop:aspect ref=&quot;myAspect&quot;&gt;
+        &lt;!-- 定义切点 --&gt;
+        &lt;aop:pointcut expression=&quot;execution(* com.spring.ISomeService.doFirst(..))&quot; id=&quot;first&quot;/&gt;
+        &lt;aop:pointcut expression=&quot;execution(* com.spring.ISomeService.doSecond(..))&quot; id=&quot;second&quot;/&gt;
+        &lt;aop:pointcut expression=&quot;execution(* com.spring.ISomeService.doThird(..))&quot; id=&quot;third&quot;/&gt;
+
+        &lt;aop:before method=&quot;before&quot; pointcut-ref=&quot;first&quot;/&gt;
+        &lt;aop:after method=&quot;after&quot; pointcut-ref=&quot;second&quot;/&gt;
+        &lt;aop:around method=&quot;around&quot; pointcut-ref=&quot;third&quot;/&gt;
+
+    &lt;/aop:aspect&gt;
+&lt;/aop:config&gt;
+&lt;/beans&gt;
+</code></pre><h4 id="使用注解方法完成-AOP"><a href="#使用注解方法完成-AOP" class="headerlink" title="使用注解方法完成 AOP"></a>使用注解方法完成 AOP</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd&quot;&gt;
+
+&lt;!-- 注册切面 --&gt;
+&lt;bean id=&quot;myAspect&quot; class=&quot;com.spring.MyAspect&quot;&gt;&lt;/bean&gt;
+&lt;!-- 注册目标对象 --&gt;
+&lt;bean id=&quot;someService&quot; class=&quot;com.spring.SomeServiceImpl&quot;&gt;&lt;/bean&gt;    
+&lt;!-- 注册Aspect --&gt;
+&lt;aop:aspectj-autoproxy/&gt;    
+&lt;/beans&gt;
+</code></pre><p>使用注解方式，必须在 ApplicationContext.xml 文件中添加 <code>&lt;aop:aspectj-autoproxy/&gt;</code> 用于启用 AspectJ 自动代理</p>
+<h4 id="编写目标类-1"><a href="#编写目标类-1" class="headerlink" title="编写目标类"></a>编写目标类</h4><pre><code>@Aspect   // 表示该类为切面
+public class MyAspect {
+    // 切面点
+    @Pointcut(&quot;execution(* com.spring.ISomeService.doFirst(..))&quot;)
+    public void first(){}    
+    // 通知前
+    @Before(&quot;first()&quot;)
+    private void before(){
+        System.out.println(&quot;before&quot;);
+    }
+    // 切面点    
+    @Pointcut(&quot;execution(* com.spring.ISomeService.doSecond(..))&quot;)
+    public void second(){}    
+    // 通知后
+    @After(&quot;second()&quot;)
+    public void after(){
+        System.out.println(&quot;执行 doSecond() after&quot;);
+    }
+    // 切面点
+    @Pointcut(&quot;execution(* com.spring.ISomeService.doThird(..))&quot;)
+    public void third(){}    
+    // 环绕通知
+    @Around(&quot;third()&quot;)
+    public void around(ProceedingJoinPoint pj) throws Throwable{
+        System.out.println(&quot;third 执行之前&quot;);        
+        pj.proceed();        
+        System.out.println(&quot;third 执行之后&quot;);        
+    }    
+}
+</code></pre><h3 id="编写测试类"><a href="#编写测试类" class="headerlink" title="编写测试类"></a>编写测试类</h3><pre><code>public class MyTest {
+// 使用注解 调用 Test 测试方法
+@Test
+public void test1(){        
+        String s = &quot;com/spring/ApplicationContext.xml&quot;;
+        ApplicationContext ac = new ClassPathXmlApplicationContext(s);
+        ISomeService service = (ISomeService) ac.getBean(&quot;someService&quot;);
+        service.doFirst();
+        System.out.println(&quot;=============&quot;);
+        service.doSecond();
+        System.out.println(&quot;==============&quot;);
+        service.doThird();
+    }
+}
+</code></pre><p>以上内容通过一个小实例完成对 AOP 的应用实现，简单的做一个认识了解。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="CarlosHaoxj WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/20/Spring 入门/" rel="next" title="Spring-入门">
+                <i class="fa fa-chevron-left"></i> Spring-入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/30/Spring-MVC/" rel="prev" title="Spring-MVC 入门">
+                Spring-MVC 入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="CarlosHaoxj" />
+            
+              <p class="site-author-name" itemprop="name">CarlosHaoxj</p>
+              <p class="site-description motion-element" itemprop="description">JAVA</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/CarlosHaoxj" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3757117190/home?wvr=5" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:458074992@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/wu-kong-gun/activities" target="_blank" title="Zhihu">
+                      
+                        <i class="fa fa-fw fa-fas fa-angle-double-right"></i>Zhihu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="baidu" target="_blank">baidu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.fontawesome.com/" title="icon" target="_blank">icon</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#spring-AOP"><span class="nav-number">1.</span> <span class="nav-text">spring - AOP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">AOP基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通知分类"><span class="nav-number">1.1.1.</span> <span class="nav-text">通知分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP-注解使用"><span class="nav-number">1.2.</span> <span class="nav-text">AOP 注解使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#execution"><span class="nav-number">1.3.</span> <span class="nav-text">execution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP-XML文件使用"><span class="nav-number">1.4.</span> <span class="nav-text">AOP XML文件使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP-使用实例"><span class="nav-number">1.5.</span> <span class="nav-text">AOP 使用实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建实例接口"><span class="nav-number">1.5.1.</span> <span class="nav-text">创建实例接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-XML-文件实现-AOP"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">使用 XML 文件实现 AOP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编写目标类"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">编写目标类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建-XML-文件-ApplicationContext-xml"><span class="nav-number">1.5.1.3.</span> <span class="nav-text">创建 XML 文件 ApplicationContext.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用注解方法完成-AOP"><span class="nav-number">1.5.1.4.</span> <span class="nav-text">使用注解方法完成 AOP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编写目标类-1"><span class="nav-number">1.5.1.5.</span> <span class="nav-text">编写目标类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写测试类"><span class="nav-number">1.5.2.</span> <span class="nav-text">编写测试类</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<section class="footer">
+    <span class="footer__copyright">
+<div><span id="span_dt_dt"> </span>
+<script language="javascript">
+	function show_date_time(){
+		window.setTimeout("show_date_time()", 1000);
+		BirthDay=new Date("4/8/2018/ 07:18:00");//这个日期是可以修改的
+		today=new Date();
+		timeold=(today.getTime()-BirthDay.getTime());//其实仅仅改了这里
+		sectimeold=timeold/1000
+		secondsold=Math.floor(sectimeold);
+		msPerDay=24*60*60*1000
+		e_daysold=timeold/msPerDay
+		daysold=Math.floor(e_daysold);
+		e_hrsold=(e_daysold-daysold)*24;
+		hrsold=Math.floor(e_hrsold);
+		e_minsold=(e_hrsold-hrsold)*60;
+		minsold=Math.floor((e_hrsold-hrsold)*60);
+		seconds=Math.floor((e_minsold-minsold)*60);
+		span_dt_dt.innerHTML="勉强运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+	}
+	show_date_time();
+</script>
+</div>
+    
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CarlosHaoxj</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">15.4k</span>
+  
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

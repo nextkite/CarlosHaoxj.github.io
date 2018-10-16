@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java Web 过滤器," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="过滤器 Filter过滤器是 Java Web 三大组件之一。它的作用是，当客户端向服务器发出请求，经过过滤器。过滤器进行拦截，也可以拦截响应。可以对拦截的内容进行添加修改。在对访问者权限判断时可以使用到过滤器。 注册 Filter需要在 web.xml 下进行 Filter 的注册，添加以下代码                         &amp;lt;filter-mapping&amp;gt;">
+<meta name="keywords" content="Java Web 过滤器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Web 过滤器">
+<meta property="og:url" content="http://yoursite.com/2018/06/06/Java-Web-过滤器/index.html">
+<meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="过滤器 Filter过滤器是 Java Web 三大组件之一。它的作用是，当客户端向服务器发出请求，经过过滤器。过滤器进行拦截，也可以拦截响应。可以对拦截的内容进行添加修改。在对访问者权限判断时可以使用到过滤器。 注册 Filter需要在 web.xml 下进行 Filter 的注册，添加以下代码                         &amp;lt;filter-mapping&amp;gt;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-06T14:33:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java Web 过滤器">
+<meta name="twitter:description" content="过滤器 Filter过滤器是 Java Web 三大组件之一。它的作用是，当客户端向服务器发出请求，经过过滤器。过滤器进行拦截，也可以拦截响应。可以对拦截的内容进行添加修改。在对访问者权限判断时可以使用到过滤器。 注册 Filter需要在 web.xml 下进行 Filter 的注册，添加以下代码                         &amp;lt;filter-mapping&amp;gt;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/06/Java-Web-过滤器/"/>
+
+
+
+
+
+  <title>Java Web 过滤器 | CarlosHaoxj's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CarlosHaoxj's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天道酬勤    宁静致远</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/Java-Web-过滤器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CarlosHaoxj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CarlosHaoxj's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java Web 过滤器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T20:40:45+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA-基础学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA 基础学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA-基础学习笔记/Java-Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Java Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  764
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="过滤器-Filter"><a href="#过滤器-Filter" class="headerlink" title="过滤器 Filter"></a>过滤器 Filter</h1><p>过滤器是 Java Web 三大组件之一。它的作用是，当客户端向服务器发出请求，经过过滤器。过滤器进行拦截，也可以拦截响应。可以对拦截的内容进行添加修改。在对访问者权限判断时可以使用到过滤器。</p>
+<h1 id="注册-Filter"><a href="#注册-Filter" class="headerlink" title="注册 Filter"></a>注册 Filter</h1><p>需要在 web.xml 下进行 Filter 的注册，添加以下代码<br>    <filter><br>        <filter-name></filter-name><br>        <filter-classs><br>    </filter-classs></filter></p>
+<pre><code>&lt;filter-mapping&gt;
+    &lt;filter-name&gt;&lt;filter-name&gt;
+    &lt;url-pattern&gt;&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+</code></pre><h1 id="生命周期四个阶段"><a href="#生命周期四个阶段" class="headerlink" title="生命周期四个阶段"></a>生命周期四个阶段</h1><h2 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h2><h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>执行 init() 方法。与 Servlet 相同，web 启动时进行实例化。创建 Filter 实例对象，调用 init() 方法进行初始化。Filter 只会创建一次，init() 方法也只会执行一次。</p>
+<h2 id="doFilter"><a href="#doFilter" class="headerlink" title="doFilter"></a>doFilter</h2><p>在每一次的拦截都会执行。需要在这里填写 <code>chain.doFilter(request, response)</code> 将请求放到下一个资源</p>
+<h3 id="FilterCofing"><a href="#FilterCofing" class="headerlink" title="FilterCofing"></a>FilterCofing</h3><ol>
+<li>getFilterName()            获取配置名称</li>
+<li>getINitParameter()         获取初始化参数</li>
+<li>getInitParameterNames()    获取所有初始化参数</li>
+<li>getServletContext()        获取全局域<h2 id="销毁"><a href="#销毁" class="headerlink" title="销毁"></a>销毁</h2>destory() 。 只有应用停止才会执行 destory() 方法进行销毁</li>
+</ol>
+<h1 id="四种拦截方式"><a href="#四种拦截方式" class="headerlink" title="四种拦截方式"></a>四种拦截方式</h1><p>在注册 Filter 时添加 <code>&lt;dipatcher&gt;&lt;/dipatcher&gt;</code> 可以添加拦截方式，只会拦截指定类型。</p>
+<h2 id="FORWARD"><a href="#FORWARD" class="headerlink" title="FORWARD"></a>FORWARD</h2><p>如果请求通过 RequestDispatcher 的 forward() 方法转发。将会被 Filter 拦截。即只会拦截由 RequestDispatcher 的 forward() 方法转发的请求，其他的不会被拦截</p>
+<h2 id="INCLUDE"><a href="#INCLUDE" class="headerlink" title="INCLUDE"></a>INCLUDE</h2><p>通过 RequestDispatcher 的 include() 方法，将会被拦截，其他的不会被拦截</p>
+<h2 id="REQUEST"><a href="#REQUEST" class="headerlink" title="REQUEST"></a>REQUEST</h2><p>不写 dispatcher 默认是<dipatcher>REQUEST 拦截普通请求，但对于 forward() 和 include() 跳转不进行拦截</dipatcher></p>
+<h2 id="ERROR"><a href="#ERROR" class="headerlink" title="ERROR"></a>ERROR</h2><p>ERROR 只有跳转错误页面处理时 会进行拦截</p>
+<h1 id="多个-Filter-执行顺序"><a href="#多个-Filter-执行顺序" class="headerlink" title="多个 Filter 执行顺序"></a>多个 Filter 执行顺序</h1><p>根据在 web.xml 中的注册顺序进行执行。</p>
+<h1 id="中文乱码解决方案"><a href="#中文乱码解决方案" class="headerlink" title="中文乱码解决方案"></a>中文乱码解决方案</h1><h2 id="POST-中文乱码解决方案"><a href="#POST-中文乱码解决方案" class="headerlink" title="POST 中文乱码解决方案"></a>POST 中文乱码解决方案</h2><ul>
+<li><p>请求</p>
+<blockquote>
+<p>request.getCharacterEncoding(“UTF-8”);<br>放入到 Filter 中   只要做拦截就修改编码<br>但是这个方法对于 GET 提交不适用（无效）</p>
+</blockquote>
+</li>
+<li><p>响应</p>
+<blockquote>
+<p>response.setContentType(“text/html;charset=UTF-8”);</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>都写在<code>chain.doFilter(request,response);</code> 之前</li>
+</ul>
+<h2 id="GET-中文乱码解决方案"><a href="#GET-中文乱码解决方案" class="headerlink" title="GET 中文乱码解决方案"></a>GET 中文乱码解决方案</h2><p>使用装饰者设计模式解决这个问题。定义一个类继承 HttpServletResponseWrapper 。子类必须要有带参构造器</p>
+<blockquote>
+<p>需要重写四个方法<br>getParmameterMap()<br>getParameterNames()<br>getParameterValues(String name)<br>getParameter(String name)</p>
+</blockquote>
+<ul>
+<li><p>自定义一个 Map ,原始 Map 中数据是乱码，自定义 Map 中数据来自于原始 Map</p>
+<p>  public Maop&lt;String, String[]&gt; getParameterMap(){</p>
+<pre><code>Map&lt;String, String[]&gt; newMap = new HashMap&lt;&gt;();   
+Map&lt;String, String[]&gt; originalMap = super.getParameterMap();   //获取原始 Map
+//遍历原始 Map
+for(String key : originalMap.keySet()){
+String[] values = originalMap.get(key);  //获取当前遍历 key 所有值
+for(int i=0; i&lt;values.length; i++){
+
+    byte[] bytes = values[i].getByte(“ISO8859-1”);    //打散
+    values[i] = new String(bytes,”UTF-8”);        //组装
+
+}
+//将解决乱码问题数据放入新 Map
+newMap.put(key, values);    
+
+}
+return newMap;
+</code></pre><p>  }<br>  public Enumweationg<string> getParameterNames(){</string></p>
+<pre><code>Map&lt;String, String[]&gt; map = this.getParameterMap();
+//将 Set 装换为 Vector
+Set&lt;String&gt; keySet = map.keySet();
+Vector keVector = (Vector) keySet;
+
+return keyVector.elements();
+</code></pre><p>  }</p>
+<p>  public String[] getparmeterValues(String name){</p>
+<pre><code>Map&lt;String, String[]&gt; map = this.getParameterMap();
+return map.get(name);
+</code></pre><p>  }</p>
+<p>  public String getParameter(String name){</p>
+<pre><code>return this.getParameterValues(name)[0];
+</code></pre><p>  }<br>  创建一个自定义请求对象<br>  request = new 自定义解决乱码名称的类((HttpServletRequest)request);</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="CarlosHaoxj WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java-Web-过滤器/" rel="tag"><i class="fa fa-tag"></i> Java Web 过滤器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/05/frist-blog/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/20/Spring 入门/" rel="prev" title="Spring-入门">
+                Spring-入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="CarlosHaoxj" />
+            
+              <p class="site-author-name" itemprop="name">CarlosHaoxj</p>
+              <p class="site-description motion-element" itemprop="description">JAVA</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/CarlosHaoxj" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3757117190/home?wvr=5" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:458074992@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/wu-kong-gun/activities" target="_blank" title="Zhihu">
+                      
+                        <i class="fa fa-fw fa-fas fa-angle-double-right"></i>Zhihu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="baidu" target="_blank">baidu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.fontawesome.com/" title="icon" target="_blank">icon</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#过滤器-Filter"><span class="nav-number">1.</span> <span class="nav-text">过滤器 Filter</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册-Filter"><span class="nav-number">2.</span> <span class="nav-text">注册 Filter</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生命周期四个阶段"><span class="nav-number">3.</span> <span class="nav-text">生命周期四个阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实例化"><span class="nav-number">3.1.</span> <span class="nav-text">实例化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">3.2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#doFilter"><span class="nav-number">3.3.</span> <span class="nav-text">doFilter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FilterCofing"><span class="nav-number">3.3.1.</span> <span class="nav-text">FilterCofing</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#销毁"><span class="nav-number">3.4.</span> <span class="nav-text">销毁</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四种拦截方式"><span class="nav-number">4.</span> <span class="nav-text">四种拦截方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FORWARD"><span class="nav-number">4.1.</span> <span class="nav-text">FORWARD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#INCLUDE"><span class="nav-number">4.2.</span> <span class="nav-text">INCLUDE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#REQUEST"><span class="nav-number">4.3.</span> <span class="nav-text">REQUEST</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ERROR"><span class="nav-number">4.4.</span> <span class="nav-text">ERROR</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多个-Filter-执行顺序"><span class="nav-number">5.</span> <span class="nav-text">多个 Filter 执行顺序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中文乱码解决方案"><span class="nav-number">6.</span> <span class="nav-text">中文乱码解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#POST-中文乱码解决方案"><span class="nav-number">6.1.</span> <span class="nav-text">POST 中文乱码解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GET-中文乱码解决方案"><span class="nav-number">6.2.</span> <span class="nav-text">GET 中文乱码解决方案</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<section class="footer">
+    <span class="footer__copyright">
+<div><span id="span_dt_dt"> </span>
+<script language="javascript">
+	function show_date_time(){
+		window.setTimeout("show_date_time()", 1000);
+		BirthDay=new Date("4/8/2018/ 07:18:00");//这个日期是可以修改的
+		today=new Date();
+		timeold=(today.getTime()-BirthDay.getTime());//其实仅仅改了这里
+		sectimeold=timeold/1000
+		secondsold=Math.floor(sectimeold);
+		msPerDay=24*60*60*1000
+		e_daysold=timeold/msPerDay
+		daysold=Math.floor(e_daysold);
+		e_hrsold=(e_daysold-daysold)*24;
+		hrsold=Math.floor(e_hrsold);
+		e_minsold=(e_hrsold-hrsold)*60;
+		minsold=Math.floor((e_hrsold-hrsold)*60);
+		seconds=Math.floor((e_minsold-minsold)*60);
+		span_dt_dt.innerHTML="勉强运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+	}
+	show_date_time();
+</script>
+</div>
+    
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CarlosHaoxj</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">15.4k</span>
+  
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

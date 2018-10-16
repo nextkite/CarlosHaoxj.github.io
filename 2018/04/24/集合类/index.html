@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JAVA," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="泛型 jdk1.5出现的安全机制，避免强制转换。&amp;lt;&amp;gt;当操作应用类型不确定时应用，确定应用类型传入即可。确保类型安全（它的出现不单单确保类型安全）。运行时会将泛型去掉生成class文件不带泛型，为兼容运行类的加载器。  集合概述 集合按照其存储方式可分为两大类，单集合Collection，双集合Map.Cokkection: 单列集合用于存储一系列符合某种规则的元素，两个重要子接口，Li">
+<meta name="keywords" content="JAVA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集合类">
+<meta property="og:url" content="http://yoursite.com/2018/04/24/集合类/index.html">
+<meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="泛型 jdk1.5出现的安全机制，避免强制转换。&amp;lt;&amp;gt;当操作应用类型不确定时应用，确定应用类型传入即可。确保类型安全（它的出现不单单确保类型安全）。运行时会将泛型去掉生成class文件不带泛型，为兼容运行类的加载器。  集合概述 集合按照其存储方式可分为两大类，单集合Collection，双集合Map.Cokkection: 单列集合用于存储一系列符合某种规则的元素，两个重要子接口，Li">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-06T01:07:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="集合类">
+<meta name="twitter:description" content="泛型 jdk1.5出现的安全机制，避免强制转换。&amp;lt;&amp;gt;当操作应用类型不确定时应用，确定应用类型传入即可。确保类型安全（它的出现不单单确保类型安全）。运行时会将泛型去掉生成class文件不带泛型，为兼容运行类的加载器。  集合概述 集合按照其存储方式可分为两大类，单集合Collection，双集合Map.Cokkection: 单列集合用于存储一系列符合某种规则的元素，两个重要子接口，Li">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/24/集合类/"/>
+
+
+
+
+
+  <title>集合类 | CarlosHaoxj's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CarlosHaoxj's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天道酬勤    宁静致远</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/24/集合类/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CarlosHaoxj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CarlosHaoxj's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">集合类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-24T08:16:52+08:00">
+                2018-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA-基础学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA 基础学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA-基础学习笔记/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,406
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><blockquote>
+<p>jdk1.5出现的安全机制，避免强制转换。&lt;&gt;当操作应用类型不确定时应用，确定应用类型传入即可。确保类型安全（它的出现不单单确保类型安全）。运行时会将泛型去掉生成class文件不带泛型，为兼容运行类的加载器。</p>
+</blockquote>
+<h1 id="集合概述"><a href="#集合概述" class="headerlink" title="集合概述"></a>集合概述</h1><ul>
+<li>集合按照其存储方式可分为两大类，单集合Collection，双集合Map.<br>Cokkection: 单列集合用于存储一系列符合某种规则的元素，两个重要子接口，List 和 Set。List特点是元素有序，元素可重复。Set特点是元素无序且不可重复。List 实现类有ArrayList和LinkedList，Set接口的主要实现类有HashSet 和 TreeSet。<br>Map： 双列集合用于存储具有键（Key）和值（Value）映射关系元素，每个元素都包含一对键值对。使用时可用一个Key找出其对应的Value。Map主要实现类有HashMap 和 TreeMap。<h1 id="List-接口"><a href="#List-接口" class="headerlink" title="List 接口"></a>List 接口</h1></li>
+<li>List 接口继承自Collection接口，是单列集合重要分支。容许存储元素重复，通过索引访问集合中指定元素。存储元素有序，元素存入顺序和取出顺序一致。<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2></li>
+</ul>
+<ol>
+<li>void add（int index，Object element）  将元素element插入在集合的index处</li>
+<li>boolean addAll（int index，Collection c) 将集合c所包含的元素插入到List集合的index处</li>
+<li>Object get(int index) 返回集合索引index处的元素</li>
+<li>Object remove(int index) 删除index索引处元素</li>
+<li>Object set(int index,Object element) 将索引indext处元素换成element对象，并将替换后的元素返回</li>
+<li>int indexOf(Object o) 返回对象o在List集合中出现的位置索引</li>
+<li>int lastIndexO(Object o) 返回对象o在List集合中最后一次出现的位置索引</li>
+<li>List subList(int fromIndex,int toIndex) 返回从索引fromINdex(包括)到toIndex(不包括)处所有元素集合组成的子集合<h2 id="asList"><a href="#asList" class="headerlink" title="asList()"></a>asList()</h2></li>
+</ol>
+<ul>
+<li>List asList(数组) 将数组转到集合，可以使用集合方法操作数组，数组长度时固定的，集合的增删方法不可用。<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2></li>
+<li>ArrayList是List接口实现类，内部封装了一个长度可变的数组对象，存入元素超出数组长度时，会在内存中分配一个更大的数组存储这些元素。ArrayList可看做一个长度可变的数组对象。底层是使用数组来保存元素，在进行增加删除时，会导致创建新数组，效率比较低，不适合做大量的增删操作。但是索引做查找元素很便捷。<h3 id="存取操作"><a href="#存取操作" class="headerlink" title="存取操作"></a>存取操作</h3>  public static void main(String[] args)<br>  {<pre><code>ArrayList it = new ArrayList();
+it.add(&quot;aa&quot;);
+it.add(&quot;bb&quot;);
+it.add(&quot;cc&quot;);
+System.out.println(&quot;长度&quot;+it.size());
+System.out.println(&quot;第2个元素&quot;+it.get(1));
+it.remove(1);
+it.set(0,&quot;e&quot;);
+System.out.println(it.subList(0,2));
+</code></pre>  }<h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2></li>
+<li>为了解决ArrayList增删的效率低问题，提供了LinkedList实现类，该集合内部维护了一个双向循环链表。可以实现栈的所有功能和方法，可以把LinkedList作为栈使用。<h3 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h3></li>
+</ul>
+<ol>
+<li>void add(int index,E element) 在指定位置加入指定元素</li>
+<li>void addFirst（Object o) 将指定元素插入到开头</li>
+<li>void addLast(Object o) 将指定元素插入到结尾</li>
+<li>Object getFirst() 返回此列表的第一个元素</li>
+<li>Object getLast() 返回此列表的最后一个元素</li>
+<li>Object removeFrist() 移除并返回此列表第一个元素</li>
+<li>Object removeLast() 移除并返回此列表最后一个元素<h4 id="方法使用"><a href="#方法使用" class="headerlink" title="方法使用"></a>方法使用</h4> public static void main(String[] args)<br> {<pre><code>LinkedList it = new LinkedList();
+it.add(&quot;aa&quot;);
+it.add(&quot;bb&quot;);
+it.add(&quot;cc&quot;);
+it.add(1,&quot;dd&quot;);
+it.addFirst(&quot;ee&quot;);
+it.removeFirst();
+</code></pre> }<h1 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h1></li>
+</ol>
+<ul>
+<li>接口Iterator与Collection，Map不同，Collection与Map用于存储元素，Iterator主要用于迭代访问（遍历）Collection中元素，迭代器。<h2 id="Iterator代码实现"><a href="#Iterator代码实现" class="headerlink" title="Iterator代码实现"></a>Iterator代码实现</h2>  public static void main(String[] args)<br>  {<pre><code>ArrayList it = new ArrayList();
+it.add(&quot;aa&quot;);
+it.add(&quot;bb&quot;);
+it.add(&quot;cc&quot;);
+Iterator i = it.Iterator();        //获取Iterator对象
+while(i.hasNext)                //判断ArrayList是否存在下一个元苏
+{    
+    Object obj = it.next();        //取ArrayList集合中元素
+    System.out.println(obj);
+}
+</code></pre>  }</li>
+<li>迭代器获取ArrayList集合中元素，都会将这些元素当做<strong>Object类型</strong>来看待，如果想得到特定类型，需要进行<strong>强制类型转换</strong>。使用迭代器进行迭代时，</li>
+<li><p>如果用集合对象调用remove()方法去删除元素，会出现异常。</p>
+<h3 id="集合对象remove-解决方法"><a href="#集合对象remove-解决方法" class="headerlink" title="集合对象remove()解决方法"></a>集合对象remove()解决方法</h3><blockquote>
+<p>第一种：添加break,找到删除，跳出循环停止迭代。</p>
+</blockquote>
+<p>  if(“aa”.equals(obj))<br>  {</p>
+<pre><code>it.remove();
+break;
+</code></pre><p>  }</p>
+</li>
+</ul>
+<blockquote>
+<p>第二种：用迭代器remove()方法，对于迭代器本身是可预知的。</p>
+</blockquote>
+<pre><code>if(&quot;aa&quot;.equals(obj))
+{
+    i.remove();
+}
+</code></pre><ul>
+<li>调用remove()必须先调用<strong>next()</strong>。<h3 id="ListIterator"><a href="#ListIterator" class="headerlink" title="ListIterator"></a>ListIterator</h3></li>
+<li>继承于Iterator类，在父类基础上添加逆向迭代，<strong>ListIterator迭代器只能用于List集合中</strong>。<h4 id="常用方法-2"><a href="#常用方法-2" class="headerlink" title="常用方法"></a>常用方法</h4></li>
+</ul>
+<ol>
+<li>void add(Object o) 将元素插入列表</li>
+<li>booleadn hasPrevious() 逆向遍历列表，列表有多个元素，返回true</li>
+<li>Object previous() 返回列表前一个元素</li>
+<li>void remove() 从列表中移除由next或previous返回的最后一个元素<h3 id="逆向迭代代码实现"><a href="#逆向迭代代码实现" class="headerlink" title="逆向迭代代码实现"></a>逆向迭代代码实现</h3> public static void main(String[] args)<br> {<pre><code>ArrayList it = new ArrayList();
+it.add(&quot;aa&quot;);
+it.add(&quot;bb&quot;);
+it.add(&quot;cc&quot;);
+ListIterator i = it.listIterator(it.size());//获取Iterator对象
+while(i.hasPrevious)                //判断ArrayList是否存在下一个元苏
+{    
+    Object obj = it.previous();        //取ArrayList集合中元素
+    System.out.println(obj);
+}
+</code></pre> }<h2 id="foreach循环代码实现"><a href="#foreach循环代码实现" class="headerlink" title="foreach循环代码实现"></a>foreach循环代码实现</h2> foreach(容器中元素类型 临时变量 : 容器容量)<br> {<pre><code>......
+</code></pre> }</li>
+</ol>
+<ul>
+<li>jdk5.0新特性，主要应用于数组。相比Iterator遍历，它的写法简单。foreach循环的次数由容器中个数决定。局限是进行foreach循环只能访问元素，不可以对元素进行修改。</li>
+</ul>
+<h2 id="Enumeration接口"><a href="#Enumeration接口" class="headerlink" title="Enumeration接口"></a>Enumeration接口</h2><ul>
+<li>在JDK1.2以前还没有Iterator接口时候，遍历集合需要使用Enumeration接口，于Iterator方法类似。集合Vector是List接口的一个实现类，用法与ArrayList完全相同。Vector集合是线程安全的，ArrayList是线程不安全的。在Vector提供一个elements()方法用于返回Enumeration对象，通过Enumeration对象来遍历集合中的元素。<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3>  public static void main(String[] args)<br>  {<pre><code>Vertor v = new Vector();
+v.add(&quot;aa&quot;);
+v.add(&quot;bb&quot;);
+Enumeration en = v.elements();
+whoile(en.hasMoreElements)
+{    
+    Object obj - en.nextElement();
+    System.out.println(obj);
+}
+</code></pre>  }<h1 id="Set-接口"><a href="#Set-接口" class="headerlink" title="Set 接口"></a>Set 接口</h1></li>
+<li>继承于Collection。Set接口存入元素是无序，不可存入重复元素。主要有俩个实现类HashSet和TreeSet。HashSet是根据哈希值确定元素在集合中的存储位置，具有良好的存取和查找功能。TreeSet是根据二叉树的方式来存储元素，可以对元素集合进行排序。<h2 id="HashSet集合"><a href="#HashSet集合" class="headerlink" title="HashSet集合"></a>HashSet集合</h2></li>
+<li>存储元素无序并且不可重复。存元素是先调用hashCode()确定元素位置，再调用equals()来完成对象的唯一性。如果hashCode()值不同，不用判断，直接存到哈希表。如果hashCode()值相同，判断equals(),true视为相同元素，不存。false视为不同元素，存。<strong>必须覆盖hashCode()和equals()</strong><h3 id="HashSet代码实现"><a href="#HashSet代码实现" class="headerlink" title="HashSet代码实现"></a>HashSet代码实现</h3>  public static void main(String[] args)<br>  {<pre><code>HashSet h = new HashSet();
+h.add(&quot;aa&quot;);
+h.add(&quot;bb&quot;);
+Iterator it = h.iterator;
+while(it.hasNext())
+{    
+    Object obj = it.next();
+    System.out.println(obj);
+}
+</code></pre>  }<h3 id="重写覆盖hashCode-和equals"><a href="#重写覆盖hashCode-和equals" class="headerlink" title="重写覆盖hashCode()和equals()"></a>重写覆盖hashCode()和equals()</h3>  public int hashCode()                //重写hashCode<br>  {<pre><code>return x.hasCode();
+</code></pre>  }<br>  public boolean equals(Object obj)    //重写equals<br>  {<pre><code>if(this == obj)            //判断是否为同一对象           
+{
+    return true;
+}
+if(!(obj instanceof S))    //判断是否为S类型
+{
+    return false;
+}
+S s = (S)obj;            //将对象强转S
+boolean b = this.x.equals(s.x);
+return b;
+</code></pre>  }</li>
+</ul>
+<h2 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h2><ul>
+<li>利用二叉树存储元素，可以排序，保证没有重复元素。TreeSet利用的是自平衡的排序二叉树。</li>
+<li>集合中元素进行排序比较时，会调用compareTo()方法，该方法在Comparable接口中定义。要对集合元素排序就必须实现<strong>Comparable接口</strong>。<h3 id="Student-name-age-类型对象排序比较需要重写compareTo"><a href="#Student-name-age-类型对象排序比较需要重写compareTo" class="headerlink" title="Student(name,age)类型对象排序比较需要重写compareTo()"></a>Student(name,age)类型对象排序比较需要重写compareTo()</h3>  public int compareTo(Object obj)                //重写compareTo()<br>  {<pre><code>Student stu = (Student)obj;
+if(this.age-stu.age&gt;age)                        //判断年龄
+{
+    return 1;                                //1存 -1不存
+}
+if(this.age-stu.age==0)        
+{
+    return this.name.compareTo(stu.name);    //年龄相同再对名字比较
+}
+return -1;
+</code></pre>  }<h1 id="Map-接口"><a href="#Map-接口" class="headerlink" title="Map 接口"></a>Map 接口</h1></li>
+<li>双列集合，存储每个对象都是一个键值对，一个键(key)和一个值(value),存在的关系是映射。访问时只要找到键(key),就可以找到对应的值(value)。必须保持键(key)的唯一性。<h2 id="常用方法-3"><a href="#常用方法-3" class="headerlink" title="常用方法"></a>常用方法</h2></li>
+</ul>
+<ol>
+<li>void put(Object key,Object value) 将值与映射关系中的指定键关联（存）</li>
+<li>Object get(Object key) 返回映射关系的值，如果不包含返回null（取）</li>
+<li>boolean containsKey(Object key) 判断指定键(key)关系的映射值（判断）</li>
+<li>boolean containsValue(Object value) 此映射将一个或多个键映射到指定值（判断）</li>
+<li>Set keySet() 返回此映射中包含键的Set视图</li>
+<li>Collection<v>values 返回此映射中包含值得Collection视图</v></li>
+<li>Set&lt;Map.Entry&lt;K,V&gt;&gt;entrySet 返回此映射中包含的映射关系的Set视图<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2></li>
+</ol>
+<ul>
+<li>Map接口一个实现类，基于哈希表。如果多个线程同时访问哈希映射，并且至少有一个线程在结构上修改了映射，那么它必须在外部进行同步。如果存入相同的键(key),后存储的值将覆盖原有的值。键相同，值覆盖。最快的查找技术。<h3 id="常用方法-4"><a href="#常用方法-4" class="headerlink" title="常用方法"></a>常用方法</h3><h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2></li>
+<li>Map接口一个实现类，基于二叉树。TreeMap所有键是按照某种顺序排列。<h3 id="常用方法-5"><a href="#常用方法-5" class="headerlink" title="常用方法"></a>常用方法</h3></li>
+</ul>
+<ol>
+<li>int size() 返回集合中键(key)映射值的数量</li>
+<li>void clear() 删除所有键的映射关系</li>
+<li>void comparator() 比较器<h3 id="TreeSet迭代"><a href="#TreeSet迭代" class="headerlink" title="TreeSet迭代"></a>TreeSet迭代</h3> public static void main(Stringp[] args)<br> {<pre><code>TreeSet tm = new TreeSet();
+tm.put(&quot;1&quot;,&quot;aa&quot;);
+tm.put(&quot;2&quot;,&quot;bb&quot;);
+Set keySet = tm.keySet();
+Iterator it = it.iterator();
+while(it.hasNext())
+{
+    Object key = it.next();
+    Object value = it.get(key);
+    System.out.println(key+&quot;,&quot;+value);
+}
+</code></pre> }</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="CarlosHaoxj WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JAVA/" rel="tag"><i class="fa fa-tag"></i> JAVA</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/29/线程/" rel="prev" title="线程">
+                线程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="CarlosHaoxj" />
+            
+              <p class="site-author-name" itemprop="name">CarlosHaoxj</p>
+              <p class="site-description motion-element" itemprop="description">JAVA</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/CarlosHaoxj" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3757117190/home?wvr=5" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:458074992@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/wu-kong-gun/activities" target="_blank" title="Zhihu">
+                      
+                        <i class="fa fa-fw fa-fas fa-angle-double-right"></i>Zhihu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="baidu" target="_blank">baidu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.fontawesome.com/" title="icon" target="_blank">icon</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#泛型"><span class="nav-number">1.</span> <span class="nav-text">泛型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集合概述"><span class="nav-number">2.</span> <span class="nav-text">集合概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#List-接口"><span class="nav-number">3.</span> <span class="nav-text">List 接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用方法"><span class="nav-number">3.1.</span> <span class="nav-text">常用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#asList"><span class="nav-number">3.2.</span> <span class="nav-text">asList()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ArrayList"><span class="nav-number">3.3.</span> <span class="nav-text">ArrayList</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#存取操作"><span class="nav-number">3.3.1.</span> <span class="nav-text">存取操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LinkedList"><span class="nav-number">3.4.</span> <span class="nav-text">LinkedList</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用方法-1"><span class="nav-number">3.4.1.</span> <span class="nav-text">常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法使用"><span class="nav-number">3.4.1.1.</span> <span class="nav-text">方法使用</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#迭代器"><span class="nav-number">4.</span> <span class="nav-text">迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterator代码实现"><span class="nav-number">4.1.</span> <span class="nav-text">Iterator代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#集合对象remove-解决方法"><span class="nav-number">4.1.1.</span> <span class="nav-text">集合对象remove()解决方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ListIterator"><span class="nav-number">4.1.2.</span> <span class="nav-text">ListIterator</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用方法-2"><span class="nav-number">4.1.2.1.</span> <span class="nav-text">常用方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逆向迭代代码实现"><span class="nav-number">4.1.3.</span> <span class="nav-text">逆向迭代代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#foreach循环代码实现"><span class="nav-number">4.2.</span> <span class="nav-text">foreach循环代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enumeration接口"><span class="nav-number">4.3.</span> <span class="nav-text">Enumeration接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">4.3.1.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Set-接口"><span class="nav-number">5.</span> <span class="nav-text">Set 接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashSet集合"><span class="nav-number">5.1.</span> <span class="nav-text">HashSet集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashSet代码实现"><span class="nav-number">5.1.1.</span> <span class="nav-text">HashSet代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重写覆盖hashCode-和equals"><span class="nav-number">5.1.2.</span> <span class="nav-text">重写覆盖hashCode()和equals()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TreeSet"><span class="nav-number">5.2.</span> <span class="nav-text">TreeSet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Student-name-age-类型对象排序比较需要重写compareTo"><span class="nav-number">5.2.1.</span> <span class="nav-text">Student(name,age)类型对象排序比较需要重写compareTo()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Map-接口"><span class="nav-number">6.</span> <span class="nav-text">Map 接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用方法-3"><span class="nav-number">6.1.</span> <span class="nav-text">常用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap"><span class="nav-number">6.2.</span> <span class="nav-text">HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用方法-4"><span class="nav-number">6.2.1.</span> <span class="nav-text">常用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TreeMap"><span class="nav-number">6.3.</span> <span class="nav-text">TreeMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用方法-5"><span class="nav-number">6.3.1.</span> <span class="nav-text">常用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeSet迭代"><span class="nav-number">6.3.2.</span> <span class="nav-text">TreeSet迭代</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<section class="footer">
+    <span class="footer__copyright">
+<div><span id="span_dt_dt"> </span>
+<script language="javascript">
+	function show_date_time(){
+		window.setTimeout("show_date_time()", 1000);
+		BirthDay=new Date("4/8/2018/ 07:18:00");//这个日期是可以修改的
+		today=new Date();
+		timeold=(today.getTime()-BirthDay.getTime());//其实仅仅改了这里
+		sectimeold=timeold/1000
+		secondsold=Math.floor(sectimeold);
+		msPerDay=24*60*60*1000
+		e_daysold=timeold/msPerDay
+		daysold=Math.floor(e_daysold);
+		e_hrsold=(e_daysold-daysold)*24;
+		hrsold=Math.floor(e_hrsold);
+		e_minsold=(e_hrsold-hrsold)*60;
+		minsold=Math.floor((e_hrsold-hrsold)*60);
+		seconds=Math.floor((e_minsold-minsold)*60);
+		span_dt_dt.innerHTML="勉强运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+	}
+	show_date_time();
+</script>
+</div>
+    
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CarlosHaoxj</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">15.4k</span>
+  
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

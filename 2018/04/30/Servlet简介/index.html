@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Servlet," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="域名解析域名解析服务DNS，将IP与域名进行映射服务，提供服务的服务器，称DNS服务器。 HTTP协议 超文本传输协议，请求与响应模式，无状态的网络协议。 浏览器 → 服务器    请求：Request服务器 → 浏览器    响应：Response  版本 HTTP 1.0 只能连接一次 HTTP 1.1 持久连接请求协议   URL 统一资源定位符，唯一确定一个资源。Web上每一个资源都有唯一">
+<meta name="keywords" content="Servlet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Web Servlet简介">
+<meta property="og:url" content="http://yoursite.com/2018/04/30/Servlet简介/index.html">
+<meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="域名解析域名解析服务DNS，将IP与域名进行映射服务，提供服务的服务器，称DNS服务器。 HTTP协议 超文本传输协议，请求与响应模式，无状态的网络协议。 浏览器 → 服务器    请求：Request服务器 → 浏览器    响应：Response  版本 HTTP 1.0 只能连接一次 HTTP 1.1 持久连接请求协议   URL 统一资源定位符，唯一确定一个资源。Web上每一个资源都有唯一">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-06T12:12:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java Web Servlet简介">
+<meta name="twitter:description" content="域名解析域名解析服务DNS，将IP与域名进行映射服务，提供服务的服务器，称DNS服务器。 HTTP协议 超文本传输协议，请求与响应模式，无状态的网络协议。 浏览器 → 服务器    请求：Request服务器 → 浏览器    响应：Response  版本 HTTP 1.0 只能连接一次 HTTP 1.1 持久连接请求协议   URL 统一资源定位符，唯一确定一个资源。Web上每一个资源都有唯一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/30/Servlet简介/"/>
+
+
+
+
+
+  <title>Java Web Servlet简介 | CarlosHaoxj's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CarlosHaoxj's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天道酬勤    宁静致远</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/30/Servlet简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CarlosHaoxj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CarlosHaoxj's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java Web Servlet简介</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-30T22:12:23+08:00">
+                2018-04-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA-基础学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA 基础学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA-基础学习笔记/Java-Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Java Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,399
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h1><p>域名解析服务DNS，将IP与域名进行映射服务，提供服务的服务器，称DNS服务器。</p>
+<h1 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h1><ul>
+<li>超文本传输协议，请求与响应模式，无状态的网络协议。<blockquote>
+<p>浏览器 → 服务器    请求：Request<br>服务器 → 浏览器    响应：Response</p>
+</blockquote>
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2></li>
+<li>HTTP 1.0 只能连接一次</li>
+<li>HTTP 1.1 持久连接<h2 id="请求协议"><a href="#请求协议" class="headerlink" title="请求协议"></a>请求协议</h2></li>
+</ul>
+<ol>
+<li>URL 统一资源定位符，唯一确定一个资源。Web上每一个资源都有唯一的地址，就采用URL格式。</li>
+<li>URI 统一资源标志符<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3></li>
+<li>GET：携带量小，只能字符串，安全系数低。但是它能够使用浏览器缓存，减轻服务器压力。</li>
+</ol>
+<ul>
+<li>构成：请求行 请求头部信息 请求正文</li>
+<li>GET请求会把表单信息追加到URL的最后。</li>
+</ul>
+<ol start="2">
+<li>POST：数据类型为任意类型，携带大量数据，安全性高，不会使用浏览器缓存。</li>
+</ol>
+<ul>
+<li>构成：响应行 响应头部信息 响应正文</li>
+</ul>
+<ol start="3">
+<li><p>其他方法：HEAD，TRACE，PUT，DELETE，OPTIONS，CONNECT。这些方法不常用。</p>
+<h1 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Servlet 是连接Web服务器服务端JAVA程序的协议，接口形式体现。三大组件之一。Servlets 属于单例，多线程。</p>
+<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2> <!-- 注册Servlet -->
+ <!-- 类的注册 -->
+<p> <servlet></servlet></p>
+<pre><code>&lt;servlet-name&gt;someServlet&lt;/servlet-name&gt;
+&lt;servlet-class&gt;com.renai.SomeServlet&lt;/servlet-class&gt;    
+</code></pre><p> </p>
+ <!-- 映射关系 -->
+<p> <servlet-mapping></servlet-mapping></p>
+<pre><code>&lt;servlet-name&gt;someServlet&lt;/servlet-name&gt;
+&lt;url-pattern&gt;/some&lt;/url-pattern&gt;    
+</code></pre><p> </p>
+</li>
+</ol>
+<p>一个Servlet可以有多个<url-pattern>与之对应。</url-pattern></p>
+<p><url-pattern>路径</url-pattern></p>
+<ol>
+<li>精确路径： /abc/a</li>
+<li>通配符路径： /abc/*</li>
+<li>拦截： /<em>和/ 拦截所有请求   区别：/</em> 拦截所有请求，无论是静态还是动态。/ 只会拦截静态资源请求。</li>
+<li>后缀名模式：<em>.后缀，只拦截后缀名。一般是(</em>.do   *.action)   限制：不能与通配符模式一起用<blockquote>
+<p>匹配原则<br>路径优先后缀<br>精确路径优先<br>最长路径优先</p>
+</blockquote>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2></li>
+<li>Servlet类加载</li>
+<li>Servlet实例化</li>
+<li>调用init()方法</li>
+<li>调用service()方法</li>
+<li>调用destroy()方法<blockquote>
+<p>只会执行一次无参构造器和init()，第一次访问执行。<br>提交一次Servlet请求，执行一次service().<br>只会执行一次destroy().服务器停用时执行<br>因为是多线程，不添加可修改变量，存在线程安全<br>默认情况下，Servlet在Web容器启动时不会被实例化</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="域属性"><a href="#域属性" class="headerlink" title="域属性"></a>域属性</h2><p>存放请求属性的区域，域属性是全局性的。存放数据方式是Map.</p>
+<ol>
+<li>设置域属性： setAttribute();</li>
+<li>获取域属性： getAttribute();</li>
+<li>删除域属性： removeAttribute();</li>
+</ol>
+<ul>
+<li><p>定义域属性</p>
+<p>  <init-param></init-param></p>
+<pre><code>&lt;param&gt;&lt;/param&gt;
+&lt;param-value&gt;&lt;/param-value&gt;
+</code></pre><p>  </p>
+</li>
+</ul>
+<h2 id="实现Servlet方法"><a href="#实现Servlet方法" class="headerlink" title="实现Servlet方法"></a>实现Servlet方法</h2><ol>
+<li>实现javax.servlet.Servlet接口。</li>
+<li>继承javax.servlet.GenericServlet类。</li>
+<li>继承javax.servlet.http.HttpServlet类。<h3 id="接口Servlet"><a href="#接口Servlet" class="headerlink" title="接口Servlet"></a>接口Servlet</h3></li>
+</ol>
+<ul>
+<li>方法</li>
+</ul>
+<ol>
+<li>service(ServletRequest,ServletResonse)</li>
+<li>init(ServletConfig)</li>
+<li>destroy()</li>
+<li>getServletConfig();</li>
+<li>getServletInfo();<blockquote>
+<p>只会执行一次无参构造器和init(),第一次访问执行。<br>提交一次Servlet请求，执行一次service()。<br>只会执行一次destory()，服务器停用时执行。<br>因为是线程，不添加可修改变量，存在线程安全问题。<br>默认情况下，Servlet在Web容器启动时不会被实例化。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="类GenericServlet"><a href="#类GenericServlet" class="headerlink" title="类GenericServlet"></a>类GenericServlet</h3><p>一个抽象类，Servlet里有五个方法，常用只有一个，简化方法，只实现service。重写init，必须留super.init(config);否则空指针异常。</p>
+<h3 id="类HttpServlet"><a href="#类HttpServlet" class="headerlink" title="类HttpServlet"></a>类HttpServlet</h3><p>重写doGet();   doPost();      必须覆盖其一。<br>HttpServletRequest是一个接口，将HTTP请求协议完整发送到request，收到响应，请求立马终止。一次请求对应一个对象。两次请求相互独立、<br>HttpServletRequest中携带的参数以Map的形式接收，并且该Map的key为String value 为String数组。</p>
+<ol>
+<li>获取请求参数： getParmater();</li>
+<li>获取全部请求参数名称： getParamterNames();</li>
+<li>获取全部请求参数值： getParamterValue();</li>
+</ol>
+<h4 id="请求中获取服务端相关信息"><a href="#请求中获取服务端相关信息" class="headerlink" title="请求中获取服务端相关信息"></a>请求中获取服务端相关信息</h4><ul>
+<li>获取请求的URL： getRequestURL();</li>
+<li>URL去掉请求协议及主机: getRequestURL();</li>
+<li>项目根路径： getContextPath();</li>
+<li>获取客户端IP： getRemoteAddr();</li>
+<li><url-pattern>精确路径： getSrtvletPath();</url-pattern></li>
+<li>通配路径： getPathInfo();</li>
+</ul>
+<h3 id="解决中文乱码问题"><a href="#解决中文乱码问题" class="headerlink" title="解决中文乱码问题"></a>解决中文乱码问题</h3><p>GET Tomcat-9解决了GET的中文乱码问题。<br>POST：添加getCharaterEncding(“UTF-8”);该方法设置解决了请求正文中字符编码，只适用于POST。<br>GET：</p>
+<blockquote>
+<p>byte[] bytes = name.getByte(“ISO8859-1”);<br>name = new String(bytes,”UTF-8”);<br>这个方法对于GET POST 都适用，不建议POST。</p>
+</blockquote>
+<p>response解决中文乱码</p>
+<ol>
+<li>setContentType(String type) 设置内容类型 text/html;charset=UTF-8</li>
+<li>setCharacterEncoding(“UTF-8”) 使用前提，之前必须使用setContentType()  用于修改setContentType(“text/html;charset=UTF-8”)</li>
+</ol>
+<h1 id="请求转发与重定向"><a href="#请求转发与重定向" class="headerlink" title="请求转发与重定向"></a>请求转发与重定向</h1><blockquote>
+<p>请求转发，称为服务器内跳转<br>重定向，称为服务器外跳转</p>
+</blockquote>
+<ol>
+<li>请求转发: request.getRequestDispatcher(“/“).forward(request,response);</li>
+<li>重定向： resonse.sendRedirect(“”) </li>
+<li>重定向传递数据： response.sendRedirect(“other?pname=zs&amp;page=23”) 使用问好连接。</li>
+</ol>
+<ul>
+<li>解决中文乱码，只适用重定向中文乱码</li>
+<li>编码:打散   URLEcoder.encode(name,”UTF-8”)</li>
+<li>解码：组装  URLDecoder.decode(name,”UTF-8”)</li>
+<li>new String(name.getBytes(“ISO8859-1”),”UTF-8”)</li>
+</ul>
+<h1 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h1><blockquote>
+<p>绝对路径 = 参照路径 + 相对路径</p>
+</blockquote>
+<p>以斜杠开头</p>
+<ol>
+<li>前台路径：前台路径的参照路径是web服务器的根路径 <a href="http://127.0.0.1:8080" target="_blank" rel="noopener">http://127.0.0.1:8080</a></li>
+<li>后台路径：后台路径是web应用的根路径 <a href="http://127.0.0.0:8080/primary" target="_blank" rel="noopener">http://127.0.0.0:8080/primary</a></li>
+</ol>
+<p>以路径名开头</p>
+<p>以路径名称开头的相对路径，无论是出现在前台页面，还是出现在后台 Java 代码或配<br>置文件中，其参照路径都是当前访问路径的资源路径。即使是 response 的 sendRedirect()方法的参数路径，若不以斜杠开头，其也属于“以路径名称开头的相对路径”类，参照路径为<br>当前访问路径的资源路径</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="CarlosHaoxj WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Servlet/" rel="tag"><i class="fa fa-tag"></i> Servlet</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/29/线程/" rel="next" title="线程">
+                <i class="fa fa-chevron-left"></i> 线程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/16/Java-Web-Cookie Session/" rel="prev" title="Java Web Cookie Session入门">
+                Java Web Cookie Session入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="CarlosHaoxj" />
+            
+              <p class="site-author-name" itemprop="name">CarlosHaoxj</p>
+              <p class="site-description motion-element" itemprop="description">JAVA</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/CarlosHaoxj" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3757117190/home?wvr=5" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:458074992@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/wu-kong-gun/activities" target="_blank" title="Zhihu">
+                      
+                        <i class="fa fa-fw fa-fas fa-angle-double-right"></i>Zhihu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="baidu" target="_blank">baidu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.fontawesome.com/" title="icon" target="_blank">icon</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#域名解析"><span class="nav-number">1.</span> <span class="nav-text">域名解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP协议"><span class="nav-number">2.</span> <span class="nav-text">HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本"><span class="nav-number">2.1.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求协议"><span class="nav-number">2.2.</span> <span class="nav-text">请求协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用方法"><span class="nav-number">2.2.1.</span> <span class="nav-text">常用方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Servlet"><span class="nav-number">3.</span> <span class="nav-text">Servlet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">3.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注册"><span class="nav-number">3.2.</span> <span class="nav-text">注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期"><span class="nav-number">3.3.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域属性"><span class="nav-number">3.4.</span> <span class="nav-text">域属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现Servlet方法"><span class="nav-number">3.5.</span> <span class="nav-text">实现Servlet方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#接口Servlet"><span class="nav-number">3.5.1.</span> <span class="nav-text">接口Servlet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类GenericServlet"><span class="nav-number">3.5.2.</span> <span class="nav-text">类GenericServlet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类HttpServlet"><span class="nav-number">3.5.3.</span> <span class="nav-text">类HttpServlet</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#请求中获取服务端相关信息"><span class="nav-number">3.5.3.1.</span> <span class="nav-text">请求中获取服务端相关信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决中文乱码问题"><span class="nav-number">3.5.4.</span> <span class="nav-text">解决中文乱码问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#请求转发与重定向"><span class="nav-number">4.</span> <span class="nav-text">请求转发与重定向</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路径"><span class="nav-number">5.</span> <span class="nav-text">路径</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<section class="footer">
+    <span class="footer__copyright">
+<div><span id="span_dt_dt"> </span>
+<script language="javascript">
+	function show_date_time(){
+		window.setTimeout("show_date_time()", 1000);
+		BirthDay=new Date("4/8/2018/ 07:18:00");//这个日期是可以修改的
+		today=new Date();
+		timeold=(today.getTime()-BirthDay.getTime());//其实仅仅改了这里
+		sectimeold=timeold/1000
+		secondsold=Math.floor(sectimeold);
+		msPerDay=24*60*60*1000
+		e_daysold=timeold/msPerDay
+		daysold=Math.floor(e_daysold);
+		e_hrsold=(e_daysold-daysold)*24;
+		hrsold=Math.floor(e_hrsold);
+		e_minsold=(e_hrsold-hrsold)*60;
+		minsold=Math.floor((e_hrsold-hrsold)*60);
+		seconds=Math.floor((e_minsold-minsold)*60);
+		span_dt_dt.innerHTML="勉强运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+	}
+	show_date_time();
+</script>
+</div>
+    
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CarlosHaoxj</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">15.4k</span>
+  
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spring," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Spring 介绍Spring是一个轻量级框架。不依赖于容器就可以运行。Struts，Hibernate 同属于轻量级。Spring以IOC，AOP为主要思想  IOC：Inversion of Control， 控制反转。 AOP：Aspect Oriented Programming， 面向切面编程。通俗意思就是在执行某些代码前执行另一些代码，可以做出添加，删除某些功能。类似于Servlet中">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring-入门">
+<meta property="og:url" content="http://yoursite.com/2018/06/20/Spring 入门/index.html">
+<meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="Spring 介绍Spring是一个轻量级框架。不依赖于容器就可以运行。Struts，Hibernate 同属于轻量级。Spring以IOC，AOP为主要思想  IOC：Inversion of Control， 控制反转。 AOP：Aspect Oriented Programming， 面向切面编程。通俗意思就是在执行某些代码前执行另一些代码，可以做出添加，删除某些功能。类似于Servlet中">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-20T08:16:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring-入门">
+<meta name="twitter:description" content="Spring 介绍Spring是一个轻量级框架。不依赖于容器就可以运行。Struts，Hibernate 同属于轻量级。Spring以IOC，AOP为主要思想  IOC：Inversion of Control， 控制反转。 AOP：Aspect Oriented Programming， 面向切面编程。通俗意思就是在执行某些代码前执行另一些代码，可以做出添加，删除某些功能。类似于Servlet中">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/20/Spring 入门/"/>
+
+
+
+
+
+  <title>Spring-入门 | CarlosHaoxj's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CarlosHaoxj's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天道酬勤    宁静致远</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/20/Spring 入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CarlosHaoxj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CarlosHaoxj's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spring-入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-20T20:03:46+08:00">
+                2018-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/框架/" itemprop="url" rel="index">
+                    <span itemprop="name">框架</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/框架/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,088
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Spring-介绍"><a href="#Spring-介绍" class="headerlink" title="Spring 介绍"></a>Spring 介绍</h1><p>Spring是一个轻量级框架。不依赖于容器就可以运行。Struts，Hibernate 同属于轻量级。<br>Spring以IOC，AOP为主要思想</p>
+<ul>
+<li>IOC：Inversion of Control， 控制反转。</li>
+<li>AOP：Aspect Oriented Programming， 面向切面编程。通俗意思就是在执行某些代码前执行另一些代码，可以做出添加，删除某些功能。类似于Servlet中的Filter，思想相同。</li>
+</ul>
+<h2 id="Spring-属于非侵入式"><a href="#Spring-属于非侵入式" class="headerlink" title="Spring 属于非侵入式"></a>Spring 属于非侵入式</h2><ul>
+<li>侵入式：通常需要通过实现特定的接口，继承特定的类才能增强功能</li>
+<li>非侵入式：对现有类的结构没有影响，就可以增强 JavaBean 的功能 </li>
+</ul>
+<h2 id="Spring-三层构架"><a href="#Spring-三层构架" class="headerlink" title="Spring 三层构架"></a>Spring 三层构架</h2><ol>
+<li>表现层(Web): Spring MVC</li>
+<li>业务逻辑层（Service）：Spring的IOC</li>
+<li>数据访问层（DAO）：Spring的jdbc</li>
+</ol>
+<h2 id="使用Spring重要的jar包"><a href="#使用Spring重要的jar包" class="headerlink" title="使用Spring重要的jar包"></a>使用Spring重要的jar包</h2><p>四个必须包</p>
+<ol>
+<li>spring-core：依赖注入IoC与DI的最基本实现</li>
+<li>spring-beans：Bean工厂与bean的装配</li>
+<li>spring-context：spring的context上下文即IoC容器</li>
+<li>spring-expression：spring表达式语言</li>
+</ol>
+<p>aop部分包含4个模块</p>
+<ol>
+<li>spring-aop：面向切面编程</li>
+<li>spring-aspects：集成AspectJ</li>
+<li>spring-instrument：提供一些类级的工具支持和ClassLoader级的实现，用于服务器</li>
+<li>spring-instrument-tomcat：针对tomcat的instrument实现</li>
+</ol>
+<p>test部分只有一个模块，我将spring-context-support也放在这吧</p>
+<ol>
+<li>spring-test：spring测试，提供junit与mock测试功能</li>
+<li>spring-context-support：spring额外支持包，比如邮件服务、视图解析等</li>
+</ol>
+<p>commons-logging: 日志（必须包）</p>
+<h1 id="Spring-Bean-三种不同配置方式"><a href="#Spring-Bean-三种不同配置方式" class="headerlink" title="Spring Bean 三种不同配置方式"></a>Spring Bean 三种不同配置方式</h1><h2 id="基于-XML-配置方式"><a href="#基于-XML-配置方式" class="headerlink" title="基于 XML 配置方式"></a>基于 XML 配置方式</h2><h3 id="导入-jar-包"><a href="#导入-jar-包" class="headerlink" title="导入 jar 包"></a>导入 jar 包</h3><ol>
+<li>commons-logging</li>
+<li>spring-aop</li>
+<li>spring-beans</li>
+<li>spring-context</li>
+<li>spring-core</li>
+<li>spring-expression</li>
+<li><p>spring-test</p>
+<h3 id="创建-Bean"><a href="#创建-Bean" class="headerlink" title="创建 Bean"></a>创建 Bean</h3><p> package com.carlos.spring;</p>
+<p> public class helloword {</p>
+<pre><code>private String title;
+private String name;
+
+public helloword(String title, String name){
+    this.title = title;
+    this.name = name;
+}
+
+public void show(){
+    System.out.print(title + &quot;:&quot; + name);
+}
+</code></pre><p> }</p>
+</li>
+</ol>
+<h3 id="创建测试类"><a href="#创建测试类" class="headerlink" title="创建测试类"></a>创建测试类</h3><pre><code>package com.carlos.spring;
+
+public class test {
+    public static void main(String[] args) {
+
+        ApplicationContext hw = new ClassPathXmlApplicationCont(&quot;ApplicationContext.xml&quot;);
+
+        helloword h = (helloword) hw.getBean(&quot;hello&quot;);
+
+        h.show();
+
+    }
+}
+</code></pre><h4 id="创建-XML-文件"><a href="#创建-XML-文件" class="headerlink" title="创建 XML 文件"></a>创建 XML 文件</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xmlns:c=&quot;http://www.springframework.org/schema/c&quot;
+xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+&lt;bean id=&quot;hello&quot; class=&quot;com.carlos.spring.helloword&quot;&gt;
+    &lt;constructor-arg name=&quot;title&quot; value=&quot;hello word&quot;&gt;&lt;/constructor-arg&gt;
+    &lt;constructor-arg name=&quot;name&quot; value=&quot;carlos&quot;&gt;&lt;/constructor-arg&gt;
+&lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre><h4 id="使用构造器注入"><a href="#使用构造器注入" class="headerlink" title="使用构造器注入"></a>使用构造器注入</h4><ul>
+<li>添加<code>xmlns:c=&quot;http://www.springframework.org/schema/c&quot;</code></li>
+<li><code>&lt;constructor-arg name=&quot;&quot; value=&quot;&quot;&gt;&lt;/constructor-arg&gt;</code></li>
+<li>Spring c- 命名空间`&lt;bean id=”hello” class=”com.carlos.spring.helloword”<pre><code>c:name=&quot;carlos&quot;
+c:title=&quot;hello word!&quot;&gt;
+</code></pre>  `</li>
+<li>XML 不容许数字作为属性的第一个字符，想要使用需要加一个 <strong>_</strong> 前缀</li>
+</ul>
+<h4 id="使用-Set-方法注入"><a href="#使用-Set-方法注入" class="headerlink" title="使用 Set 方法注入"></a>使用 Set 方法注入</h4><ul>
+<li>添加<code>xmlns:p=&quot;http://www.springframework.org/schema/p&quot;</code></li>
+<li><code>&lt;property name=&quot;&quot; value=&quot;&quot;&gt;&lt;/property&gt;</code></li>
+<li>Spring p- 命名空间`&lt;bean id=”hello” class=”com.carlos.spring.helloword”<pre><code>p:name=&quot;carlos&quot;
+p:title=&quot;hello word!&quot;&gt;
+</code></pre>  `</li>
+</ul>
+<h4 id="装配集合"><a href="#装配集合" class="headerlink" title="装配集合"></a>装配集合</h4><p>使用 List 元素申明一个列表</p>
+<pre><code>&lt;property name=&quot;num&quot;&gt;
+    &lt;list&gt;
+        &lt;value&gt;第一&lt;/value&gt;
+        &lt;value&gt;第二&lt;/value&gt;
+        &lt;value&gt;第三&lt;/value&gt;
+    &lt;/list&gt;
+    &lt;/property&gt;
+</code></pre><ul>
+<li><set> 与 <list> 性质相同，都可使用。不同的是，set 不可存放重复数据，存放顺序同样不可保证。推荐使用 <list> 。不论在哪种情况下俩种集合都可使用。</list></list></set></li>
+</ul>
+<h2 id="基于注解的配置方式"><a href="#基于注解的配置方式" class="headerlink" title="基于注解的配置方式"></a>基于注解的配置方式</h2><h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><ul>
+<li>@Component : 表明该类会作为组件类。</li>
+<li>@ComponentScan : 能够在Spring中启用组件扫描。如果没有其他的配置，默认会扫描与配置类相同的包。</li>
+<li>@Controller : 用于对 Controller 实现类进行标注，功能与 Component 相同。</li>
+<li>@Repository : 用于对 DAO 实现类进行标注。</li>
+<li>@Service : 用于对 Service 实现类进行标注，功能与 Component 相同。</li>
+</ul>
+<h3 id="创建-Bean-1"><a href="#创建-Bean-1" class="headerlink" title="创建 Bean"></a>创建 Bean</h3><h4 id="DAO-层"><a href="#DAO-层" class="headerlink" title="DAO 层"></a>DAO 层</h4><p>使用注解 @Repository</p>
+<pre><code>@Repository
+public class UserDao {
+    public void save(){
+        System.out.println(&quot;数据库&quot;);
+    }
+}
+</code></pre><ul>
+<li>等效于 XML 中 <code>&lt;bean id=&quot;userDao&quot; class=&quot; ... &quot;/&gt;</code></li>
+<li>ID 为 userDao 而不是 UserDao,将类名第一个字母变为小写。</li>
+</ul>
+<h4 id="Service-层"><a href="#Service-层" class="headerlink" title="Service 层"></a>Service 层</h4><p>使用注解 @Service</p>
+<pre><code>@Service
+public class UserService {
+    public void save(){
+        System.out.println(&quot;service&quot;);
+    }
+}    
+</code></pre><h4 id="Servlet-层"><a href="#Servlet-层" class="headerlink" title="Servlet 层"></a>Servlet 层</h4><p>使用注解 @Controller</p>
+<pre><code>@Controller
+public class UserServlet {
+    public void save(){
+        System.out.println(&quot;servlet&quot;);
+    }
+}
+</code></pre><h4 id="创建-XML-启动组件扫描"><a href="#创建-XML-启动组件扫描" class="headerlink" title="创建 XML 启动组件扫描"></a>创建 XML 启动组件扫描</h4><pre><code>&lt;beans ...&gt;
+    &lt;context:component-scan base-package=&quot; 包名 &quot;&gt;&lt;/context:component-scan&gt;
+&lt;/beans&gt;
+</code></pre><h4 id="创建测试类-1"><a href="#创建测试类-1" class="headerlink" title="创建测试类"></a>创建测试类</h4><pre><code>public class Test {
+    public static void main(String[] args) {
+        ApplicationContext act = new ClassPathXmlApplicationContext    (&quot;ApplicationContext.xml&quot;);
+
+        UserDao ud = (UserDao) act.getBean(&quot;userDao&quot;);
+        ud.save();
+
+        UserService user = (UserService) act.getBean(&quot;userService&quot;);
+        user.save();
+
+        UserServlet us = (UserServlet) act.getBean(&quot;userServlet&quot;);
+        us.save();
+    }
+}
+</code></pre><h2 id="基于-Java-类的配置方式"><a href="#基于-Java-类的配置方式" class="headerlink" title="基于 Java 类的配置方式"></a>基于 Java 类的配置方式</h2><ul>
+<li>Bean ： 声明 Bean<h3 id="创建配置类"><a href="#创建配置类" class="headerlink" title="创建配置类"></a>创建配置类</h3></li>
+</ul>
+<pre><code>@Configuration
+public class User {
+    @Bean
+    public String show(){
+        return &quot;hello word!&quot;;
+    }
+}
+
+@Configuration
+public class Student {
+    @Bean
+    public String show1(){
+        return &quot;student&quot;;
+    }
+}
+</code></pre><h3 id="创建测试类-2"><a href="#创建测试类-2" class="headerlink" title="创建测试类"></a>创建测试类</h3><pre><code>public class Test {
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext at = new AnnotationConfigApplicationContext(User.class);
+        System.out.println(at.getBean(&quot;show&quot;));
+
+        AnnotationConfigApplicationContext stu = new AnnotationConfigApplicationContext(Student.class);
+        System.out.println(stu.getBean(&quot;show1&quot;));
+    }
+}
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="CarlosHaoxj WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/06/Java-Web-过滤器/" rel="next" title="Java Web 过滤器">
+                <i class="fa fa-chevron-left"></i> Java Web 过滤器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/20/Spring-AOP/" rel="prev" title="spring - AOP">
+                spring - AOP <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="CarlosHaoxj" />
+            
+              <p class="site-author-name" itemprop="name">CarlosHaoxj</p>
+              <p class="site-description motion-element" itemprop="description">JAVA</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/CarlosHaoxj" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3757117190/home?wvr=5" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:458074992@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/wu-kong-gun/activities" target="_blank" title="Zhihu">
+                      
+                        <i class="fa fa-fw fa-fas fa-angle-double-right"></i>Zhihu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="baidu" target="_blank">baidu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.fontawesome.com/" title="icon" target="_blank">icon</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-介绍"><span class="nav-number">1.</span> <span class="nav-text">Spring 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-属于非侵入式"><span class="nav-number">1.1.</span> <span class="nav-text">Spring 属于非侵入式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-三层构架"><span class="nav-number">1.2.</span> <span class="nav-text">Spring 三层构架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Spring重要的jar包"><span class="nav-number">1.3.</span> <span class="nav-text">使用Spring重要的jar包</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Bean-三种不同配置方式"><span class="nav-number">2.</span> <span class="nav-text">Spring Bean 三种不同配置方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于-XML-配置方式"><span class="nav-number">2.1.</span> <span class="nav-text">基于 XML 配置方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入-jar-包"><span class="nav-number">2.1.1.</span> <span class="nav-text">导入 jar 包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-Bean"><span class="nav-number">2.1.2.</span> <span class="nav-text">创建 Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建测试类"><span class="nav-number">2.1.3.</span> <span class="nav-text">创建测试类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建-XML-文件"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">创建 XML 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用构造器注入"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">使用构造器注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-Set-方法注入"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">使用 Set 方法注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#装配集合"><span class="nav-number">2.1.3.4.</span> <span class="nav-text">装配集合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于注解的配置方式"><span class="nav-number">2.2.</span> <span class="nav-text">基于注解的配置方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注解"><span class="nav-number">2.2.1.</span> <span class="nav-text">注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-Bean-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">创建 Bean</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DAO-层"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">DAO 层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Service-层"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">Service 层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Servlet-层"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">Servlet 层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建-XML-启动组件扫描"><span class="nav-number">2.2.2.4.</span> <span class="nav-text">创建 XML 启动组件扫描</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建测试类-1"><span class="nav-number">2.2.2.5.</span> <span class="nav-text">创建测试类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于-Java-类的配置方式"><span class="nav-number">2.3.</span> <span class="nav-text">基于 Java 类的配置方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建配置类"><span class="nav-number">2.3.1.</span> <span class="nav-text">创建配置类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建测试类-2"><span class="nav-number">2.3.2.</span> <span class="nav-text">创建测试类</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<section class="footer">
+    <span class="footer__copyright">
+<div><span id="span_dt_dt"> </span>
+<script language="javascript">
+	function show_date_time(){
+		window.setTimeout("show_date_time()", 1000);
+		BirthDay=new Date("4/8/2018/ 07:18:00");//这个日期是可以修改的
+		today=new Date();
+		timeold=(today.getTime()-BirthDay.getTime());//其实仅仅改了这里
+		sectimeold=timeold/1000
+		secondsold=Math.floor(sectimeold);
+		msPerDay=24*60*60*1000
+		e_daysold=timeold/msPerDay
+		daysold=Math.floor(e_daysold);
+		e_hrsold=(e_daysold-daysold)*24;
+		hrsold=Math.floor(e_hrsold);
+		e_minsold=(e_hrsold-hrsold)*60;
+		minsold=Math.floor((e_hrsold-hrsold)*60);
+		seconds=Math.floor((e_minsold-minsold)*60);
+		span_dt_dt.innerHTML="勉强运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+	}
+	show_date_time();
+</script>
+</div>
+    
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CarlosHaoxj</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">15.4k</span>
+  
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

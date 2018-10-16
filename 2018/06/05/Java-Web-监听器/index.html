@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java Web 监听器," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="监听器监听器是一个专门用于对其他对象身上发生的事件或状态改变进行监听和相应处理的对象，当被监视的对象发生情况时，立即采取相应的行动。监听器其实就是一个实现特定接口的普通java程序，这个程序专门用于监听另一个java对象的方法调用或属性改变，当被监听对象发生上述事件后，监听器某个方法立即被执行。 使用监听器需要在 web.xml 里配置监听器             全名      监听器分类在S">
+<meta name="keywords" content="Java Web 监听器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Web 监听器">
+<meta property="og:url" content="http://yoursite.com/2018/06/05/Java-Web-监听器/index.html">
+<meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="监听器监听器是一个专门用于对其他对象身上发生的事件或状态改变进行监听和相应处理的对象，当被监视的对象发生情况时，立即采取相应的行动。监听器其实就是一个实现特定接口的普通java程序，这个程序专门用于监听另一个java对象的方法调用或属性改变，当被监听对象发生上述事件后，监听器某个方法立即被执行。 使用监听器需要在 web.xml 里配置监听器             全名      监听器分类在S">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-06T01:44:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java Web 监听器">
+<meta name="twitter:description" content="监听器监听器是一个专门用于对其他对象身上发生的事件或状态改变进行监听和相应处理的对象，当被监视的对象发生情况时，立即采取相应的行动。监听器其实就是一个实现特定接口的普通java程序，这个程序专门用于监听另一个java对象的方法调用或属性改变，当被监听对象发生上述事件后，监听器某个方法立即被执行。 使用监听器需要在 web.xml 里配置监听器             全名      监听器分类在S">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/05/Java-Web-监听器/"/>
+
+
+
+
+
+  <title>Java Web 监听器 | CarlosHaoxj's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CarlosHaoxj's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天道酬勤    宁静致远</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/05/Java-Web-监听器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CarlosHaoxj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CarlosHaoxj's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java Web 监听器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-05T17:02:59+08:00">
+                2018-06-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA-基础学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA 基础学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA-基础学习笔记/Java-Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Java Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  613
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="监听器"><a href="#监听器" class="headerlink" title="监听器"></a>监听器</h1><p>监听器是一个专门用于对其他对象身上发生的事件或状态改变进行监听和相应处理的对象，当被监视的对象发生情况时，立即采取相应的行动。监听器其实就是一个实现特定接口的普通java程序，这个程序专门用于监听另一个java对象的方法调用或属性改变，当被监听对象发生上述事件后，监听器某个方法立即被执行。</p>
+<h2 id="使用监听器"><a href="#使用监听器" class="headerlink" title="使用监听器"></a>使用监听器</h2><p>需要在 <strong>web.xml</strong> 里配置监听器<br>     <listener><br>        <listener-class>全名 </listener-class><br>    </listener></p>
+<h1 id="监听器分类"><a href="#监听器分类" class="headerlink" title="监听器分类"></a>监听器分类</h1><p>在Servlet规范中定义了多种类型的监听器(一共8个监听器)，它们用于监听的事件源分别为ServletContext，HttpSession和ServletRequest这三个域对象。</p>
+<ul>
+<li>事件源    三个域属性 中的 增 删 改</li>
+<li>对事件对象 创建与销毁</li>
+</ul>
+<h2 id="域对象监生命周期"><a href="#域对象监生命周期" class="headerlink" title="域对象监生命周期"></a>域对象监生命周期</h2><h3 id="ServletRequestListener-生命周期"><a href="#ServletRequestListener-生命周期" class="headerlink" title="ServletRequestListener 生命周期"></a>ServletRequestListener 生命周期</h3><pre><code>public class RequestListener implements ServletRequestListener {
+public void requestInitialized(ServletRequestEvent sre) {
+    //创建
+}
+public void requestDestroyed(ServletRequestEvent sre) {
+    //销毁
+}
+</code></pre><p>}</p>
+<h3 id="HttpSessionListener-生命周期"><a href="#HttpSessionListener-生命周期" class="headerlink" title="HttpSessionListener 生命周期"></a>HttpSessionListener 生命周期</h3><pre><code>public class SessionListener implements HttpSessionListener {
+public void sessionCreated(HttpSessionEvent se) {
+    //session 创建时触发
+}
+public void sessionDestroyed(HttpSessionEvent se) {
+    //session 销毁时触发
+}    
+</code></pre><p>}</p>
+<h3 id="ServletContexListener-生命周期"><a href="#ServletContexListener-生命周期" class="headerlink" title="ServletContexListener 生命周期"></a>ServletContexListener 生命周期</h3><pre><code>public class ContextListener implements ServletContextListener {
+    public void contextInitialized(ServletContextEvent sce) {
+        //ServletContext 初始化触发
+    }
+    public void contextDestroyed(ServletContextEvent sce) {
+        //ServletContext 销毁时触发
+    }
+}
+</code></pre><h2 id="域对象的属性监听"><a href="#域对象的属性监听" class="headerlink" title="域对象的属性监听"></a>域对象的属性监听</h2><h3 id="ServletRequestListener-属性监听"><a href="#ServletRequestListener-属性监听" class="headerlink" title="ServletRequestListener 属性监听"></a>ServletRequestListener 属性监听</h3><pre><code>public class AttributeListener implements ServletRequestAttributeListener {
+    public void attributeAdded(ServletRequestAttributeEvent srae) {
+        //向request 添加属性触发
+    }
+    public void attributeRemoved(ServletRequestAttributeEvent srae) {
+        //从request 删除属性触发
+    }
+    public void attributeReplaced(ServletRequestAttributeEvent srae) {
+        //从request 重置属性触发
+    }    
+}
+</code></pre><h3 id="HttpSessionListener-属性监听"><a href="#HttpSessionListener-属性监听" class="headerlink" title="HttpSessionListener 属性监听"></a>HttpSessionListener 属性监听</h3><pre><code>public class SessionAttributeListener implements HttpSessionAttributeListener {
+public void attributeAdded(HttpSessionBindingEvent se) {
+    //向 Session 添加属性触发
+}
+public void attributeRemoved(HttpSessionBindingEvent se) {
+    //从 Session 删除属性触发
+}
+public void attributeReplaced(HttpSessionBindingEvent se) {
+    //向从Session 重置属性触发
+}
+</code></pre><p>}</p>
+<h3 id="ServletContextListener-属性监听"><a href="#ServletContextListener-属性监听" class="headerlink" title="ServletContextListener 属性监听"></a>ServletContextListener 属性监听</h3><pre><code>public class ContextAttributeListener implements ServletContextAttributeListener {
+    public void attributeAdded(ServletContextAttributeEvent scae) {
+        //向 ServletContext 添加属性触发
+    }    
+    public void attributeRemoved(ServletContextAttributeEvent scae) {
+        //从 ServletContext 删除属性触发
+    }
+    public void attributeReplaced(ServletContextAttributeEvent scae) {
+        //从 ServletContext 重置属性触发
+    }
+}
+</code></pre><h2 id="HttpSeesionBindingListener"><a href="#HttpSeesionBindingListener" class="headerlink" title="HttpSeesionBindingListener"></a>HttpSeesionBindingListener</h2><blockquote>
+<p>作用： 实体类实现这个借口对象，从 Session 删除对象都会触发这个接口<br>该监听器不需要注册</p>
+</blockquote>
+<pre><code>public void valueBound(HttpSessionBindingEvent event) {
+    //当前类的对象放入到Session时 触发执行
+}
+public void valueUnbound(HttpSessionBindingEvent event) {
+    //当前类的对象从Session删除时 触发执行
+}
+</code></pre><h2 id="HttpSessionActivationListener"><a href="#HttpSessionActivationListener" class="headerlink" title="HttpSessionActivationListener"></a>HttpSessionActivationListener</h2><p>该监听器在 Session 中存放的指定类型对象的钝化与活化</p>
+<ul>
+<li>同时需要实现 Seralizable 接口</li>
+</ul>
+<blockquote>
+<p>钝化： 将数据写入到硬盘 sessionWilPassivate(HttpSessionEvent se)<br>活化： 将数据写入到内存 sessionDidActivate(HttpSessionEvent se)</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="CarlosHaoxj WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java-Web-监听器/" rel="tag"><i class="fa fa-tag"></i> Java Web 监听器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/02/My-SQL/" rel="next" title="SQL 基础">
+                <i class="fa fa-chevron-left"></i> SQL 基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/05/frist-blog/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="CarlosHaoxj" />
+            
+              <p class="site-author-name" itemprop="name">CarlosHaoxj</p>
+              <p class="site-description motion-element" itemprop="description">JAVA</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/CarlosHaoxj" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/3757117190/home?wvr=5" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:458074992@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/wu-kong-gun/activities" target="_blank" title="Zhihu">
+                      
+                        <i class="fa fa-fw fa-fas fa-angle-double-right"></i>Zhihu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="baidu" target="_blank">baidu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.fontawesome.com/" title="icon" target="_blank">icon</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#监听器"><span class="nav-number">1.</span> <span class="nav-text">监听器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用监听器"><span class="nav-number">1.1.</span> <span class="nav-text">使用监听器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#监听器分类"><span class="nav-number">2.</span> <span class="nav-text">监听器分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#域对象监生命周期"><span class="nav-number">2.1.</span> <span class="nav-text">域对象监生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletRequestListener-生命周期"><span class="nav-number">2.1.1.</span> <span class="nav-text">ServletRequestListener 生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HttpSessionListener-生命周期"><span class="nav-number">2.1.2.</span> <span class="nav-text">HttpSessionListener 生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletContexListener-生命周期"><span class="nav-number">2.1.3.</span> <span class="nav-text">ServletContexListener 生命周期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#域对象的属性监听"><span class="nav-number">2.2.</span> <span class="nav-text">域对象的属性监听</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletRequestListener-属性监听"><span class="nav-number">2.2.1.</span> <span class="nav-text">ServletRequestListener 属性监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HttpSessionListener-属性监听"><span class="nav-number">2.2.2.</span> <span class="nav-text">HttpSessionListener 属性监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ServletContextListener-属性监听"><span class="nav-number">2.2.3.</span> <span class="nav-text">ServletContextListener 属性监听</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HttpSeesionBindingListener"><span class="nav-number">2.3.</span> <span class="nav-text">HttpSeesionBindingListener</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HttpSessionActivationListener"><span class="nav-number">2.4.</span> <span class="nav-text">HttpSessionActivationListener</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<section class="footer">
+    <span class="footer__copyright">
+<div><span id="span_dt_dt"> </span>
+<script language="javascript">
+	function show_date_time(){
+		window.setTimeout("show_date_time()", 1000);
+		BirthDay=new Date("4/8/2018/ 07:18:00");//这个日期是可以修改的
+		today=new Date();
+		timeold=(today.getTime()-BirthDay.getTime());//其实仅仅改了这里
+		sectimeold=timeold/1000
+		secondsold=Math.floor(sectimeold);
+		msPerDay=24*60*60*1000
+		e_daysold=timeold/msPerDay
+		daysold=Math.floor(e_daysold);
+		e_hrsold=(e_daysold-daysold)*24;
+		hrsold=Math.floor(e_hrsold);
+		e_minsold=(e_hrsold-hrsold)*60;
+		minsold=Math.floor((e_hrsold-hrsold)*60);
+		seconds=Math.floor((e_minsold-minsold)*60);
+		span_dt_dt.innerHTML="勉强运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+	}
+	show_date_time();
+</script>
+</div>
+    
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CarlosHaoxj</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">15.4k</span>
+  
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
