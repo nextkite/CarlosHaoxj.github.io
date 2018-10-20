@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Spring IoC]]></title>
+    <url>%2F2018%2F10%2F20%2FSpring-IoC%2F</url>
+    <content type="text"><![CDATA[认识Spring IoC DI 依赖注入 Dependency Injection IoC 控制反转 Inversion of Control IOC Container 容器 Inversion of Control Container 理解 IoC DIIoC (Inversion of Control) 控制反转，是由软件专家 Michael Mattson 提出的一个理论，用于解决复杂系统中的耦合关系。后来这个理论被逐渐应用到实践中，例如 J2EE 中的 Spring 框架中，IoC 就成为核心功能实现。 IoC(Inversion of Control)Spring IoC(Inversion of Control) 别名 DI(Dependency Injection) 依赖注入，而事实上二者并非相同。IoC(Inversion of Control)是面向对象的一种思想，DI(Dependency Injection)是实现这一思想的方法。 控制反转是目的，依赖注入是实现控制反转的手段。控制反转是将某个类对其内部状态权交给其他机制去完成，为降低类与类之间的耦合度。这个时候就出现了一个新的概念 IoC Container 称为 IoC 容器，在这里面从放着所有类与类依赖关系的方法，这时候 IoC 容器就充当着一个第三方角色，想要解决某个问题直接告诉 IoC 容器，它为我们找到解决问题的方式。 DI(Dependency Injection)DI(Dependency Injection)依赖注入 就是在 IoC 容器运行期间动态的将某种依赖关系注入到对象中，实现 IoC 的方法。利用依赖关系的注入的方式，实现对象之间的结耦。IoC 容器就是一个对象的制造工厂，当你使用某个功能时，你只要调用其方法就可以实现。你的关注点只在如何使用，至于其方法是如何创建，何时销毁等不需要关心，这一切都是由 IoC 容器进行实现。 实例当我们打开机械手表后，会看到上图所示的场景，各个齿轮带动时针，分针，秒针的转动，相互依赖，从而在表盘上产生正确的时间。但是当其中某个齿轮损坏后，整个系统可能将停止运转，之间存在这复杂的耦合关系。齿轮组中齿轮之间的啮合关系,与软件系统中对象之间的耦合关系非常相似。对象之间的耦合关系是无法避免的，也是必要的，这是协同工作的基础。现在，伴随着工业级应用的规模越来越庞大，对象之间的依赖关系也越来越复杂，经常会出现对象之间的多重依赖性关系，因此，架构师和设计师对于系统的分析和设计，将面临更大的挑战。对象之间耦合度过高的系统，必然会出现牵一发而动全身的情形。为了有效的避免出现这样的问题，我们对其引入 IoC(Inversion of Control)来解决。 当我们引入 IoC 容器后，我们可以发现其中 A,B,C,D这四个齿轮不再是相互依赖的关系，而是共同依赖于 IoC 容器这个第三方的，IoC 容器成为整个系统的一个核心，A,B,C,D四个齿轮的转动都依赖于 IoC 容器。 ##文档参考： Dependency Injection Inversion of Control Containers and the Dependency Injection pattern]]></content>
+      <categories>
+        <category>框架</category>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[MyBatis 入门]]></title>
     <url>%2F2018%2F10%2F16%2FMyBatis-%E5%85%A5%E9%97%A8%2F</url>
     <content type="text"><![CDATA[认识 MyBatiesMyBatist 是 apache 一个开源项目 iBatis, 2010年这个项目由 apache software foundation 迁移到 google code,并改名为 MyBatis。属于 java 持久层框架，它的主要作用就识负责跟数据库进行交互。MyBatis 是对 jdbc 一个封装。 了解 MyBatiesSqlSessiinFactorySqlSessionFactory 是每一个 MyBatis 的实例中心。在一个应用中一个数据库只会对应一个 SqlSessionFactory。通常通过 spring 配置来实现 SqlSessionFactory。SqlSessionFactory 作用是创建 SqlSession。在应用整个运行时期一直存在。 SqlSessionSqlSession 作用是对数据库进行操作，我们直接调用 SqlSession 接口就可以对数据库进行操作。 SqlSession 是不可以被共享，线程不安全的，完成一次请求响应，打开一个 SqlSession,使用完成就将其关闭。当 MyBaties 进行 CRUD 时可以直接利用 SqlSession 访问 Mapper 配置文件里面的映射进行操作。 MapperMyBatis 强大在于它的映射语句。与 JDBC 相比会较少代码量。 常用属性有 id 当前命名空间唯一标识 type 类型别名 property 映射到列结果的字段或属性 column 数据库中的列名 resultType resultMap 返回数据类型 parameterType 传入的参数格式 flushCache 是否清空缓存 默认为 false useCache 是否二级缓存 默认值对 select 元素为 true – select&lt;select id=&quot;selectPerson&quot; parameterType=&quot;int&quot; resultType=&quot;hashmap&quot;&gt; SELECT * FROM PERSON WHERE ID = #{id} &lt;/select&gt; 基础的 sql 语句，通过 id 到 PERSON 查结果 resultType: 直接表示返回类型 resultMap：是对外部 resultMap 的引用 当我们使用 select 映射的时，返回值类型可以用 resultType 或者 resultMap。但是俩个不可以同时使用。resultMap 示例 &lt;resultMap id=&quot;userResultMap&quot; type=&quot;com.carlos.entiy.User&quot;&gt; &lt;id property=&quot;id&quot; column=&quot;user_id&quot; /&gt; &lt;result property=&quot;username&quot; column=&quot;user_name&quot;/&gt; &lt;result property=&quot;password&quot; column=&quot;hashed_password&quot;/&gt; &lt;/resultMap&gt; resuletMap 还包含其他元素 constructor 实例化类将结果注入到构造方法中。 result 注入到 JavaBean 属性的普通结果，与 id 表示的结果相同，id 是对象的标识属性 association 返回结果为一个对象时使用，不同于 collection collection 返回结果为一个集合时使用]]></content>

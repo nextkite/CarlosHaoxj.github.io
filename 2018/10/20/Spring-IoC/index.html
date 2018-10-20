@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Spring," />
 
 
 
@@ -79,16 +79,21 @@
 
 
 
-<meta name="description" content="JAVA">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/categories/JAVA-基础学习笔记/JAVA/index.html">
+<meta name="description" content="认识Spring IoC DI         依赖注入    Dependency Injection IoC         控制反转    Inversion of Control IOC Container     容器         Inversion of Control Container  理解 IoC DIIoC (Inversion of Control) 控制反转，是由软件">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring IoC">
+<meta property="og:url" content="http://yoursite.com/2018/10/20/Spring-IoC/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="JAVA">
+<meta property="og:description" content="认识Spring IoC DI         依赖注入    Dependency Injection IoC         控制反转    Inversion of Control IOC Container     容器         Inversion of Control Container  理解 IoC DIIoC (Inversion of Control) 控制反转，是由软件">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/Spring-IoC/Spring-IoC/spring-IoC-1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/Spring-IoC/Spring-IoC/spring-IoC-2.jpg">
+<meta property="og:updated_time" content="2018-10-20T10:21:37.009Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CarlosHaoxj&#39;s Blog">
-<meta name="twitter:description" content="JAVA">
+<meta name="twitter:title" content="Spring IoC">
+<meta name="twitter:description" content="认识Spring IoC DI         依赖注入    Dependency Injection IoC         控制反转    Inversion of Control IOC Container     容器         Inversion of Control Container  理解 IoC DIIoC (Inversion of Control) 控制反转，是由软件">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/20/Spring-IoC/Spring-IoC/spring-IoC-1.jpg">
 
 
 
@@ -118,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/JAVA-基础学习笔记/JAVA/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/20/Spring-IoC/"/>
 
 
 
 
 
-  <title>Category: JAVA | CarlosHaoxj's Blog</title>
+  <title>Spring IoC | CarlosHaoxj's Blog</title>
   
 
 
@@ -143,7 +148,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,83 +252,238 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>JAVA<small>Category</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/20/Spring-IoC/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CarlosHaoxj">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CarlosHaoxj's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/04/29/线程/" itemprop="url">
-              
-                <span itemprop="name">线程</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Spring IoC</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-29T09:39:30+08:00"
-              content="2018-04-29" >
-          04-29
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-20T17:53:14+08:00">
+                2018-10-20
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/框架/" itemprop="url" rel="index">
+                    <span itemprop="name">框架</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/框架/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  823
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/24/集合类/" itemprop="url">
-              
-                <span itemprop="name">集合类</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-24T08:16:52+08:00"
-              content="2018-04-24" >
-          04-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <h1 id="认识Spring-IoC"><a href="#认识Spring-IoC" class="headerlink" title="认识Spring IoC"></a>认识Spring IoC</h1><ul>
+<li>DI         依赖注入    Dependency Injection</li>
+<li>IoC         控制反转    Inversion of Control</li>
+<li>IOC Container     容器         Inversion of Control Container</li>
+</ul>
+<h2 id="理解-IoC-DI"><a href="#理解-IoC-DI" class="headerlink" title="理解 IoC DI"></a>理解 IoC DI</h2><p>IoC (Inversion of Control) 控制反转，是由软件专家 Michael Mattson 提出的一个理论，用于解决复杂系统中的耦合关系。后来这个理论被逐渐应用到实践中，例如 J2EE 中的 Spring 框架中，IoC 就成为核心功能实现。</p>
+<h3 id="IoC-Inversion-of-Control"><a href="#IoC-Inversion-of-Control" class="headerlink" title="IoC(Inversion of Control)"></a>IoC(Inversion of Control)</h3><p>Spring IoC(Inversion of Control) 别名 DI(Dependency Injection) 依赖注入，而事实上二者并非相同。IoC(Inversion of Control)是面向对象的一种思想，DI(Dependency Injection)是实现这一思想的方法。</p>
+<p>控制反转是目的，依赖注入是实现控制反转的手段。控制反转是将某个类对其内部状态权交给其他机制去完成，为降低类与类之间的耦合度。这个时候就出现了一个新的概念 IoC Container 称为 IoC 容器，在这里面从放着所有类与类依赖关系的方法，这时候 IoC 容器就充当着一个第三方角色，想要解决某个问题直接告诉 IoC 容器，它为我们找到解决问题的方式。</p>
+<h3 id="DI-Dependency-Injection"><a href="#DI-Dependency-Injection" class="headerlink" title="DI(Dependency Injection)"></a>DI(Dependency Injection)</h3><p>DI(Dependency Injection)依赖注入 就是在 IoC 容器运行期间动态的将某种依赖关系注入到对象中，实现 IoC 的方法。利用依赖关系的注入的方式，实现对象之间的结耦。IoC 容器就是一个对象的制造工厂，当你使用某个功能时，你只要调用其方法就可以实现。你的关注点只在如何使用，至于其方法是如何创建，何时销毁等不需要关心，这一切都是由 IoC 容器进行实现。 </p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p><img src="Spring-IoC/spring-IoC-1.jpg" alt="spring-IoC-1"><br>当我们打开机械手表后，会看到上图所示的场景，各个齿轮带动时针，分针，秒针的转动，相互依赖，从而在表盘上产生正确的时间。但是当其中某个齿轮损坏后，整个系统可能将停止运转，之间存在这复杂的耦合关系。齿轮组中齿轮之间的啮合关系,与软件系统中对象之间的耦合关系非常相似。对象之间的耦合关系是无法避免的，也是必要的，这是协同工作的基础。现在，伴随着工业级应用的规模越来越庞大，对象之间的依赖关系也越来越复杂，经常会出现对象之间的多重依赖性关系，因此，架构师和设计师对于系统的分析和设计，将面临更大的挑战。对象之间耦合度过高的系统，必然会出现牵一发而动全身的情形。为了有效的避免出现这样的问题，我们对其引入 IoC(Inversion of Control)来解决。</p>
+<p><img src="Spring-IoC/spring-IoC-2.jpg" alt="spring-IoC-2"><br>当我们引入 IoC 容器后，我们可以发现其中 A,B,C,D这四个齿轮不再是相互依赖的关系，而是共同依赖于 IoC 容器这个第三方的，IoC 容器成为整个系统的一个核心，A,B,C,D四个齿轮的转动都依赖于 IoC 容器。</p>
+<p>##文档参考：</p>
+<ul>
+<li><a href="https://martinfowler.com/articles/injection.html" target="_blank" rel="noopener">Dependency Injection</a> </li>
+<li><a href="https://en.wikipedia.org/wiki/Dependency_injection" target="_blank" rel="noopener">Inversion of Control Containers and the Dependency Injection pattern</a></li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpg" alt="CarlosHaoxj WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/16/MyBatis-入门/" rel="next" title="MyBatis 入门">
+                <i class="fa fa-chevron-left"></i> MyBatis 入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -331,6 +491,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -351,8 +515,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -462,6 +635,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#认识Spring-IoC"><span class="nav-number">1.</span> <span class="nav-text">认识Spring IoC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#理解-IoC-DI"><span class="nav-number">1.1.</span> <span class="nav-text">理解 IoC DI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IoC-Inversion-of-Control"><span class="nav-number">1.1.1.</span> <span class="nav-text">IoC(Inversion of Control)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DI-Dependency-Injection"><span class="nav-number">1.1.2.</span> <span class="nav-text">DI(Dependency Injection)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">1.2.</span> <span class="nav-text">实例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -648,6 +837,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
