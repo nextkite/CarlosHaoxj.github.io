@@ -6,18 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Cookie Session | CarlosHaoxj&#39;s Blog</title>
+  <title>Spring IoC 源码分析 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/Cookie-Session/index.html">
+  <meta name="description" content="Spring IoCIoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring IoC 源码分析">
+<meta property="og:url" content="http://yoursite.com/2018/11/20/Spring-IoC-源码分析/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="Java">
+<meta property="og:description" content="Spring IoCIoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码分析/Spring-IoC-源码分析/BeanFactory.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码分析/Spring-IoC-源码分析/ApplicationContext.jpg">
+<meta property="og:updated_time" content="2018-11-20T15:13:03.189Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CarlosHaoxj&#39;s Blog">
-<meta name="twitter:description" content="Java">
+<meta name="twitter:title" content="Spring IoC 源码分析">
+<meta name="twitter:description" content="Spring IoCIoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。">
+<meta name="twitter:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码分析/Spring-IoC-源码分析/BeanFactory.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -163,71 +168,224 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Spring-IoC-源码分析" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/16/Java-Web-Cookie Session/" class="archive-article-date">
-  	<time datetime="2018-05-16T05:26:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/16/Java-Web-Cookie Session/">Java Web Cookie Session</a>
+    <h1 class="article-title" itemprop="name">
+      Spring IoC 源码分析
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/11/20/Spring-IoC-源码分析/" class="archive-article-date">
+  	<time datetime="2018-11-20T11:55:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Spring-IoC"><a href="#Spring-IoC" class="headerlink" title="Spring IoC"></a>Spring IoC</h1><p>IoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。</p>
+<a id="more"></a>
+<h2 id="BeanFactory"><a href="#BeanFactory" class="headerlink" title="BeanFactory"></a>BeanFactory</h2><p>可以理解为生产 bean 的工厂，负责管理各个 bean 实例。它是 IoC 容器最基本的接口，提供最基本的 IoC 容器的功能，下面是 BeanFactory 源代码。</p>
+<pre><code>public interface BeanFactory {
+
+    String FACTORY_BEAN_PREFIX = &quot;&amp;&quot;;
+    // 根据 bean 的名字，获取容器中 bean 实例
+    Object getBean(String name) throws BeansException;
+
+    // 根据 bean 的名字和 Class 类型的到 bean 实例，增加类型安全验证机制
+    &lt;T&gt; T getBean(String name, Class&lt;T&gt; requiredType) throws BeansException;
+
+    &lt;T&gt; T getBean(Class&lt;T&gt; requiredType) throws BeansException;
+
+    Object getBean(String name, Object... args) throws BeansException;
+
+    &lt;T&gt; T getBean(Class&lt;T&gt; requiredType, Object... args) throws BeansException;
+
+    // bean 的索引，检查容器中是否有相同名字的 bean 
+    boolean containsBean(String name);
+
+    // 根据 bean 的名字，得到 bean 的实例，并且判断这个 bean 是不是单例
+    boolean isSingleton(String name) throws NoSuchBeanDefinitionException;
+
+    // 查询制定名字的 bean 是否是 prototyoe 类型，属性可以由用户在 BeanDefinition 中制定
+    boolean isPrototype(String name) throws NoSuchBeanDefinitionException;
+
+    // 指定 bean 名字的 Class 类型是否是特定 Class 类型
+    boolean isTypeMatch(String name, ResolvableType typeToMatch) throws NoSuchBeanDefinitionException;
+
+    boolean isTypeMatch(String name, Class&lt;?&gt; typeToMatch) throws NoSuchBeanDefinitionException;
+
+    // 得到 bean 实例的 Class 类型
+    Class&lt;?&gt; getType(String name) throws NoSuchBeanDefinitionException;
+
+    // 得到 bean 的别名
+    String[] getAliases(String name);
+
+}
+</code></pre><h3 id="BeanFactory-1"><a href="#BeanFactory-1" class="headerlink" title="BeanFactory"></a>BeanFactory</h3><p>想要分析源码，首先对接口，类的继承关系有一个初步的认识，先要对整体有个宏观概念，为接下来细分代码做准备，从大到小的顺序进行分析源码。BeanFactory 是一个接口，与其他接口关系如下图：<br><img src="Spring-IoC-源码分析/BeanFactory.jpg" alt="BeanFactory"><br>实现该接口有三个子接口，ListableBeanFactory,HierarchicalBeanFactory,AutowireCapableBeanFactory。上图可以看出最后默认实现类为 DefaultListableBeanFactory。图中 ApplicationContext 在 IoC 容器扮演者重要的角色，ApplicationContext 启动过程中，负责创建实例 Bean，往各个 Bean 中注入依赖等。</p>
+<h3 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h3><p><img src="Spring-IoC-源码分析/ApplicationContext.jpg" alt="AoolicationContext"><br>Spring 提供了许多 IoC 容器的实现，如上图所示: ClassPathXmlApplication, FileSystemXmlApplication, AnnotationConfigApplicationContext.在这三个类中，都有一个重要的方法 refresh() 。该方法作为初始化 IoC 容器的入口，这一方法属于核心方法，重点分析。</p>
+<h2 id="IoC-容器初始化过程"><a href="#IoC-容器初始化过程" class="headerlink" title="IoC 容器初始化过程"></a>IoC 容器初始化过程</h2><p>当执行 refresh(()。标志着 IoC 容器正式启动，会经历三个基本的过程，包括定位，载入，注册。</p>
+<h3 id="Resource-定位"><a href="#Resource-定位" class="headerlink" title="Resource 定位"></a>Resource 定位</h3><h3 id="BeanDefinition-载入"><a href="#BeanDefinition-载入" class="headerlink" title="BeanDefinition 载入"></a>BeanDefinition 载入</h3><h3 id="BeanDefinition-注册"><a href="#BeanDefinition-注册" class="headerlink" title="BeanDefinition 注册"></a>BeanDefinition 注册</h3>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢您的支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Cookie Session</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/JavaEE//" class="article-tag-list-link color2">JavaEE</a>
+        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/11/20/Spring-IoC-源码分析/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/10/20/Spring-IoC/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring IoC</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -276,9 +434,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
