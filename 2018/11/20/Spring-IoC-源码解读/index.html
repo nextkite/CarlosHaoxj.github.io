@@ -6,23 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Spring IoC 源码分析 | CarlosHaoxj&#39;s Blog</title>
+  <title>Spring IoC 源码解读 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Spring IoCIoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。">
 <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring IoC 源码分析">
-<meta property="og:url" content="http://yoursite.com/2018/11/20/Spring-IoC-源码分析/index.html">
+<meta property="og:title" content="Spring IoC 源码解读">
+<meta property="og:url" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
 <meta property="og:description" content="Spring IoCIoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码分析/Spring-IoC-源码分析/BeanFactory.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码分析/Spring-IoC-源码分析/ApplicationContext.jpg">
-<meta property="og:updated_time" content="2018-11-20T15:13:03.189Z">
+<meta property="og:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/Spring-IoC-源码解读/BeanFactory.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/Spring-IoC-源码解读/ApplicationContext.jpg">
+<meta property="og:updated_time" content="2018-11-21T14:27:22.225Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring IoC 源码分析">
+<meta name="twitter:title" content="Spring IoC 源码解读">
 <meta name="twitter:description" content="Spring IoCIoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。">
-<meta name="twitter:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码分析/Spring-IoC-源码分析/BeanFactory.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/Spring-IoC-源码解读/BeanFactory.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -168,19 +168,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Spring-IoC-源码分析" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Spring-IoC-源码解读" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Spring IoC 源码分析
+      Spring IoC 源码解读
     </h1>
   
 
         
-        <a href="/2018/11/20/Spring-IoC-源码分析/" class="archive-article-date">
+        <a href="/2018/11/20/Spring-IoC-源码解读/" class="archive-article-date">
   	<time datetime="2018-11-20T11:55:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-20</time>
 </a>
         
@@ -227,10 +227,457 @@
     String[] getAliases(String name);
 
 }
-</code></pre><h3 id="BeanFactory-1"><a href="#BeanFactory-1" class="headerlink" title="BeanFactory"></a>BeanFactory</h3><p>想要分析源码，首先对接口，类的继承关系有一个初步的认识，先要对整体有个宏观概念，为接下来细分代码做准备，从大到小的顺序进行分析源码。BeanFactory 是一个接口，与其他接口关系如下图：<br><img src="Spring-IoC-源码分析/BeanFactory.jpg" alt="BeanFactory"><br>实现该接口有三个子接口，ListableBeanFactory,HierarchicalBeanFactory,AutowireCapableBeanFactory。上图可以看出最后默认实现类为 DefaultListableBeanFactory。图中 ApplicationContext 在 IoC 容器扮演者重要的角色，ApplicationContext 启动过程中，负责创建实例 Bean，往各个 Bean 中注入依赖等。</p>
-<h3 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h3><p><img src="Spring-IoC-源码分析/ApplicationContext.jpg" alt="AoolicationContext"><br>Spring 提供了许多 IoC 容器的实现，如上图所示: ClassPathXmlApplication, FileSystemXmlApplication, AnnotationConfigApplicationContext.在这三个类中，都有一个重要的方法 refresh() 。该方法作为初始化 IoC 容器的入口，这一方法属于核心方法，重点分析。</p>
-<h2 id="IoC-容器初始化过程"><a href="#IoC-容器初始化过程" class="headerlink" title="IoC 容器初始化过程"></a>IoC 容器初始化过程</h2><p>当执行 refresh(()。标志着 IoC 容器正式启动，会经历三个基本的过程，包括定位，载入，注册。</p>
-<h3 id="Resource-定位"><a href="#Resource-定位" class="headerlink" title="Resource 定位"></a>Resource 定位</h3><h3 id="BeanDefinition-载入"><a href="#BeanDefinition-载入" class="headerlink" title="BeanDefinition 载入"></a>BeanDefinition 载入</h3><h3 id="BeanDefinition-注册"><a href="#BeanDefinition-注册" class="headerlink" title="BeanDefinition 注册"></a>BeanDefinition 注册</h3>
+</code></pre><h3 id="BeanFactory-1"><a href="#BeanFactory-1" class="headerlink" title="BeanFactory"></a>BeanFactory</h3><p>想要分析源码，首先对接口，类的继承关系有一个初步的认识，先要对整体有个宏观概念，为接下来细分代码做准备，从大到小的顺序进行分析源码。BeanFactory 是一个接口，与其他接口关系如下图：<br><img src="Spring-IoC-源码解读/BeanFactory.jpg" alt="BeanFactory"><br>实现该接口有三个子接口，ListableBeanFactory,HierarchicalBeanFactory,AutowireCapableBeanFactory。上图可以看出最后默认实现类为 DefaultListableBeanFactory，这是 BeanFactory 重要实现类。图中 ApplicationContext 在 IoC 容器扮演者重要的角色，ApplicationContext 启动过程中，负责创建实例 Bean，往各个 Bean 中注入依赖等。</p>
+<h3 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h3><p><img src="Spring-IoC-源码解读/ApplicationContext.jpg" alt="AoolicationContext"><br>Spring 提供了许多 IoC 容器的实现，如上图所示: ClassPathXmlApplication, FileSystemXmlApplication, AnnotationConfigApplicationContext.在这三个类中，都有一个重要的方法 refresh() 。该方法作为初始化 IoC 容器的入口，这一方法属于核心方法，重点分析。在这里我们使用 ClassPathXmlApplicationContext 继续解读 Spring IoC 整个过程。</p>
+<pre><code>public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContext {
+    private Resource[] configResources;
+    // 如果已经存在 ApplicationContext 需要调用此方法配置成父子关系
+    public ClassPathXmlApplicationContext(ApplicationContext parent) {
+        super(parent);
+    }
+    ...
+    public ClassPathXmlApplicationContext(String[] configLocations, boolean refresh, ApplicationContext parent) throws BeansException {
+        super(parent);
+          // 根据提供路径，解析配置文件     
+       this.setConfigLocations(configLocations);
+       if (refresh) {
+            this.refresh(); // 核心方法
+        }
+    ...
+      }
+
+}
+</code></pre><h2 id="IoC-容器初始化过程"><a href="#IoC-容器初始化过程" class="headerlink" title="IoC 容器初始化过程"></a>IoC 容器初始化过程</h2><p>当执行 refresh(()。标志着 IoC 容器正式启动，会经历三个基本的过程，包括定位，载入，注册。执行 refresh() 方法会将原来的 ApplicationContext 销毁，然后重新执行一次初始化操作。</p>
+<pre><code>public void refresh() throws BeansException, IllegalStateException {
+    Object var1 = this.startupShutdownMonitor;
+    // 防止 refresh（）还没有结束，又来一个启动或者执行操作
+    synchronized(this.startupShutdownMonitor) {
+          // 准备工作，记录容器启动时间
+        this.prepareRefresh();
+        // 执行完这步后，配置文件就会解析成一个个 Bean 定义，注册到 BeanFactory 中，但是这步还没有将 Bean 初始化，只是将配置文件中信息解析出来。
+        ConfigurableListableBeanFactory beanFactory = this.obtainFreshBeanFactory();
+        // 设置 BeanFactory 类加载器，
+        this.prepareBeanFactory(beanFactory);
+
+        try {
+            this.postProcessBeanFactory(beanFactory);
+            this.invokeBeanFactoryPostProcessors(beanFactory);
+            this.registerBeanPostProcessors(beanFactory);
+            this.initMessageSource();
+            this.initApplicationEventMulticaster();
+            this.onRefresh();
+            this.registerListeners();
+            // 初始化所有 singleton beans （lazy-init 的除外）
+            this.finishBeanFactoryInitialization(beanFactory);
+            // ApplicationContext 初始化完成，结束 refresh() 过程
+            this.finishRefresh();
+        } catch (BeansException var9) {
+            if (this.logger.isWarnEnabled()) {
+                this.logger.warn(&quot;Exception encountered during context initialization - cancelling refresh attempt: &quot; + var9);
+            }
+            // 销毁已经初始化的 singleton beans ，防止资源占用
+
+            this.destroyBeans();
+            this.cancelRefresh(var9);
+            throw var9;
+        } finally {
+            this.resetCommonCaches();
+        }
+
+    }
+}
+</code></pre><p>看过 refresh() 方法整体内容后，开始逐步分解代码。prepareRefresh() 该方法是穿件 Bean 容器前的准备工作，比如 记录容器启动时间就在该方法里设置。</p>
+<h3 id="Resource定位"><a href="#Resource定位" class="headerlink" title="Resource定位"></a>Resource定位</h3><p>准备工作结束后，代码执行到 obtainFreshBeanFactory() 方法，该方法非常重要，初始化 BeanFactory，加载 Bean， 注册 Bean，都会在该方法内进行完成。（Bean 实例并不在这里完成）。</p>
+<pre><code>protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
+    this.refreshBeanFactory();
+    // 返回刚创建的 BeanFactory
+    ConfigurableListableBeanFactory beanFactory = this.getBeanFactory();
+    if (this.logger.isDebugEnabled()) {
+        this.logger.debug(&quot;Bean factory for &quot; + this.getDisplayName() + &quot;: &quot; + beanFactory);
+    }
+
+    return beanFactory;
+}
+</code></pre><p>这里最重要的过程在 refreshBeanFactory() 中，Spring IoC 容器启动从这里开始。该方法是 AbstractApplicationContext 中的抽象方法。具体实现不在这里，而是在它的子类中实现，</p>
+<pre><code>    protected final void refreshBeanFactory() throws BeansException {
+    // 如果之前加载过 BeanFactory ，销毁所有 Bean ，关闭 BeanFactory,这里不是只全局 BeanFactory ,只是指当前 ApplicationContext 是否有 BeanFactory
+    if (hasBeanFactory()) {
+        destroyBeans();
+        closeBeanFactory();
+    }
+    try {
+        DefaultListableBeanFactory beanFactory = createBeanFactory();
+        beanFactory.setSerializationId(getId());
+        customizeBeanFactory(beanFactory);
+        // 加载 Bean 到 BeanFactory 中
+        loadBeanDefinitions(beanFactory);
+        synchronized (this.beanFactoryMonitor) {
+            this.beanFactory = beanFactory;
+        }
+    }
+    catch (IOException ex) {
+        throw new ApplicationContextException(&quot;I/O error parsing bean definition source for &quot; + getDisplayName(), ex);
+    }
+}
+</code></pre><p>先执行<code>refreshBeanfactory()</code>判断完是否有工厂后，开始载入 Bean 的定义，先经过方法<code>customizeBeanFactory(beanFactory);</code>该方法的作用是是否容许 BeanDefinition 覆盖,是否容许循环应用。这里就可以帮助我们解答在刚学习 Spring 时遇到的在配置文件中定义 bean 时使用了相同的 id 或 name 的问题，如果同意配置文件中重复，会抛错，不是同一个配置文件中，会覆盖。</p>
+<p>接着是 <code>loadBeanDefinitions(beanFactory)</code>。此方法根据配置，加载各个 Bean ,然后放到 BeanFactory 中。接着我们到 AbstractRefreshableApplicationContext 类下找到 loadBeanDefinitions方法，在 AbstractXmlApplicationContext 类下找到该方法</p>
+<pre><code>protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throws BeansException, IOException {
+    // 实例化一个 XmlBeanDefinitionReader
+    XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
+
+
+    beanDefinitionReader.setEnvironment(this.getEnvironment());
+    beanDefinitionReader.setResourceLoader(this);
+    beanDefinitionReader.setEntityResolver(new ResourceEntityResolver(this));
+
+    initBeanDefinitionReader(beanDefinitionReader);
+    // 从这里出发继续分析源码
+    loadBeanDefinitions(beanDefinitionReader);
+}
+</code></pre><p>按照 loadBeanDefinitions(beanDefinitionReader) 继续查找，接着来到 AbstractXmlApplicationContext 类下。</p>
+<pre><code>    protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) throws BeansException, IOException {
+    Resource[] configResources = getConfigResources();
+    if (configResources != null) {
+        reader.loadBeanDefinitions(configResources);
+    }
+    String[] configLocations = getConfigLocations();
+    if (configLocations != null) {
+        reader.loadBeanDefinitions(configLocations);
+    }
+}
+</code></pre><p>这里有俩个分支，先选择第一个分支。接着到 BeanDefinitionReader 接口下。找到 loadBeanDefinitions 方法</p>
+<pre><code>    public int loadBeanDefinitions(Resource... resources) throws BeanDefinitionStoreException {
+    Assert.notNull(resources, &quot;Resource array must not be null&quot;);
+    int counter = 0;
+    for (Resource resource : resources) {
+        counter += loadBeanDefinitions(resource);
+    }
+    return counter;
+}
+</code></pre><p>来到 BeanDefinitionReader 接口，在 XmlBeanDefinitionReader 类中找到 loadBeanDefinitions 方法</p>
+<pre><code>public int loadBeanDefinitions(EncodedResource encodedResource) throws BeanDefinitionStoreException {
+    Assert.notNull(encodedResource, &quot;EncodedResource must not be null&quot;);
+    if (logger.isInfoEnabled()) {
+        logger.info(&quot;Loading XML bean definitions from &quot; + encodedResource.getResource());
+    }
+    // 存放配置文件资源
+    Set&lt;EncodedResource&gt; currentResources = this.resourcesCurrentlyBeingLoaded.get();
+    if (currentResources == null) {
+        currentResources = new HashSet&lt;EncodedResource&gt;(4);
+        this.resourcesCurrentlyBeingLoaded.set(currentResources);
+    }
+    if (!currentResources.add(encodedResource)) {
+        throw new BeanDefinitionStoreException(
+                &quot;Detected cyclic loading of &quot; + encodedResource + &quot; - check your import definitions!&quot;);
+    }
+    try {
+        // 将资源文件转换为 IO 输入流
+        InputStream inputStream = encodedResource.getResource().getInputStream();
+        try {
+            InputSource inputSource = new InputSource(inputStream);
+            if (encodedResource.getEncoding() != null) {
+                inputSource.setEncoding(encodedResource.getEncoding());
+            }
+            // 从这里继续查找，这里是具体读取过程的方法
+            return doLoadBeanDefinitions(inputSource, encodedResource.getResource());
+        }
+        finally {
+            inputStream.close();
+        }
+    }
+    catch (IOException ex) {
+        throw new BeanDefinitionStoreException(
+                &quot;IOException parsing XML document from &quot; + encodedResource.getResource(), ex);
+    }
+    finally {
+        currentResources.remove(encodedResource);
+        if (currentResources.isEmpty()) {
+            this.resourcesCurrentlyBeingLoaded.remove();
+        }
+    }
+}
+
+
+    protected int doLoadBeanDefinitions(InputSource inputSource, Resource resource)
+        throws BeanDefinitionStoreException {
+    try {
+        // 将 XML 文件转换为 DOM 对象
+        Document doc = doLoadDocument(inputSource, resource);
+        // 启动时 Bean 定义解析详细过程，
+        return registerBeanDefinitions(doc, resource);
+    }
+    ......
+}
+</code></pre><p>接着 registerBeanDefinitions 继续分析</p>
+<pre><code>    public int registerBeanDefinitions(Document doc, Resource resource) throws BeanDefinitionStoreException {
+    // 对 XML 格式的 BeanDefinition 解析
+    BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader();
+    // 获得容器中注册的 Bean 数量
+    int countBefore = getRegistry().getBeanDefinitionCount();
+    // 解析过程入口，
+    documentReader.registerBeanDefinitions(doc, createReaderContext(resource));
+    // 统计解析 Bean 数量
+    return getRegistry().getBeanDefinitionCount() - countBefore;
+}
+</code></pre><p>BeanDefinitionDocumentReader 是一个接口，具体实现类在 DefaultBeanDefinitionDocumentReader</p>
+<pre><code>    public void registerBeanDefinitions(Document doc, XmlReaderContext readerContext) {
+    this.readerContext = readerContext;
+    logger.debug(&quot;Loading bean definitions&quot;);
+    // 获取根元素
+    Element root = doc.getDocumentElement();
+    doRegisterBeanDefinitions(root);
+}
+</code></pre><p>真正开始解析配置文件里内容是由 <code>doRegisterBeanDefinitions(root);</code> 方法开始解析</p>
+<pre><code>    protected void doRegisterBeanDefinitions(Element root) {
+    // 该类负责解析 Bean 定义
+    BeanDefinitionParserDelegate parent = this.delegate;
+    this.delegate = createDelegate(getReaderContext(), root, parent);
+
+    if (this.delegate.isDefaultNamespace(root)) {
+        String profileSpec = root.getAttribute(PROFILE_ATTRIBUTE);
+        if (StringUtils.hasText(profileSpec)) {
+            String[] specifiedProfiles = StringUtils.tokenizeToStringArray(
+                    profileSpec, BeanDefinitionParserDelegate.MULTI_VALUE_ATTRIBUTE_DELIMITERS);
+            if (!getReaderContext().getEnvironment().acceptsProfiles(specifiedProfiles)) {
+                if (logger.isInfoEnabled()) {
+                    logger.info(&quot;Skipped XML bean definition file due to specified profiles [&quot; + profileSpec +
+                            &quot;] not matching: &quot; + getReaderContext().getResource());
+                }
+                return;
+            }
+        }
+    }
+
+    preProcessXml(root);
+    parseBeanDefinitions(root, this.delegate);
+    postProcessXml(root);
+
+    this.delegate = parent;
+}
+</code></pre><p><code>parseBeanDefinitions(root, this.delegate);</code> 核心方法，负责解析 <bean> 标签</bean></p>
+<pre><code>protected void parseBeanDefinitions(Element root, BeanDefinitionParserDelegate delegate) {
+    if (delegate.isDefaultNamespace(root)) {
+         // 遍历根元素所有子节点
+        NodeList nl = root.getChildNodes();
+        for (int i = 0; i &lt; nl.getLength(); i++) {
+            Node node = nl.item(i);
+            // 如果节点是 XML 元素节点
+            if (node instanceof Element) {
+                Element ele = (Element) node;
+                // 如果节点使用的是 Spring 默认 XML 命名空间
+                if (delegate.isDefaultNamespace(ele)) {
+                    // 使用 Spring 的 Bean 规则解析元素节点
+                    parseDefaultElement(ele, delegate);
+                }
+                else {
+                    // 如果没有使用 Spring 默认的 Bean 命名空间，使用用户自定义的解析规则解析元素（自定义的 xsd）
+                    delegate.parseCustomElement(ele);
+                }
+            }
+        }
+    }
+    else {
+        // 根节点没有使用 Spring 默认命名空间，使用用户自定义规则解析
+        delegate.parseCustomElement(root);
+    }
+}
+</code></pre><p>以上方法主要是判断是否为 Spring 默认命名空间，接着我们看使用 Spring 默认命名空间后，执行 <code>parseDefaultElement(ele, delegate);</code> 方法。</p>
+<pre><code>    private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate)     {
+    // 如果节点是 import 导入元素，进行解析
+    if (delegate.nodeNameEquals(ele, IMPORT_ELEMENT)) {
+        importBeanDefinitionResource(ele);
+    }
+    // 如果元素节点是 Alias 别名元素，进行别名解析
+    else if (delegate.nodeNameEquals(ele, ALIAS_ELEMENT)) {
+        processAliasRegistration(ele);
+    }
+    // 如果是普通 Bean 元素，进行 Spring 的 Bean 规则解析
+    else if (delegate.nodeNameEquals(ele, BEAN_ELEMENT)) {
+        processBeanDefinition(ele, delegate);
+    }
+    else if (delegate.nodeNameEquals(ele, NESTED_BEANS_ELEMENT)) {
+        // 如果碰到嵌套 beans 标签，需要递归
+        doRegisterBeanDefinitions(ele);
+    }
+}
+</code></pre><p>直接来到 Bean 规则解析，这里的 DeanDefinitionHolder 是对 BeanDefinition 的封装，包括 BeanDefinition, beanName, aliases</p>
+<pre><code>    protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) {
+    BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele);
+    if (bdHolder != null) {
+        bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder);
+        try {
+            // 向 Spring IoC 容器注册解析得到的 Bean 定义
+            BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());
+        }
+        catch (BeanDefinitionStoreException ex) {
+            getReaderContext().error(&quot;Failed to register bean definition with name &apos;&quot; +
+                    bdHolder.getBeanName() + &quot;&apos;&quot;, ele, ex);
+        }
+        // Send registration event.
+        getReaderContext().fireComponentRegistered(new BeanComponentDefinition(bdHolder));
+    }
+}
+</code></pre><p>在进行标签解析之前，先回顾 <bean> 标签里可以定义的属性</bean></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>calss</td>
+<td>类的全限定名</td>
+</tr>
+<tr>
+<td>name</td>
+<td>可指定 id, name (用逗号，分号，空格分隔)</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>作用域</td>
+</tr>
+<tr>
+<td>constructor arguments</td>
+<td>指定构造参数</td>
+</tr>
+<tr>
+<td>properties</td>
+<td>设置属性的值</td>
+</tr>
+<tr>
+<td>autoworting mode</td>
+<td>no(默认值),byName,byType,constructor</td>
+</tr>
+<tr>
+<td>lazy-initialization mode</td>
+<td>是否类加载</td>
+</tr>
+<tr>
+<td>initialization method</td>
+<td>bean 属性设置完成后，会调用这个方法</td>
+</tr>
+<tr>
+<td>destruction method</td>
+<td>bean 销毁后的回调方法</td>
+</tr>
+</tbody>
+</table>
+<pre><code>public BeanDefinitionHolder parseBeanDefinitionElement(Element ele, BeanDefinition containingBean) {
+    String id = ele.getAttribute(ID_ATTRIBUTE);
+    String nameAttr = ele.getAttribute(NAME_ATTRIBUTE);
+    // 将 name 属性的定义按照 逗号 分号 空格 切分，形成一个别名列表组
+    List&lt;String&gt; aliases = new ArrayList&lt;String&gt;();
+    if (StringUtils.hasLength(nameAttr)) {
+        String[] nameArr = StringUtils.tokenizeToStringArray(nameAttr, MULTI_VALUE_ATTRIBUTE_DELIMITERS);
+        aliases.addAll(Arrays.asList(nameArr));
+    }
+
+    String beanName = id;
+    // 如果没有指定 id，那么用别名列表的第一个名字作为 beanName
+    if (!StringUtils.hasText(beanName) &amp;&amp; !aliases.isEmpty()) {
+        beanName = aliases.remove(0);
+        if (logger.isDebugEnabled()) {
+            logger.debug(&quot;No XML &apos;id&apos; specified - using &apos;&quot; + beanName +
+                    &quot;&apos; as bean name and &quot; + aliases + &quot; as aliases&quot;);
+        }
+    }
+    // 检查 &lt;bean&gt; id 和 name 的唯一性。
+    if (containingBean == null) {
+        checkNameUniqueness(beanName, aliases, ele);
+    }
+    // 从这里对 &lt;bean&gt; 元素详细解析
+    AbstractBeanDefinition beanDefinition = parseBeanDefinitionElement(ele, beanName, containingBean);
+    if (beanDefinition != null) {
+        if (!StringUtils.hasText(beanName)) {
+            try {
+                if (containingBean != null) {
+                    // 如果 &lt;bean&gt; 没有配置 id, name, 或者别名，为解析的 bean 生成一个唯一 beanName 并注册
+                    beanName = BeanDefinitionReaderUtils.generateBeanName(
+                            beanDefinition, this.readerContext.getRegistry(), true);
+                }
+                else {
+                    beanName = this.readerContext.generateBeanName(beanDefinition);
+                    // 
+                    String beanClassName = beanDefinition.getBeanClassName();
+                    if (beanClassName != null &amp;&amp;
+                            beanName.startsWith(beanClassName) &amp;&amp; beanName.length() &gt; beanClassName.length() &amp;&amp;
+                            !this.readerContext.getRegistry().isBeanNameInUse(beanClassName)) {
+                            // beanClassName 设置为 Bean 的别名
+                        aliases.add(beanClassName);
+                    }
+                }
+                if (logger.isDebugEnabled()) {
+                    logger.debug(&quot;Neither XML &apos;id&apos; nor &apos;name&apos; specified - &quot; +
+                            &quot;using generated bean name [&quot; + beanName + &quot;]&quot;);
+                }
+            }
+            catch (Exception ex) {
+                error(ex.getMessage(), ele);
+                return null;
+            }
+        }
+        String[] aliasesArray = StringUtils.toStringArray(aliases);
+        // 返回 BeanDefinitionHolder
+        return new BeanDefinitionHolder(beanDefinition, beanName, aliasesArray);
+    }
+
+    return null;
+}
+</code></pre><p><code>parseBeanDefinitionElement</code>中放着具体参数配置</p>
+<pre><code>    public AbstractBeanDefinition parseBeanDefinitionElement(
+        Element ele, String beanName, BeanDefinition containingBean) {
+    // 记录解析 Bean
+    this.parseState.push(new BeanEntry(beanName));
+    // 读取配置的 class 名字，然后记录到 BeanDefinition 中，并不做实例化
+    String className = null;
+    if (ele.hasAttribute(CLASS_ATTRIBUTE)) {
+        className = ele.getAttribute(CLASS_ATTRIBUTE).trim();
+    }
+
+    try {
+        // 如果配置了 parent 属性，获取 parent 属性的值
+        String parent = null;
+        if (ele.hasAttribute(PARENT_ATTRIBUTE)) {
+            parent = ele.getAttribute(PARENT_ATTRIBUTE);
+        }
+        AbstractBeanDefinition bd = createBeanDefinition(className, parent);
+        // 设置 BeanDefinition 的属性，这些属性定义在 AbstractBeanDefinition 中
+        parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);
+        bd.setDescription(DomUtils.getChildElementValueByTagName(ele, DESCRIPTION_ELEMENT));
+        // 解析 &lt;bean /&gt; 内部的子元素，解析的星系放到 bd 中
+
+        parseMetaElements(ele, bd);
+        parseLookupOverrideSubElements(ele, bd.getMethodOverrides());
+        parseReplacedMethodSubElements(ele, bd.getMethodOverrides());
+
+        parseConstructorArgElements(ele, bd);
+        parsePropertyElements(ele, bd);
+        parseQualifierElements(ele, bd);
+
+        bd.setResource(this.readerContext.getResource());
+        bd.setSource(extractSource(ele));
+
+        return bd;
+    }
+    catch (ClassNotFoundException ex) {
+        error(&quot;Bean class [&quot; + className + &quot;] not found&quot;, ele, ex);
+    }
+    catch (NoClassDefFoundError err) {
+        error(&quot;Class that bean class [&quot; + className + &quot;] depends on not found&quot;, ele, err);
+    }
+    catch (Throwable ex) {
+        error(&quot;Unexpected failure during bean definition parsing&quot;, ele, ex);
+    }
+    finally {
+        this.parseState.pop();
+    }
+
+    return null;
+}
+</code></pre><p>以上的代码内容就可解释在使用 Spring 是，配置文件中 <bean> 标签中的属性是如何解析到 Bean 中。在上述解析过程中并没有创建和实例化 Bean 对象，只是创建了 Bean 对象的定义类 BeanDefinition, 将 <bean> 中配置信息设置到 BeanDefinition 中作为记录。</bean></bean></p>
+
       
 
       
@@ -336,7 +783,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/11/20/Spring-IoC-源码分析/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/11/20/Spring-IoC-源码解读/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -508,11 +955,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Java Web 过滤器</a>
+                <a href="javascript:void(0)" class="js-tag color5">Cookie Session</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Cookie Session</a>
+                <a href="javascript:void(0)" class="js-tag color2">JSP EL JSTL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -520,7 +967,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JSP EL JSTL</a>
+                <a href="javascript:void(0)" class="js-tag color3">Java Web 过滤器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,19 +979,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">CarlosHaoxj</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Servlet</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Spring-MVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">CarlosHaoxj</a>
               </li>
              
               <li class="article-tag-list-item">
