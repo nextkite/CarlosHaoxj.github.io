@@ -16,13 +16,13 @@
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
 <meta property="og:description" content="Spring IoCIoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/Spring-IoC-源码解读/BeanFactory.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/Spring-IoC-源码解读/ApplicationContext.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/BeanFactory.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/ApplicationContext.jpg">
 <meta property="og:updated_time" content="2018-11-21T14:27:22.225Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring IoC 源码解读">
 <meta name="twitter:description" content="Spring IoCIoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。">
-<meta name="twitter:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/Spring-IoC-源码解读/BeanFactory.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/BeanFactory.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -227,8 +227,8 @@
     String[] getAliases(String name);
 
 }
-</code></pre><h3 id="BeanFactory-1"><a href="#BeanFactory-1" class="headerlink" title="BeanFactory"></a>BeanFactory</h3><p>想要分析源码，首先对接口，类的继承关系有一个初步的认识，先要对整体有个宏观概念，为接下来细分代码做准备，从大到小的顺序进行分析源码。BeanFactory 是一个接口，与其他接口关系如下图：<br><img src="Spring-IoC-源码解读/BeanFactory.jpg" alt="BeanFactory"><br>实现该接口有三个子接口，ListableBeanFactory,HierarchicalBeanFactory,AutowireCapableBeanFactory。上图可以看出最后默认实现类为 DefaultListableBeanFactory，这是 BeanFactory 重要实现类。图中 ApplicationContext 在 IoC 容器扮演者重要的角色，ApplicationContext 启动过程中，负责创建实例 Bean，往各个 Bean 中注入依赖等。</p>
-<h3 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h3><p><img src="Spring-IoC-源码解读/ApplicationContext.jpg" alt="AoolicationContext"><br>Spring 提供了许多 IoC 容器的实现，如上图所示: ClassPathXmlApplication, FileSystemXmlApplication, AnnotationConfigApplicationContext.在这三个类中，都有一个重要的方法 refresh() 。该方法作为初始化 IoC 容器的入口，这一方法属于核心方法，重点分析。在这里我们使用 ClassPathXmlApplicationContext 继续解读 Spring IoC 整个过程。</p>
+</code></pre><h3 id="BeanFactory-1"><a href="#BeanFactory-1" class="headerlink" title="BeanFactory"></a>BeanFactory</h3><p>想要分析源码，首先对接口，类的继承关系有一个初步的认识，先要对整体有个宏观概念，为接下来细分代码做准备，从大到小的顺序进行分析源码。BeanFactory 是一个接口，与其他接口关系如下图：<br><img src="/2018/11/20/Spring-IoC-源码解读/BeanFactory.jpg" alt="BeanFactory"><br>实现该接口有三个子接口，ListableBeanFactory,HierarchicalBeanFactory,AutowireCapableBeanFactory。上图可以看出最后默认实现类为 DefaultListableBeanFactory，这是 BeanFactory 重要实现类。图中 ApplicationContext 在 IoC 容器扮演者重要的角色，ApplicationContext 启动过程中，负责创建实例 Bean，往各个 Bean 中注入依赖等。</p>
+<h3 id="ApplicationContext"><a href="#ApplicationContext" class="headerlink" title="ApplicationContext"></a>ApplicationContext</h3><p><img src="/2018/11/20/Spring-IoC-源码解读/ApplicationContext.jpg" alt="AoolicationContext"><br>Spring 提供了许多 IoC 容器的实现，如上图所示: ClassPathXmlApplication, FileSystemXmlApplication, AnnotationConfigApplicationContext.在这三个类中，都有一个重要的方法 refresh() 。该方法作为初始化 IoC 容器的入口，这一方法属于核心方法，重点分析。在这里我们使用 ClassPathXmlApplicationContext 继续解读 Spring IoC 整个过程。</p>
 <pre><code>public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContext {
     private Resource[] configResources;
     // 如果已经存在 ApplicationContext 需要调用此方法配置成父子关系

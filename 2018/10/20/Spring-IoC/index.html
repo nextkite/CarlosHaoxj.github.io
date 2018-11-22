@@ -16,13 +16,13 @@
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
 <meta property="og:description" content="认识Spring IoC DI         依赖注入    Dependency Injection IoC         控制反转    Inversion of Control IOC Container     容器         Inversion of Control Container  理解 IoC DIIoC (Inversion of Control) 控制反转，是由软件">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/10/20/Spring-IoC/Spring-IoC/spring-IoC-1.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/10/20/Spring-IoC/Spring-IoC/spring-IoC-2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/Spring-IoC/spring-IoC-1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/Spring-IoC/spring-IoC-2.jpg">
 <meta property="og:updated_time" content="2018-11-19T12:25:19.407Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring IoC">
 <meta name="twitter:description" content="认识Spring IoC DI         依赖注入    Dependency Injection IoC         控制反转    Inversion of Control IOC Container     容器         Inversion of Control Container  理解 IoC DIIoC (Inversion of Control) 控制反转，是由软件">
-<meta name="twitter:image" content="http://yoursite.com/2018/10/20/Spring-IoC/Spring-IoC/spring-IoC-1.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/20/Spring-IoC/spring-IoC-1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -198,8 +198,8 @@
 <a id="more"></a>
 <p>控制反转是目的，依赖注入是实现控制反转的手段。控制反转是将某个类对其内部状态权交给其他机制去完成，为降低类与类之间的耦合度。这个时候就出现了一个新的概念 IoC Container 称为 IoC 容器，在这里面从放着所有类与类依赖关系的方法，这时候 IoC 容器就充当着一个第三方角色，想要解决某个问题直接告诉 IoC 容器，它为我们找到解决问题的方式。</p>
 <h3 id="DI-Dependency-Injection"><a href="#DI-Dependency-Injection" class="headerlink" title="DI(Dependency Injection)"></a>DI(Dependency Injection)</h3><p>DI(Dependency Injection)依赖注入 就是在 IoC 容器运行期间动态的将某种依赖关系注入到对象中，实现 IoC 的方法。利用依赖关系的注入的方式，实现对象之间的结耦。IoC 容器就是一个对象的制造工厂，当你使用某个功能时，你只要调用其方法就可以实现。你的关注点只在如何使用，至于其方法是如何创建，何时销毁等不需要关心，这一切都是由 IoC 容器进行实现。 </p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p><img src="Spring-IoC/spring-IoC-1.jpg" alt="spring-IoC-1"><br>当我们打开机械手表后，会看到上图所示的场景，各个齿轮带动时针，分针，秒针的转动，相互依赖，从而在表盘上产生正确的时间。但是当其中某个齿轮损坏后，整个系统可能将停止运转，之间存在这复杂的耦合关系。齿轮组中齿轮之间的啮合关系,与软件系统中对象之间的耦合关系非常相似。对象之间的耦合关系是无法避免的，也是必要的，这是协同工作的基础。现在，伴随着工业级应用的规模越来越庞大，对象之间的依赖关系也越来越复杂，经常会出现对象之间的多重依赖性关系，因此，架构师和设计师对于系统的分析和设计，将面临更大的挑战。对象之间耦合度过高的系统，必然会出现牵一发而动全身的情形。为了有效的避免出现这样的问题，我们对其引入 IoC(Inversion of Control)来解决。</p>
-<p><img src="Spring-IoC/spring-IoC-2.jpg" alt="spring-IoC-2"><br>当我们引入 IoC 容器后，我们可以发现其中 A,B,C,D这四个齿轮不再是相互依赖的关系，而是共同依赖于 IoC 容器这个第三方的，IoC 容器成为整个系统的一个核心，A,B,C,D四个齿轮的转动都依赖于 IoC 容器。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p><img src="/2018/10/20/Spring-IoC/spring-IoC-1.jpg" alt="spring-IoC-1"><br>当我们打开机械手表后，会看到上图所示的场景，各个齿轮带动时针，分针，秒针的转动，相互依赖，从而在表盘上产生正确的时间。但是当其中某个齿轮损坏后，整个系统可能将停止运转，之间存在这复杂的耦合关系。齿轮组中齿轮之间的啮合关系,与软件系统中对象之间的耦合关系非常相似。对象之间的耦合关系是无法避免的，也是必要的，这是协同工作的基础。现在，伴随着工业级应用的规模越来越庞大，对象之间的依赖关系也越来越复杂，经常会出现对象之间的多重依赖性关系，因此，架构师和设计师对于系统的分析和设计，将面临更大的挑战。对象之间耦合度过高的系统，必然会出现牵一发而动全身的情形。为了有效的避免出现这样的问题，我们对其引入 IoC(Inversion of Control)来解决。</p>
+<p><img src="/2018/10/20/Spring-IoC/spring-IoC-2.jpg" alt="spring-IoC-2"><br>当我们引入 IoC 容器后，我们可以发现其中 A,B,C,D这四个齿轮不再是相互依赖的关系，而是共同依赖于 IoC 容器这个第三方的，IoC 容器成为整个系统的一个核心，A,B,C,D四个齿轮的转动都依赖于 IoC 容器。</p>
 <p>##文档参考：</p>
 <ul>
 <li><a href="https://martinfowler.com/articles/injection.html" target="_blank" rel="noopener">Dependency Injection</a> </li>
