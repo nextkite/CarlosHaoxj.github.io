@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Spring-MVC 初相识 | CarlosHaoxj&#39;s Blog</title>
+  <title>Spring-MVC | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Spring-MVC 认识要学习使用 Sring-MVC 需要了解，掌握一副图，展示了它的工作原理。需要理解并记牢每一步的所要完成的任务。   用户发送一个请求，请求先到达 DispatcherServlet ，它需要知道，应该将请求交给哪一个控制器去处理请求 DispatcherServlet 会去 Hander Mapping （处理器映射）查询下一站应该去何处。Hander Mapping">
-<meta name="keywords" content="Spring-MVC">
+  <meta name="keywords" content="Spring-MVC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring-MVC 初相识">
+<meta property="og:title" content="Spring-MVC">
 <meta property="og:url" content="http://yoursite.com/2018/07/30/Spring-MVC/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="Spring-MVC 认识要学习使用 Sring-MVC 需要了解，掌握一副图，展示了它的工作原理。需要理解并记牢每一步的所要完成的任务。   用户发送一个请求，请求先到达 DispatcherServlet ，它需要知道，应该将请求交给哪一个控制器去处理请求 DispatcherServlet 会去 Hander Mapping （处理器映射）查询下一站应该去何处。Hander Mapping">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/07/30/Spring-MVC/markus-spiske.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/07/30/Spring-MVC/spring-MVC-01.jpg">
-<meta property="og:updated_time" content="2019-03-13T02:11:31.016Z">
+<meta property="og:updated_time" content="2019-03-17T10:50:56.545Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring-MVC 初相识">
-<meta name="twitter:description" content="Spring-MVC 认识要学习使用 Sring-MVC 需要了解，掌握一副图，展示了它的工作原理。需要理解并记牢每一步的所要完成的任务。   用户发送一个请求，请求先到达 DispatcherServlet ，它需要知道，应该将请求交给哪一个控制器去处理请求 DispatcherServlet 会去 Hander Mapping （处理器映射）查询下一站应该去何处。Hander Mapping">
-<meta name="twitter:image" content="http://yoursite.com/2018/07/30/Spring-MVC/spring-MVC-01.jpg">
+<meta name="twitter:title" content="Spring-MVC">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/30/Spring-MVC/markus-spiske.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -182,7 +180,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Spring-MVC 初相识
+      Spring-MVC
     </h1>
   
 
@@ -195,7 +193,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Spring-MVC-认识"><a href="#Spring-MVC-认识" class="headerlink" title="Spring-MVC 认识"></a>Spring-MVC 认识</h1><p>要学习使用 Sring-MVC 需要了解，掌握一副图，展示了它的工作原理。需要理解并记牢每一步的所要完成的任务。</p>
+        <p><img src="/2018/07/30/Spring-MVC/markus-spiske.jpg" alt="picture"><br><a id="more"></a></p>
+<h1 id="Spring-MVC-认识"><a href="#Spring-MVC-认识" class="headerlink" title="Spring-MVC 认识"></a>Spring-MVC 认识</h1><p>要学习使用 Sring-MVC 需要了解，掌握一副图，展示了它的工作原理。需要理解并记牢每一步的所要完成的任务。</p>
 <p><img src="/2018/07/30/Spring-MVC/spring-MVC-01.jpg" alt="spring-MVC-01"></p>
 <ul>
 <li>用户发送一个请求，请求先到达 DispatcherServlet ，它需要知道，应该将请求交给哪一个控制器去处理请求</li>
@@ -204,7 +203,6 @@
 <li>这时候的虽然得到了 ModelAndView ，但是这里的 View 仅仅是一个逻辑名称，所以接下来需要将信息交给 ViewResolver（视图解析器）进行处理，返回一个相应的页面。</li>
 <li>最后将解析完成的 ModelAndView 返回给用户。</li>
 </ul>
-<a id="more"></a>
 <p>到这结束用户的发送的一次请求到响应完成。接下来应该逐步认识需要做的配置</p>
 <h2 id="DispatcherServlet"><a href="#DispatcherServlet" class="headerlink" title="DispatcherServlet"></a>DispatcherServlet</h2><p>DispatcherServlet（中央调度器）继承 HttpServlet ,所以我们要对 DispatcherServlet 进行所需要的配置就应该在 web.xml 中进行声明。</p>
 <pre><code>&lt;servlet&gt;
@@ -236,6 +234,8 @@
 
       
 
+
+	
       
         <div class="page-reward">
           <a href="javascript:;" class="page-reward-btn tooltip-top">
@@ -363,8 +363,8 @@
     </a>
   
   
-    <a href="/2018/07/20/Spring-AOP/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Spring - AOP</div>
+    <a href="/2018/05/09/Java-基础-关键字volatile/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java-基础-关键字volatile</div>
       <i class="icon-circle-right"></i>
     </a>
   

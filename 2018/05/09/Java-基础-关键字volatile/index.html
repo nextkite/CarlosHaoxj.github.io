@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Category: 后端生态 | CarlosHaoxj&#39;s Blog</title>
+  <title>Java-基础-关键字volatile | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/categories/后端生态/page/2/index.html">
+  <meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java-基础-关键字volatile">
+<meta property="og:url" content="http://yoursite.com/2018/05/09/Java-基础-关键字volatile/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="Java">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/05/09/Java-基础-关键字volatile/oleg-ivanov.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/05/09/Java-基础-关键字volatile/JVM.png">
+<meta property="og:updated_time" content="2019-03-17T11:05:10.978Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CarlosHaoxj&#39;s Blog">
-<meta name="twitter:description" content="Java">
+<meta name="twitter:title" content="Java-基础-关键字volatile">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/09/Java-基础-关键字volatile/oleg-ivanov.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -171,36 +173,94 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Java-基础-关键字volatile" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/24/Java-基础-集合框架/" class="archive-article-date">
-  	<time datetime="2018-04-24T00:16:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/24/Java-基础-集合框架/">Java-基础-集合框架</a>
+    <h1 class="article-title" itemprop="name">
+      Java-基础-关键字volatile
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/05/09/Java-基础-关键字volatile/" class="archive-article-date">
+  	<time datetime="2018-05-09T04:51:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/2018/05/09/Java-基础-关键字volatile/oleg-ivanov.jpg" alt="picture"><br><a id="more"></a></p>
+<h1 id="Java-内存模型"><a href="#Java-内存模型" class="headerlink" title="Java 内存模型"></a>Java 内存模型</h1><p>Java 内存模型定义：屏蔽掉各种硬件和操作系统的内存访问差异，实现让 Java 程序在各种平台下能达到一致的内存访问效果。避免更换平台后在并发问题上出现访问错误。</p>
+<p>在 Java 内存模型中规定所有变量存储在主内存中，每一个线程都有自己工作内存，每个线程都有对变量的读取操作都是在自己的工作内存中操作，线程之间不会有通讯，比如线程 A 对一个变量进行修改，此时的线程 B 并不知道线程 A 在对变量进行修改。线程对变量处理完成后到会写到主内存中，主内存内实现线程之间的变量值传递。</p>
+<p>下图为线程、工作内存、主内存之间的关系</p>
+<p><img src="/2018/05/09/Java-基础-关键字volatile/JVM.png" alt="JVM"></p>
+<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>在 Java 内存模型中每个线程都有自己的工作内存，比如在并发情况下的 （i++），当线程 A 先进行 i++ ，此时是在自己的工作内存中进行运算，还没有写到主内存中，线程 B 也在进行 i++ ，也在对 i 变量做更改，再写入主内存中，就会造成数据不一致。只要让在并发的过程中数据进行同步就可避免问题出现，在 Java 中提供的关键字 volatile 就可以解决此类问题</p>
+<p>一旦一个共享变量（类的成员变量、类的静态成员变量）被volatile修饰之后，那么就具备了两层语义：</p>
+<ol>
+<li>保证了不同线程对这个变量进行操作时的可见性，即一个线程修改了某个变量的值，这新值对其他线程来说是立即可见的。</li>
+<li>禁止进行指令重排序。</li>
+</ol>
+<p>主要用于处理多线程问题，处理指令重排序问题，在 Java 1.5 之后解决指令重排序问题，实现多线程下的单例模式。能保证可见性，有序性，但不保证原子性。</p>
+<p>第二条中说禁止进行指令重排序在多线程的单例模式中发挥重要的作用,指令重排序主要是指在硬件方面，CPU 采用了容许将多条指令不按规定顺序分开发送给各相应电路单元处理，并不是指令任意重排，对于两条指令有依赖，还会按原来顺序处理，只会对没有依赖的指令进行重排，比如在多线程情况下解决以下代码问题</p>
+<pre><code>singleton = new Singleton();
+</code></pre><p>在单线程情况下，该段代码会分成三部</p>
+<ol>
+<li>分配内存</li>
+<li>实例化对象</li>
+<li>将实例化对象给 singleton 赋值</li>
+</ol>
+<p>这三个过程是没有依赖，在工作内存中无论怎样排序执行都不会影响最后写入到主内存中的数据，但是在多线程情况下，比如多线程单例模式中的，双重检查锁，如果没有之前的 volatile 修饰变量，会出现线程 A 进入实例化代码块内，进行实例化，此时有可能重排序，先执行第三步，此时的 singleton 还是为空，线程 B 进行判断为空，也会进入执行代码块内，就会出现实例化多个对象，违反了单例模式的定义。</p>
+<p>解决此类问题可以使用，关键字 volatile ，它的工作原理是，当多个线程进行处理同一变量，在执行被 volatile 关键字修饰的代码时，会在编译代码后添加一句 <code>lock add1 $0x0, (%esp)</code>，充当一个内存屏障操作，保证线程之间的可见性。</p>
+<blockquote>
+<p>内存屏障（Memory Barrier）是一类同步屏障指令，是CPU或编译器在对内存随机访问的操作中的一个同步点，使得此点之前的所有读写操作都执行后才可以开始执行此点之后的操作。</p>
+</blockquote>
+<p>加上内存屏障之后，其实实例化代码还是会重排序，但是一旦一个线程进行访问处理，其他线程就不会执行同样的代码块，相当于一但开始对被 volatile 修饰的变量进行处理，改变量的读写操作只容许一个线程访问，其他线程没有权利进行读写操作。</p>
+<blockquote>
+<p>volatile是通过内存屏障来来禁止指令重排的。</p>
+</blockquote>
+<ul>
+<li>参考 《深入理解 Java 虚拟机》</li>
+</ul>
+
+      
+
+
+	
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢您的支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -212,7 +272,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -225,20 +285,112 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/05/09/Java-基础-关键字volatile/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/07/30/Spring-MVC/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Spring-MVC
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2018/04/30/Java-基础-线程进阶/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java-基础-线程进阶</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/categories/后端生态/">&laquo; Prev</a><a class="page-number" href="/categories/后端生态/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
   
 
 
@@ -288,10 +440,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",

@@ -8,21 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Spring IoC 源码解读 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Spring IoCIoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。">
-<meta name="keywords" content="Spring">
+  <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring IoC 源码解读">
 <meta property="og:url" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="Spring IoCIoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/pankaj-patel.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/BeanFactory.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/ApplicationContext.jpg">
-<meta property="og:updated_time" content="2019-03-13T02:11:17.354Z">
+<meta property="og:updated_time" content="2019-03-17T10:49:02.474Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring IoC 源码解读">
-<meta name="twitter:description" content="Spring IoCIoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。">
-<meta name="twitter:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/BeanFactory.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2018/11/20/Spring-IoC-源码解读/pankaj-patel.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -196,8 +194,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Spring-IoC"><a href="#Spring-IoC" class="headerlink" title="Spring IoC"></a>Spring IoC</h1><p>IoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。</p>
-<a id="more"></a>
+        <p><img src="/2018/11/20/Spring-IoC-源码解读/pankaj-patel.jpg" alt="picture"><br><a id="more"></a></p>
+<h1 id="Spring-IoC"><a href="#Spring-IoC" class="headerlink" title="Spring IoC"></a>Spring IoC</h1><p>IoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。</p>
 <h2 id="BeanFactory"><a href="#BeanFactory" class="headerlink" title="BeanFactory"></a>BeanFactory</h2><p>可以理解为生产 bean 的工厂，负责管理各个 bean 实例。它是 IoC 容器最基本的接口，提供最基本的 IoC 容器的功能，下面是 BeanFactory 源代码。</p>
 <pre><code>public interface BeanFactory {
 
@@ -688,6 +686,8 @@
 
       
 
+
+	
       
         <div class="page-reward">
           <a href="javascript:;" class="page-reward-btn tooltip-top">

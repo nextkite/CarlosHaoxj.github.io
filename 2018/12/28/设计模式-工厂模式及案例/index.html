@@ -8,18 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>设计模式-工厂模式及案例 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="工厂模式学习工厂设计模式之前需要掌握两种设计原则：  依赖倒置原则：依赖抽象，不依赖具体类 开闭原则：两个主要特征，对于扩展是开放的和对于修改是关闭的。对于扩展是开放的：模块的行为是可扩展的，当应用需求改变时，可对模块进行扩展，使其具有新行为，可以改变模块的功能。对于修改是关闭的：当模块进行扩展时，不必改动源代码或二进制代码，不破坏原有系统结构。">
-<meta name="keywords" content="设计模式">
+  <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式-工厂模式及案例">
 <meta property="og:url" content="http://yoursite.com/2018/12/28/设计模式-工厂模式及案例/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="工厂模式学习工厂设计模式之前需要掌握两种设计原则：  依赖倒置原则：依赖抽象，不依赖具体类 开闭原则：两个主要特征，对于扩展是开放的和对于修改是关闭的。对于扩展是开放的：模块的行为是可扩展的，当应用需求改变时，可对模块进行扩展，使其具有新行为，可以改变模块的功能。对于修改是关闭的：当模块进行扩展时，不必改动源代码或二进制代码，不破坏原有系统结构。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-02T05:04:57.613Z">
+<meta property="og:image" content="http://yoursite.com/2018/12/28/设计模式-工厂模式及案例/roberto-nickson.jpg">
+<meta property="og:updated_time" content="2019-03-17T10:58:53.561Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式-工厂模式及案例">
-<meta name="twitter:description" content="工厂模式学习工厂设计模式之前需要掌握两种设计原则：  依赖倒置原则：依赖抽象，不依赖具体类 开闭原则：两个主要特征，对于扩展是开放的和对于修改是关闭的。对于扩展是开放的：模块的行为是可扩展的，当应用需求改变时，可对模块进行扩展，使其具有新行为，可以改变模块的功能。对于修改是关闭的：当模块进行扩展时，不必改动源代码或二进制代码，不破坏原有系统结构。">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/28/设计模式-工厂模式及案例/roberto-nickson.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -193,12 +192,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><p>学习工厂设计模式之前需要掌握两种设计原则：</p>
+        <p><img src="/2018/12/28/设计模式-工厂模式及案例/roberto-nickson.jpg" alt="picture"><br><a id="more"></a></p>
+<h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><p>学习工厂设计模式之前需要掌握两种设计原则：</p>
 <ol>
 <li>依赖倒置原则：依赖抽象，不依赖具体类</li>
 <li>开闭原则：两个主要特征，对于扩展是开放的和对于修改是关闭的。对于扩展是开放的：模块的行为是可扩展的，当应用需求改变时，可对模块进行扩展，使其具有新行为，可以改变模块的功能。对于修改是关闭的：当模块进行扩展时，不必改动源代码或二进制代码，不破坏原有系统结构。</li>
 </ol>
-<a id="more"></a>
 <p>工厂模式定义为：把可能会有所改变的代码（创建新对象的代码）放到另一个新对象中。称这个新对象为 “工厂”，处理创建对象的细节，用来封装对象的创建，让类决定创建的对象时什么。通过创建模式绕开 “new” ，避免对象创建过程中所导致的紧耦合（依赖具体类）.</p>
 <p>工厂模式主要分为三大模式：</p>
 <ol>
@@ -387,6 +386,8 @@ public class TruckFactory implements CarFactory{
 
       
 
+
+	
       
         <div class="page-reward">
           <a href="javascript:;" class="page-reward-btn tooltip-top">

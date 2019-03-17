@@ -8,20 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Java-基础-异常处理机制 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="异常处理每个程序在运行时，都会出现不被期望的事，它的出现组织了程序正常执行，这种情况被称为异常。在 Java 语言中提供了解决方法：异常处理机制。">
-<meta name="keywords" content="Java">
+  <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java-基础-异常处理机制">
 <meta property="og:url" content="http://yoursite.com/2018/11/22/Java-基础-异常处理机制/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="异常处理每个程序在运行时，都会出现不被期望的事，它的出现组织了程序正常执行，这种情况被称为异常。在 Java 语言中提供了解决方法：异常处理机制。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/11/22/Java-基础-异常处理机制/eugene-chystiakov.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/11/22/Java-基础-异常处理机制/Throwable.png">
-<meta property="og:updated_time" content="2019-03-13T02:10:47.532Z">
+<meta property="og:updated_time" content="2019-03-17T10:43:08.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-异常处理机制">
-<meta name="twitter:description" content="异常处理每个程序在运行时，都会出现不被期望的事，它的出现组织了程序正常执行，这种情况被称为异常。在 Java 语言中提供了解决方法：异常处理机制。">
-<meta name="twitter:image" content="http://yoursite.com/2018/11/22/Java-基础-异常处理机制/Throwable.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/11/22/Java-基础-异常处理机制/eugene-chystiakov.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -195,7 +193,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>每个程序在运行时，都会出现不被期望的事，它的出现组织了程序正常执行，这种情况被称为异常。在 Java 语言中提供了解决方法：异常处理机制。<br><a id="more"></a></p>
+        <p><img src="/2018/11/22/Java-基础-异常处理机制/eugene-chystiakov.jpg" alt="pirture"><br><a id="more"></a></p>
+<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>每个程序在运行时，都会出现不被期望的事，它的出现组织了程序正常执行，这种情况被称为异常。在 Java 语言中提供了解决方法：异常处理机制。</p>
 <h2 id="异常处理机制"><a href="#异常处理机制" class="headerlink" title="异常处理机制"></a>异常处理机制</h2><p>Java 中异常可以是函数运行时引发的，也可是通过 throw 语句抛出。Throwable 类是异常处理的顶级父类。一个对象只有一个 Throable 类，或者说一个对象只有是 Throwable 类的直接或间接实例，他才是一个异常对象，才能被异常处理识别。</p>
 <h2 id="Throwable"><a href="#Throwable" class="headerlink" title="Throwable"></a>Throwable</h2><p><img src="/2018/11/22/Java-基础-异常处理机制/Throwable.png" alt="Throwable"></p>
 <p>图中可以可以认识到异常处理类之间关系。Error 和 Exception 继承自 Throwable 类，这俩个类又在对不同的异常做处理，</p>
@@ -250,6 +249,8 @@
 </code></pre>
       
 
+
+	
       
         <div class="page-reward">
           <a href="javascript:;" class="page-reward-btn tooltip-top">

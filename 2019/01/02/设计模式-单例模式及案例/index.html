@@ -8,18 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>设计模式-单例模式及案例 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="单例模式 单例模式：用来创建独一无二的，只能有一个实例对象，确保一个类只有一个实例，并提供一个全局访问点。  通俗说单例模式只将对象 new 一次，与工厂模式区别，工厂模式像是与单例模式相同，其实差距很大，工厂模式并不是实现将对象只 new 一次，它是主要避免对象的紧耦合，实现最终的解耦，或者是说单例模式是类的设计者要考虑的问题，工厂模式是类的使用者需要考虑的问题，不要混淆两个设计模式者">
-<meta name="keywords" content="设计模式">
+  <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式-单例模式及案例">
 <meta property="og:url" content="http://yoursite.com/2019/01/02/设计模式-单例模式及案例/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="单例模式 单例模式：用来创建独一无二的，只能有一个实例对象，确保一个类只有一个实例，并提供一个全局访问点。  通俗说单例模式只将对象 new 一次，与工厂模式区别，工厂模式像是与单例模式相同，其实差距很大，工厂模式并不是实现将对象只 new 一次，它是主要避免对象的紧耦合，实现最终的解耦，或者是说单例模式是类的设计者要考虑的问题，工厂模式是类的使用者需要考虑的问题，不要混淆两个设计模式者">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-04T15:53:56.131Z">
+<meta property="og:image" content="http://yoursite.com/2019/01/02/设计模式-单例模式及案例/kat-stokes.jpg">
+<meta property="og:updated_time" content="2019-03-17T10:57:22.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式-单例模式及案例">
-<meta name="twitter:description" content="单例模式 单例模式：用来创建独一无二的，只能有一个实例对象，确保一个类只有一个实例，并提供一个全局访问点。  通俗说单例模式只将对象 new 一次，与工厂模式区别，工厂模式像是与单例模式相同，其实差距很大，工厂模式并不是实现将对象只 new 一次，它是主要避免对象的紧耦合，实现最终的解耦，或者是说单例模式是类的设计者要考虑的问题，工厂模式是类的使用者需要考虑的问题，不要混淆两个设计模式者">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/02/设计模式-单例模式及案例/kat-stokes.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -193,10 +192,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><ul>
+        <p><img src="/2019/01/02/设计模式-单例模式及案例/kat-stokes.jpg" alt="picture"><br><a id="more"></a></p>
+<h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><ul>
 <li>单例模式：用来创建独一无二的，只能有一个实例对象，确保一个类只有一个实例，并提供一个全局访问点。</li>
 </ul>
-<p>通俗说单例模式只将对象 new 一次，与工厂模式区别，工厂模式像是与单例模式相同，其实差距很大，工厂模式并不是实现将对象只 new 一次，它是主要避免对象的紧耦合，实现最终的解耦，或者是说单例模式是类的设计者要考虑的问题，工厂模式是类的使用者需要考虑的问题，不要混淆两个设计模式<br>者<br><a id="more"></a></p>
+<p>通俗说单例模式只将对象 new 一次，与工厂模式区别，工厂模式像是与单例模式相同，其实差距很大，工厂模式并不是实现将对象只 new 一次，它是主要避免对象的紧耦合，实现最终的解耦，或者是说单例模式是类的设计者要考虑的问题，工厂模式是类的使用者需要考虑的问题，不要混淆两个设计模式<br>者</p>
 <h2 id="单例模式实现"><a href="#单例模式实现" class="headerlink" title="单例模式实现"></a>单例模式实现</h2><pre><code>public class Singleton{
     // 记录唯一实例对象
     private static Singleton uniqueInstance;
@@ -294,6 +294,8 @@ Thread-3=Thread.Singleton@352ebfc0
 
       
 
+
+	
       
         <div class="page-reward">
           <a href="javascript:;" class="page-reward-btn tooltip-top">

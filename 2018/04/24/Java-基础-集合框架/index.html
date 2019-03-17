@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Java-基础-集合框架 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="泛型 jdk1.5出现的安全机制，避免强制转换。&amp;lt;&amp;gt;当操作应用类型不确定时应用，确定应用类型传入即可。确保类型安全（它的出现不单单确保类型安全）。运行时会将泛型去掉生成class文件不带泛型，为兼容运行类的加载器。  集合概述 集合按照其存储方式可分为两大类，单集合Collection，双集合Map.">
-<meta name="keywords" content="Java">
+  <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java-基础-集合框架">
 <meta property="og:url" content="http://yoursite.com/2018/04/24/Java-基础-集合框架/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="泛型 jdk1.5出现的安全机制，避免强制转换。&amp;lt;&amp;gt;当操作应用类型不确定时应用，确定应用类型传入即可。确保类型安全（它的出现不单单确保类型安全）。运行时会将泛型去掉生成class文件不带泛型，为兼容运行类的加载器。  集合概述 集合按照其存储方式可分为两大类，单集合Collection，双集合Map.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-13T02:10:21.160Z">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/Java-基础-集合框架/dillon-shook.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/Java-基础-集合框架/Java-基础-集合框架.png">
+<meta property="og:updated_time" content="2019-03-17T10:30:21.845Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-集合框架">
-<meta name="twitter:description" content="泛型 jdk1.5出现的安全机制，避免强制转换。&amp;lt;&amp;gt;当操作应用类型不确定时应用，确定应用类型传入即可。确保类型安全（它的出现不单单确保类型安全）。运行时会将泛型去掉生成class文件不带泛型，为兼容运行类的加载器。  集合概述 集合按照其存储方式可分为两大类，单集合Collection，双集合Map.">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/24/Java-基础-集合框架/dillon-shook.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -193,193 +193,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><blockquote>
-<p>jdk1.5出现的安全机制，避免强制转换。&lt;&gt;当操作应用类型不确定时应用，确定应用类型传入即可。确保类型安全（它的出现不单单确保类型安全）。运行时会将泛型去掉生成class文件不带泛型，为兼容运行类的加载器。</p>
-</blockquote>
-<h1 id="集合概述"><a href="#集合概述" class="headerlink" title="集合概述"></a>集合概述</h1><ul>
-<li>集合按照其存储方式可分为两大类，单集合Collection，双集合Map.</li>
-</ul>
-<a id="more"></a>
-<p>Cokkection: 单列集合用于存储一系列符合某种规则的元素，两个重要子接口，List 和 Set。List特点是元素有序，元素可重复。Set特点是元素无序且不可重复。List 实现类有ArrayList和LinkedList，Set接口的主要实现类有HashSet 和 TreeSet。<br>Map： 双列集合用于存储具有键（Key）和值（Value）映射关系元素，每个元素都包含一对键值对。使用时可用一个Key找出其对应的Value。Map主要实现类有HashMap 和 TreeMap。</p>
-<h1 id="List-接口"><a href="#List-接口" class="headerlink" title="List 接口"></a>List 接口</h1><ul>
-<li>List 接口继承自Collection接口，是单列集合重要分支。容许存储元素重复，通过索引访问集合中指定元素。存储元素有序，元素存入顺序和取出顺序一致。<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2></li>
-</ul>
-<ol>
-<li>void add（int index，Object element）  将元素element插入在集合的index处</li>
-<li>boolean addAll（int index，Collection c) 将集合c所包含的元素插入到List集合的index处</li>
-<li>Object get(int index) 返回集合索引index处的元素</li>
-<li>Object remove(int index) 删除index索引处元素</li>
-<li>Object set(int index,Object element) 将索引indext处元素换成element对象，并将替换后的元素返回</li>
-<li>int indexOf(Object o) 返回对象o在List集合中出现的位置索引</li>
-<li>int lastIndexO(Object o) 返回对象o在List集合中最后一次出现的位置索引</li>
-<li>List subList(int fromIndex,int toIndex) 返回从索引fromINdex(包括)到toIndex(不包括)处所有元素集合组成的子集合<h2 id="asList"><a href="#asList" class="headerlink" title="asList()"></a>asList()</h2></li>
-</ol>
-<ul>
-<li>List asList(数组) 将数组转到集合，可以使用集合方法操作数组，数组长度时固定的，集合的增删方法不可用。<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2></li>
-<li>ArrayList是List接口实现类，内部封装了一个长度可变的数组对象，存入元素超出数组长度时，会在内存中分配一个更大的数组存储这些元素。ArrayList可看做一个长度可变的数组对象。底层是使用数组来保存元素，在进行增加删除时，会导致创建新数组，效率比较低，不适合做大量的增删操作。但是索引做查找元素很便捷。<h3 id="存取操作"><a href="#存取操作" class="headerlink" title="存取操作"></a>存取操作</h3>  public static void main(String[] args)<br>  {<pre><code>ArrayList it = new ArrayList();
-it.add(&quot;aa&quot;);
-it.add(&quot;bb&quot;);
-it.add(&quot;cc&quot;);
-System.out.println(&quot;长度&quot;+it.size());
-System.out.println(&quot;第2个元素&quot;+it.get(1));
-it.remove(1);
-it.set(0,&quot;e&quot;);
-System.out.println(it.subList(0,2));
-</code></pre>  }<h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2></li>
-<li>为了解决ArrayList增删的效率低问题，提供了LinkedList实现类，该集合内部维护了一个双向循环链表。可以实现栈的所有功能和方法，可以把LinkedList作为栈使用。<h3 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h3></li>
-</ul>
-<ol>
-<li>void add(int index,E element) 在指定位置加入指定元素</li>
-<li>void addFirst（Object o) 将指定元素插入到开头</li>
-<li>void addLast(Object o) 将指定元素插入到结尾</li>
-<li>Object getFirst() 返回此列表的第一个元素</li>
-<li>Object getLast() 返回此列表的最后一个元素</li>
-<li>Object removeFrist() 移除并返回此列表第一个元素</li>
-<li>Object removeLast() 移除并返回此列表最后一个元素<h4 id="方法使用"><a href="#方法使用" class="headerlink" title="方法使用"></a>方法使用</h4> public static void main(String[] args)<br> {<pre><code>LinkedList it = new LinkedList();
-it.add(&quot;aa&quot;);
-it.add(&quot;bb&quot;);
-it.add(&quot;cc&quot;);
-it.add(1,&quot;dd&quot;);
-it.addFirst(&quot;ee&quot;);
-it.removeFirst();
-</code></pre> }<h1 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h1></li>
-</ol>
-<ul>
-<li>接口Iterator与Collection，Map不同，Collection与Map用于存储元素，Iterator主要用于迭代访问（遍历）Collection中元素，迭代器。<h2 id="Iterator代码实现"><a href="#Iterator代码实现" class="headerlink" title="Iterator代码实现"></a>Iterator代码实现</h2>  public static void main(String[] args)<br>  {<pre><code>ArrayList it = new ArrayList();
-it.add(&quot;aa&quot;);
-it.add(&quot;bb&quot;);
-it.add(&quot;cc&quot;);
-Iterator i = it.Iterator();        //获取Iterator对象
-while(i.hasNext)                //判断ArrayList是否存在下一个元苏
-{    
-    Object obj = it.next();        //取ArrayList集合中元素
-    System.out.println(obj);
-}
-</code></pre>  }</li>
-<li>迭代器获取ArrayList集合中元素，都会将这些元素当做<strong>Object类型</strong>来看待，如果想得到特定类型，需要进行<strong>强制类型转换</strong>。使用迭代器进行迭代时，</li>
-<li><p>如果用集合对象调用remove()方法去删除元素，会出现异常。</p>
-<h3 id="集合对象remove-解决方法"><a href="#集合对象remove-解决方法" class="headerlink" title="集合对象remove()解决方法"></a>集合对象remove()解决方法</h3><blockquote>
-<p>第一种：添加break,找到删除，跳出循环停止迭代。</p>
-</blockquote>
-<p>  if(“aa”.equals(obj))<br>  {</p>
-<pre><code>it.remove();
-break;
-</code></pre><p>  }</p>
-</li>
-</ul>
-<blockquote>
-<p>第二种：用迭代器remove()方法，对于迭代器本身是可预知的。</p>
-</blockquote>
-<pre><code>if(&quot;aa&quot;.equals(obj))
-{
-    i.remove();
-}
-</code></pre><ul>
-<li>调用remove()必须先调用<strong>next()</strong>。<h3 id="ListIterator"><a href="#ListIterator" class="headerlink" title="ListIterator"></a>ListIterator</h3></li>
-<li>继承于Iterator类，在父类基础上添加逆向迭代，<strong>ListIterator迭代器只能用于List集合中</strong>。<h4 id="常用方法-2"><a href="#常用方法-2" class="headerlink" title="常用方法"></a>常用方法</h4></li>
-</ul>
-<ol>
-<li>void add(Object o) 将元素插入列表</li>
-<li>booleadn hasPrevious() 逆向遍历列表，列表有多个元素，返回true</li>
-<li>Object previous() 返回列表前一个元素</li>
-<li>void remove() 从列表中移除由next或previous返回的最后一个元素<h3 id="逆向迭代代码实现"><a href="#逆向迭代代码实现" class="headerlink" title="逆向迭代代码实现"></a>逆向迭代代码实现</h3> public static void main(String[] args)<br> {<pre><code>ArrayList it = new ArrayList();
-it.add(&quot;aa&quot;);
-it.add(&quot;bb&quot;);
-it.add(&quot;cc&quot;);
-ListIterator i = it.listIterator(it.size());//获取Iterator对象
-while(i.hasPrevious)                //判断ArrayList是否存在下一个元苏
-{    
-    Object obj = it.previous();        //取ArrayList集合中元素
-    System.out.println(obj);
-}
-</code></pre> }<h2 id="foreach循环代码实现"><a href="#foreach循环代码实现" class="headerlink" title="foreach循环代码实现"></a>foreach循环代码实现</h2> foreach(容器中元素类型 临时变量 : 容器容量)<br> {<pre><code>......
-</code></pre> }</li>
-</ol>
-<ul>
-<li>jdk5.0新特性，主要应用于数组。相比Iterator遍历，它的写法简单。foreach循环的次数由容器中个数决定。局限是进行foreach循环只能访问元素，不可以对元素进行修改。</li>
-</ul>
-<h2 id="Enumeration接口"><a href="#Enumeration接口" class="headerlink" title="Enumeration接口"></a>Enumeration接口</h2><ul>
-<li>在JDK1.2以前还没有Iterator接口时候，遍历集合需要使用Enumeration接口，于Iterator方法类似。集合Vector是List接口的一个实现类，用法与ArrayList完全相同。Vector集合是线程安全的，ArrayList是线程不安全的。在Vector提供一个elements()方法用于返回Enumeration对象，通过Enumeration对象来遍历集合中的元素。<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3>  public static void main(String[] args)<br>  {<pre><code>Vertor v = new Vector();
-v.add(&quot;aa&quot;);
-v.add(&quot;bb&quot;);
-Enumeration en = v.elements();
-whoile(en.hasMoreElements)
-{    
-    Object obj - en.nextElement();
-    System.out.println(obj);
-}
-</code></pre>  }<h1 id="Set-接口"><a href="#Set-接口" class="headerlink" title="Set 接口"></a>Set 接口</h1></li>
-<li>继承于Collection。Set接口存入元素是无序，不可存入重复元素。主要有俩个实现类HashSet和TreeSet。HashSet是根据哈希值确定元素在集合中的存储位置，具有良好的存取和查找功能。TreeSet是根据二叉树的方式来存储元素，可以对元素集合进行排序。<h2 id="HashSet集合"><a href="#HashSet集合" class="headerlink" title="HashSet集合"></a>HashSet集合</h2></li>
-<li>存储元素无序并且不可重复。存元素是先调用hashCode()确定元素位置，再调用equals()来完成对象的唯一性。如果hashCode()值不同，不用判断，直接存到哈希表。如果hashCode()值相同，判断equals(),true视为相同元素，不存。false视为不同元素，存。<strong>必须覆盖hashCode()和equals()</strong><h3 id="HashSet代码实现"><a href="#HashSet代码实现" class="headerlink" title="HashSet代码实现"></a>HashSet代码实现</h3>  public static void main(String[] args)<br>  {<pre><code>HashSet h = new HashSet();
-h.add(&quot;aa&quot;);
-h.add(&quot;bb&quot;);
-Iterator it = h.iterator;
-while(it.hasNext())
-{    
-    Object obj = it.next();
-    System.out.println(obj);
-}
-</code></pre>  }<h3 id="重写覆盖hashCode-和equals"><a href="#重写覆盖hashCode-和equals" class="headerlink" title="重写覆盖hashCode()和equals()"></a>重写覆盖hashCode()和equals()</h3>  public int hashCode()                //重写hashCode<br>  {<pre><code>return x.hasCode();
-</code></pre>  }<br>  public boolean equals(Object obj)    //重写equals<br>  {<pre><code>if(this == obj)            //判断是否为同一对象           
-{
-    return true;
-}
-if(!(obj instanceof S))    //判断是否为S类型
-{
-    return false;
-}
-S s = (S)obj;            //将对象强转S
-boolean b = this.x.equals(s.x);
-return b;
-</code></pre>  }</li>
-</ul>
-<h2 id="TreeSet"><a href="#TreeSet" class="headerlink" title="TreeSet"></a>TreeSet</h2><ul>
-<li>利用二叉树存储元素，可以排序，保证没有重复元素。TreeSet利用的是自平衡的排序二叉树。</li>
-<li>集合中元素进行排序比较时，会调用compareTo()方法，该方法在Comparable接口中定义。要对集合元素排序就必须实现<strong>Comparable接口</strong>。<h3 id="Student-name-age-类型对象排序比较需要重写compareTo"><a href="#Student-name-age-类型对象排序比较需要重写compareTo" class="headerlink" title="Student(name,age)类型对象排序比较需要重写compareTo()"></a>Student(name,age)类型对象排序比较需要重写compareTo()</h3>  public int compareTo(Object obj)                //重写compareTo()<br>  {<pre><code>Student stu = (Student)obj;
-if(this.age-stu.age&gt;age)                        //判断年龄
-{
-    return 1;                                //1存 -1不存
-}
-if(this.age-stu.age==0)        
-{
-    return this.name.compareTo(stu.name);    //年龄相同再对名字比较
-}
-return -1;
-</code></pre>  }<h1 id="Map-接口"><a href="#Map-接口" class="headerlink" title="Map 接口"></a>Map 接口</h1></li>
-<li>双列集合，存储每个对象都是一个键值对，一个键(key)和一个值(value),存在的关系是映射。访问时只要找到键(key),就可以找到对应的值(value)。必须保持键(key)的唯一性。<h2 id="常用方法-3"><a href="#常用方法-3" class="headerlink" title="常用方法"></a>常用方法</h2></li>
-</ul>
-<ol>
-<li>void put(Object key,Object value) 将值与映射关系中的指定键关联（存）</li>
-<li>Object get(Object key) 返回映射关系的值，如果不包含返回null（取）</li>
-<li>boolean containsKey(Object key) 判断指定键(key)关系的映射值（判断）</li>
-<li>boolean containsValue(Object value) 此映射将一个或多个键映射到指定值（判断）</li>
-<li>Set keySet() 返回此映射中包含键的Set视图</li>
-<li>Collection<v>values 返回此映射中包含值得Collection视图</v></li>
-<li>Set&lt;Map.Entry&lt;K,V&gt;&gt;entrySet 返回此映射中包含的映射关系的Set视图<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2></li>
-</ol>
-<ul>
-<li>Map接口一个实现类，基于哈希表。如果多个线程同时访问哈希映射，并且至少有一个线程在结构上修改了映射，那么它必须在外部进行同步。如果存入相同的键(key),后存储的值将覆盖原有的值。键相同，值覆盖。最快的查找技术。<h3 id="常用方法-4"><a href="#常用方法-4" class="headerlink" title="常用方法"></a>常用方法</h3><h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2></li>
-<li>Map接口一个实现类，基于二叉树。TreeMap所有键是按照某种顺序排列。<h3 id="常用方法-5"><a href="#常用方法-5" class="headerlink" title="常用方法"></a>常用方法</h3></li>
-</ul>
-<ol>
-<li>int size() 返回集合中键(key)映射值的数量</li>
-<li>void clear() 删除所有键的映射关系</li>
-<li>void comparator() 比较器<h3 id="TreeSet迭代"><a href="#TreeSet迭代" class="headerlink" title="TreeSet迭代"></a>TreeSet迭代</h3> public static void main(Stringp[] args)<br> {<pre><code>TreeSet tm = new TreeSet();
-tm.put(&quot;1&quot;,&quot;aa&quot;);
-tm.put(&quot;2&quot;,&quot;bb&quot;);
-Set keySet = tm.keySet();
-Iterator it = it.iterator();
-while(it.hasNext())
-{
-    Object key = it.next();
-    Object value = it.get(key);
-    System.out.println(key+&quot;,&quot;+value);
-}
-</code></pre> }</li>
-</ol>
+        <p><img src="/2018/04/24/Java-基础-集合框架/dillon-shook.jpg" alt="picture"><br><a id="more"></a><br><img src="/2018/04/24/Java-基础-集合框架/Java-基础-集合框架.png" alt="Java"></p>
 
       
 
+
+	
       
         <div class="page-reward">
           <a href="javascript:;" class="page-reward-btn tooltip-top">
