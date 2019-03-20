@@ -8,21 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
 
 
-  <title>Spring IoC | CarlosHaoxj&#39;s Blog</title>
+  <title>Java-基础-关键字synchronized | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Spring">
+  <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring IoC">
-<meta property="og:url" content="http://yoursite.com/2018/10/20/Spring-IoC/index.html">
+<meta property="og:title" content="Java-基础-关键字synchronized">
+<meta property="og:url" content="http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2018/10/20/Spring-IoC/mel-poole.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/10/20/Spring-IoC/spring-IoC-1.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/10/20/Spring-IoC/spring-IoC-2.jpg">
-<meta property="og:updated_time" content="2019-03-17T10:47:18.061Z">
+<meta property="og:image" content="http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/hello-i.jpg">
+<meta property="og:updated_time" content="2019-03-20T05:32:28.904Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring IoC">
-<meta name="twitter:image" content="http://yoursite.com/2018/10/20/Spring-IoC/mel-poole.jpg">
+<meta name="twitter:title" content="Java-基础-关键字synchronized">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/hello-i.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -176,43 +174,239 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Spring-IoC" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java-基础-关键字synchronized" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Spring IoC
+      Java-基础-关键字synchronized
     </h1>
   
 
         
-        <a href="/2018/10/20/Spring-IoC/" class="archive-article-date">
-  	<time datetime="2018-10-20T09:53:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-20</time>
+        <a href="/2019/02/17/Java-基础-关键字synchronized/" class="archive-article-date">
+  	<time datetime="2019-02-17T13:38:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2018/10/20/Spring-IoC/mel-poole.jpg" alt="picture"><br><a id="more"></a></p>
-<h1 id="认识Spring-IoC"><a href="#认识Spring-IoC" class="headerlink" title="认识Spring IoC"></a>认识Spring IoC</h1><ul>
-<li>DI         依赖注入    Dependency Injection</li>
-<li>IoC         控制反转    Inversion of Control</li>
-<li>IOC Container     容器         Inversion of Control Container</li>
-</ul>
-<h2 id="理解-IoC-DI"><a href="#理解-IoC-DI" class="headerlink" title="理解 IoC DI"></a>理解 IoC DI</h2><p>IoC (Inversion of Control) 控制反转，是由软件专家 Michael Mattson 提出的一个理论，用于解决复杂系统中的耦合关系。后来这个理论被逐渐应用到实践中，例如 J2EE 中的 Spring 框架中，IoC 就成为核心功能实现。</p>
-<h3 id="IoC-Inversion-of-Control"><a href="#IoC-Inversion-of-Control" class="headerlink" title="IoC(Inversion of Control)"></a>IoC(Inversion of Control)</h3><p>Spring IoC(Inversion of Control) 别名 DI(Dependency Injection) 依赖注入，而事实上二者并非相同。IoC(Inversion of Control)是面向对象的一种思想，DI(Dependency Injection)是实现这一思想的方法。</p>
-<p>控制反转是目的，依赖注入是实现控制反转的手段。控制反转是将某个类对其内部状态权交给其他机制去完成，为降低类与类之间的耦合度。这个时候就出现了一个新的概念 IoC Container 称为 IoC 容器，在这里面从放着所有类与类依赖关系的方法，这时候 IoC 容器就充当着一个第三方角色，想要解决某个问题直接告诉 IoC 容器，它为我们找到解决问题的方式。</p>
-<h3 id="DI-Dependency-Injection"><a href="#DI-Dependency-Injection" class="headerlink" title="DI(Dependency Injection)"></a>DI(Dependency Injection)</h3><p>DI(Dependency Injection)依赖注入 就是在 IoC 容器运行期间动态的将某种依赖关系注入到对象中，实现 IoC 的方法。利用依赖关系的注入的方式，实现对象之间的结耦。IoC 容器就是一个对象的制造工厂，当你使用某个功能时，你只要调用其方法就可以实现。你的关注点只在如何使用，至于其方法是如何创建，何时销毁等不需要关心，这一切都是由 IoC 容器进行实现。 </p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p><img src="/2018/10/20/Spring-IoC/spring-IoC-1.jpg" alt="spring-IoC-1"><br>当我们打开机械手表后，会看到上图所示的场景，各个齿轮带动时针，分针，秒针的转动，相互依赖，从而在表盘上产生正确的时间。但是当其中某个齿轮损坏后，整个系统可能将停止运转，之间存在这复杂的耦合关系。齿轮组中齿轮之间的啮合关系,与软件系统中对象之间的耦合关系非常相似。对象之间的耦合关系是无法避免的，也是必要的，这是协同工作的基础。现在，伴随着工业级应用的规模越来越庞大，对象之间的依赖关系也越来越复杂，经常会出现对象之间的多重依赖性关系，因此，架构师和设计师对于系统的分析和设计，将面临更大的挑战。对象之间耦合度过高的系统，必然会出现牵一发而动全身的情形。为了有效的避免出现这样的问题，我们对其引入 IoC(Inversion of Control)来解决。</p>
-<p><img src="/2018/10/20/Spring-IoC/spring-IoC-2.jpg" alt="spring-IoC-2"><br>当我们引入 IoC 容器后，我们可以发现其中 A,B,C,D这四个齿轮不再是相互依赖的关系，而是共同依赖于 IoC 容器这个第三方的，IoC 容器成为整个系统的一个核心，A,B,C,D四个齿轮的转动都依赖于 IoC 容器。</p>
-<p>##文档参考：</p>
+        <p><img src="/2019/02/17/Java-基础-关键字synchronized/hello-i.jpg" alt="picture"><br><a id="more"></a></p>
+<h1 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h1><p>为什么出现线程不安全？</p>
+<blockquote>
+<p>在多线程状态下，对共享数据（临界资源）的读写操作不同步导致线程不安全</p>
+</blockquote>
+<p>书中定义</p>
+<blockquote>
+<p>当多个线程访问一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或者在调用方法进行任何其他的协调操作，调用这个对象的行为都可以获得正确的结果，那这个对象就是线程安全的。<br>《Java Concurrency In Practice》Brian Goetz</p>
+</blockquote>
+<p>代码本身已经封装好必要的解决线程安全问题保障手段，使用者无需关注线程安全问题，直接使用即可。</p>
+<h2 id="线程安全等级"><a href="#线程安全等级" class="headerlink" title="线程安全等级"></a>线程安全等级</h2><h3 id="不可变"><a href="#不可变" class="headerlink" title="不可变"></a>不可变</h3><p>只要是不可变的对象被正确构建出来，外部可见状态永远不会被改变，一定是线程安全的，最简单的实现线程安全的方法，例如用 final 来保证不可变，从而实现线程安全</p>
+<h3 id="绝对线程安全"><a href="#绝对线程安全" class="headerlink" title="绝对线程安全"></a>绝对线程安全</h3><p>学习集合框架知识我们知道 <code>java.util.Vector</code> 该类是线程安全的，是一个线程安全容器，主要方法都被关键字 <code>synchronized</code> 所修饰，但不保证绝对线程安全，需要在关键位置加入同步措施来实现线程安全</p>
+<p>使用 <code>Vector</code> 类中常用方法做测试，是否绝对线程安全</p>
+<h3 id="相对线程安全"><a href="#相对线程安全" class="headerlink" title="相对线程安全"></a>相对线程安全</h3><p>相对线程安全就是我们通常意义上的线程安全，单独调用操作是线程安全的，调用过程中不需要加入额外的保障措施，特殊连续调用需要加入同步保障措施来保证正确性</p>
+<h3 id="线程兼容"><a href="#线程兼容" class="headerlink" title="线程兼容"></a>线程兼容</h3><p>对象本事不是线程安全的，可以通过同步手段实现线程安全，例如加入关键字 <code>synchronized</code></p>
+<h3 id="线程对立"><a href="#线程对立" class="headerlink" title="线程对立"></a>线程对立</h3><p>无论采取如何同步措施，无论怎么加锁，都无法同步运行（死锁）如果两个线程同时持有一个线程对象，一个线程尝试去中断线程，一个线程尝试去恢复线程。无论是否进行同步，目标线程都存在死锁</p>
+<h2 id="实现线程安全"><a href="#实现线程安全" class="headerlink" title="实现线程安全"></a>实现线程安全</h2><h3 id="互斥同步"><a href="#互斥同步" class="headerlink" title="互斥同步"></a>互斥同步</h3><p>多个线程访问共享数据，共享数据在同一时刻只被一个线程使用。又称之为阻塞同步，悲观并发策略，采用这样方法实现线程安全，必须加入锁才可解决。在这里通过关键字 <code>synchronized</code> 的使用来解决线程安全的问题；还可以选择 <code>java.util.concurrent</code> 包中的重入锁来实现同步。1.6 版本之后性能角度上不建议采用此方法</p>
+<blockquote>
+<p>互斥是手段，同步是目的</p>
+</blockquote>
+<h3 id="非阻塞同步"><a href="#非阻塞同步" class="headerlink" title="非阻塞同步"></a>非阻塞同步</h3><p>属于乐观并发策略，不需要强制加锁来解决线程安全，只在需要时出现锁的应用。主要是实现是基于冲突检测，通俗理解为当共享数据无争用，正常执行，当产生冲突，进行补救。</p>
+<p>非阻塞同步属于乐观锁实现线程安全，实现乐观锁主要原理就是使用 Java 中关键指令 <code>CAS</code> 来实现。该指令中包含三个重要操作数</p>
+<ol>
+<li>V : 内存位置，也就是对象的内存地址</li>
+<li>A : 旧的预期值</li>
+<li>B : 新值</li>
+</ol>
+<p>指令执行过程：当前仅当 V 符合 A 时，处理器更新 V 使用 B 的值，否则不执行更新，返回 V 。不论是否更新，都会返回 V 的旧值。整个过程是一个原子操作。CAS 操作实现是由 <code>sun.misc.Unsafe</code> 类里 <code>compareAndSwapInt()</code> 和 <code>compareAndSwapLong()</code> 等几个方法包装提供，Unsafe 类不提供给用户程序调用的类，只有启动类加载器加载 Class 才能访问它，如果不使用反射方法，只能使用 Java API 间接使用</p>
+<p>CAS 缺点：</p>
+<ol>
+<li>循环时间长开销大；获取失败，继续尝试，长时间不成功，开销大</li>
+<li>只能保证一个共享变量的原子操作</li>
+<li>ABA问题</li>
+</ol>
+<h3 id="无同步方案"><a href="#无同步方案" class="headerlink" title="无同步方案"></a>无同步方案</h3><p>不涉及共享数据，无需同步保证线程安全。可以大致概括为两类：可重入代码，线程本地存储</p>
+<h4 id="可重入代码"><a href="#可重入代码" class="headerlink" title="可重入代码"></a>可重入代码</h4><p>可重入代码又称为纯代码，可以在代码执行的任何时候中断它，转而去执行另一段代码，控制权返回后，不会出现任何错误。可以保证线程安全，所有可重入代码都是线程安全的，但是不是所有线程安全的都是可重入代码。判断是否是可重入代码方法：如果一个方法，他的返回结果可以预测，只要输入相同数据，就能返回相同结果，它就满足可重入性要求，也是线程安全的</p>
+<h4 id="线程本地存储"><a href="#线程本地存储" class="headerlink" title="线程本地存储"></a>线程本地存储</h4><p>将被多个线程使用的共享数据尽量集中在一个线程中执行，这样即使不同步，也能实现线程安全，实现线程本地存储。在 Java 中可以使用 <code>java.lang.ThreadLocal</code> 来实现本地存储功能。每一个线程都有一个 ThreadLocalMap 对象，这个对象存储了一组 <code>ThreadLocal.threadLocalHashCode</code> 为健，本地线程变量为值的 K - V 对。ThreadLocal 对象就是当前线程的 ThreadLocalMap 的访问入口，每一个对象都包含了一个 threadLocalHashCode 值，通过该值可以在 K - V 中找到本地线程变量</p>
+<h2 id="锁优化"><a href="#锁优化" class="headerlink" title="锁优化"></a>锁优化</h2><p>为并发过程中线程之间高效的共享数据</p>
+<h3 id="自旋锁与自适应自旋"><a href="#自旋锁与自适应自旋" class="headerlink" title="自旋锁与自适应自旋"></a>自旋锁与自适应自旋</h3><p>线程 A 正在执行，线程 B 等待线程 A 释放锁。此时线程 B 等待，执行忙循环（自旋）一直等待线程 A 释放锁。这样的过程称为自旋锁。在 Java 1.6 版本以后不是让它永久等待自旋，这样长时间消耗处理器资源过大，默认自旋参数为 10 ，也可以使用 <code>-XX:PreBlockSpin</code> 来更改参数。自适应自旋是依照同一个锁前一个自旋时间以及锁的拥有者状态来决定，自旋次数，提高执行效率。特殊情况，如果一个锁，自旋很少成功，之后的线程就会自动放弃自旋过程，避免浪费处理器资源</p>
+<h3 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h3><p>虚拟机在编译器运行时，对一些代码要求同步，但是被检测到不可能存在共享数据竞争的锁进行消除。根据逃逸分析的数据支持</p>
+<h3 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h3><p>如果虚拟机检测到一串零碎的操作都对同一个对象进行加锁，将会把锁的范围扩大，从第一个操作到最后一个操作，使用同一个锁</p>
+<h3 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h3><p>相对于使用操作系统互斥量来实现，在没有多线程竞争前提下，减少传统的重量级锁使用操作系统互斥量产生的性能消耗（线程切换）主要是通过 CAS 操作来实现轻量级锁；在锁无竞争情况下，减少线程切换的性能开销，但在竞争情况下，轻量级比重量级更慢（互斥量和 CAS 操作）</p>
+<h4 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h4><p>对象头是指 HotSpot 虚拟机的对象内存布局，主要分为两部分</p>
+<ol>
+<li>存储对象运行时数据，如 HashCode, GC 分代年龄等，官方称之为 “Marl Word”</li>
+<li>存储对象方法区对象类型数据的指针</li>
+</ol>
+<p>如果是数组，额外加一部分，用于存储数组长度</p>
+<p>对象头信息时与对象自身定义的数据无关的额外存储成本，Mark Word 是一个非固定的数据结构，可以根据对象的状态复用自己的存储空降，在 32 位虚拟机中存储状态为</p>
+<table>
+<thead>
+<tr>
+<th>锁状态</th>
+<th style="text-align:center">25bit</th>
+<th style="text-align:center">4bit</th>
+<th>2bit 标志位</th>
+<th>1bit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无锁状态</td>
+<td style="text-align:center">存放对象哈希码</td>
+<td style="text-align:center">对象分代年龄</td>
+<td>01</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Mark Word 对象头</p>
+<table>
+<thead>
+<tr>
+<th>锁状态</th>
+<th style="text-align:center">存储内容</th>
+<th>标志位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无锁状态</td>
+<td style="text-align:center">对象哈希吗对象分代年龄</td>
+<td>01</td>
+</tr>
+<tr>
+<td>轻量级锁</td>
+<td style="text-align:center">指向锁记录指针</td>
+<td>00</td>
+</tr>
+<tr>
+<td>重量级锁</td>
+<td style="text-align:center">指向重量级锁的指针</td>
+<td>10</td>
+</tr>
+<tr>
+<td>可偏向锁</td>
+<td style="text-align:center">偏向线程 ID ，偏向时间戳，对象分代年龄</td>
+<td>01</td>
+</tr>
+</tbody>
+</table>
+<h4 id="加锁"><a href="#加锁" class="headerlink" title="加锁"></a>加锁</h4><ol>
+<li>先判断标志位，未被锁定标志位 “01”，建立一个锁记录（LockRecord）空间存储对象，拷贝 Mark Word ，将拷贝后加一个前缀 （Displaced Mark Word）</li>
+<li>利用 CAS 将对象 Mark Word 更新指向 Lock Record;如果更新成功，标志位 “00”，轻量级锁，拥有该对象锁，执行同步操作；</li>
+<li>否则检查对象的 Mark Word 是否指向当前线程，已经拥有对象锁，执行同步，否则锁对象被其他线程占用，轻量级线程变为重量级线程，标志位 “10” 等待的线程进入阻塞状态<h4 id="解锁"><a href="#解锁" class="headerlink" title="解锁"></a>解锁</h4></li>
+<li>如果对象的 Mark Word 仍指向线程锁记录，使用 CAS 将当前 Mark Word 与线程中 Displaced Mark Word 替换</li>
+<li>替换成功：同步过程完成</li>
+<li>替换失败：其他线程尝试获得该锁，释放锁同时唤起挂起线程</li>
+</ol>
+<h3 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h3><p>目的是消除数据在无竞争情况下同步，没必要使用轻量级锁，减少 CAS 操作；不适用于一个锁被多个线程访问</p>
+<h4 id="加锁-1"><a href="#加锁-1" class="headerlink" title="加锁"></a>加锁</h4><ol>
+<li>检测和是否为偏向锁，判断标志位是否 ”01“</li>
+<li>如果不是标志位改为 “01”</li>
+<li>否则检查是否为当前线程 ID，如果相等，执行同步代码，否则执行轻量级锁过程</li>
+</ol>
+<h4 id="解锁-1"><a href="#解锁-1" class="headerlink" title="解锁"></a>解锁</h4><p>偏向锁会在竞争情况下解锁</p>
+<h2 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>在多线程状态下，保证只有一个线程可以执行某个方法或某个代码块（对共享数据的操作）。对共享数据修改其他线程及时可见，实现可见性；同时也可以保证线程之间的操作是有序的。具备原子性，可见性，有序性。</p>
 <ul>
-<li><a href="https://martinfowler.com/articles/injection.html" target="_blank" rel="noopener">Dependency Injection</a> </li>
-<li><a href="https://en.wikipedia.org/wiki/Dependency_injection" target="_blank" rel="noopener">Inversion of Control Containers and the Dependency Injection pattern</a></li>
+<li>原子性：一个操作不可中断，要么全部执行通过，要么全部执行失败</li>
+<li>可见性：一个线程对某一个共享数据的修改，其他线程立即获得更新</li>
+<li>有序性：本线程内看指令执行是有序的，另一个线程观察到的是无序的</li>
 </ul>
+<p>实现方法</p>
+<ul>
+<li>对实例方法</li>
+<li>对静态方法</li>
+<li>对代码块（括号里方法可以是实例对象也可以是类的 Class 对象）</li>
+</ul>
+<h4 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h4><pre><code>public class test01 implements Runnable{
+    static int i = 0;
+    public static void main(String[] args) throws InterruptedException {
+        test01 test01 = new test01();
+        Thread thread1 = new Thread(test01);
+        Thread thread2 = new Thread(test01);
+
+        thread1.start();
+        thread2.start();
+
+        thread1.join();
+        thread2.join();
+
+        System.out.println(i);
+    }
+    public void run(){
+        for (int i = 0;i &lt; 10000;i++){
+            test();
+        }
+    }
+    public static synchronized void test(){
+        i++;
+    }
+}
+</code></pre><h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><pre><code>public class test01 implements Runnable{
+    static int i = 0;
+    public static void main(String[] args) throws InterruptedException {
+        test01 test01 = new test01();
+        Thread thread1 = new Thread(test01);
+        Thread thread2 = new Thread(test01);
+
+        thread1.start();
+        thread2.start();
+
+        thread1.join();
+        thread2.join();
+
+        System.out.println(i);
+    }
+    public void run(){
+        for (int i = 0;i &lt; 10000;i++){
+            test();
+        }
+    }
+    // 静态方法
+    public static synchronized void test(){
+        i++;
+    }
+}
+</code></pre><h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><pre><code>public class test01 implements Runnable{
+    static test01 test01 = new test01();
+    static int i = 0;
+    public static void main(String[] args) throws InterruptedException {
+        test01 test01 = new test01();
+        Thread thread1 = new Thread(test01);
+        Thread thread2 = new Thread(test01);
+
+        thread1.start();
+        thread2.start();
+
+        thread1.join();
+        thread2.join();
+
+        System.out.println(i);
+    }
+    public void run(){
+        synchronized (test01){
+            for (int i = 0; i &lt; 10000; i++) {
+                test();
+            }
+        }
+    }
+    public void test(){
+        i++;
+    }
+}
+</code></pre><p>以上代码测试在多线程状态下，对静态方法加关键字 <code>synchronized</code> 与不加的区别。经过多次执行，在不加关键字的情况下，对共享变量 <code>i</code> 的值是不相同，并且多数是小于 20000。当使用 <code>synchronized</code> 修饰后，变量的值都是恒定不变 20000</p>
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p>虚拟机在对 Java 代码编译之后，在被关键字 <code>synchronized</code> 修饰之后的代码块的前后分别形成 <code>monitorenter</code> 和 <code>monitrorexit</code> 这两个字节码需要一个参数 <code>reference</code> 类型来指明锁定和解锁对象。如果 <code>synchronized</code> 指定了对象参数，就是这个对象的 <code>reference</code> 否则根据修饰实例方法或者是类方法，取对应的对象实例或 Class 对象作为锁对象。</p>
+<ul>
+<li>monitorenter:同步代码块开始位置，执行该指令首先获取对象锁，如果获取失败，阻塞等待，或当前对象已经拥有对象的锁，锁的计数器加1</li>
+<li>monitorexit:同步代码块结束位置，锁的计数器减1，当计数器为 0，锁被释放</li>
+</ul>
+<blockquote>
+<p>以上内容参考自    《深入理解 Java 虚拟机》</p>
+</blockquote>
 
       
 
@@ -254,7 +448,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
       		
 		</ul>
@@ -321,7 +515,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/10/20/Spring-IoC/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -335,18 +529,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/11/20/Spring-IoC-源码解读/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Spring IoC 源码解读
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/07/30/Spring-MVC/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Spring-MVC</div>
+    <a href="/2019/01/04/Java-基础-反射/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java-基础-反射</div>
       <i class="icon-circle-right"></i>
     </a>
   
