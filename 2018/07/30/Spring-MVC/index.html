@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2018/07/30/Spring-MVC/markus-spiske.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/07/30/Spring-MVC/spring-MVC-01.jpg">
-<meta property="og:updated_time" content="2019-03-17T10:50:56.545Z">
+<meta property="og:updated_time" content="2019-03-20T08:29:06.807Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring-MVC">
 <meta name="twitter:image" content="http://yoursite.com/2018/07/30/Spring-MVC/markus-spiske.jpg">
@@ -207,20 +207,8 @@
 </ul>
 <p>到这结束用户的发送的一次请求到响应完成。接下来应该逐步认识需要做的配置</p>
 <h2 id="DispatcherServlet"><a href="#DispatcherServlet" class="headerlink" title="DispatcherServlet"></a>DispatcherServlet</h2><p>DispatcherServlet（中央调度器）继承 HttpServlet ,所以我们要对 DispatcherServlet 进行所需要的配置就应该在 web.xml 中进行声明。</p>
-<pre><code>&lt;servlet&gt;
-    &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
-    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
-    &lt;init-param&gt;      
-          &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
-          &lt;param-value&gt;classpath:spring/spring-mvc.xml&lt;/param-value&gt;
-    &lt;/init-param&gt;
-    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
-  &lt;/servlet&gt;
-  &lt;servlet-mapping&gt;
-   &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
-   &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;
-  &lt;/servlet-mapping&gt;
-</code></pre><p>完成一个处理 “.do” 结尾的请求处理。在初始化 DispatcherServlet 得时候，如果不配置 <init-parm> ，Spring-MVC 默认会去 /WEB-INF 寻找 [servlet-name]-serlvet.xml 文件，例如：如果此 DispatcherServlet 不配置 <init-parm> ，它会在 /WEB-INF/springmvc-servlet.xml ,没有找到该配置文件，出异常报错。建议大家在此配置 contextConfigLocation ,如果不在 WEB-INF 目录下，要用 classpath: 指出该配置文件的路径。</init-parm></init-parm></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springmvc<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">   	<span class="tag">&lt;<span class="name">init-param</span>&gt;</span>      </span><br><span class="line">    		 <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">     		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:spring/spring-mvc.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">   	<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">  	 <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springmvc<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.do<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>完成一个处理 “.do” 结尾的请求处理。在初始化 DispatcherServlet 得时候，如果不配置 <init-parm> ，Spring-MVC 默认会去 /WEB-INF 寻找 [servlet-name]-serlvet.xml 文件，例如：如果此 DispatcherServlet 不配置 <init-parm> ，它会在 /WEB-INF/springmvc-servlet.xml ,没有找到该配置文件，出异常报错。建议大家在此配置 contextConfigLocation ,如果不在 WEB-INF 目录下，要用 classpath: 指出该配置文件的路径。</init-parm></init-parm></p>
 <p>上面说到该配置会处理一个 “.do” 结尾的请求处理，是因为我们在 <url-pattern> 中配置了 *.do 拦截请求方式，我们还可以进行其他的配置，产生不同的作用。</url-pattern></p>
 <ol>
 <li>配置 / ：此工程所有的请求全部由 Spring-MVC 解析，此种方式可以实现RESTful方式，需要特殊处理对静态文件的解析不能由 Spring-MVC 解析</li>
@@ -228,11 +216,8 @@
 <li>不可以配置 /<em> ,如果配置 /</em> ,返回 JSP 也由 Spring-MVC 解析，这是不对的</li>
 </ol>
 <h2 id="ViewResoler（视图解析器）"><a href="#ViewResoler（视图解析器）" class="headerlink" title="ViewResoler（视图解析器）"></a>ViewResoler（视图解析器）</h2><p>当请求到达 ViewResoler ，需要完成一个任务，就是告诉 DispatcherServlet 该请求应该得到哪一个页面。我们需要配置一个视图解析器完成此操作。根据上述 DispatcherServlet 的配置信息，需要找到 spring 文件夹下的 spring-mvc.xml 进行配置。</p>
-<pre><code>&lt;bean id=&quot;resourceViewResolver&quot; class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
-    &lt;property name=&quot;prefix&quot; value=&quot;/views/&quot;/&gt;
-    &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
-&lt;/bean&gt;
-</code></pre><p>进行该配置后，每次对请求的是图处理都会按照 此方式进行解析。<br><strong>如果我们使用 Spring-MVC 的注解，需要在该配置文件下，引入 mvc 命名空间，用 <a href="mvc:annotation-driven/" target="_blank" rel="noopener">mvc:annotation-driven/</a> 进行声明</strong></p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean <span class="built_in">id</span>=<span class="string">"resourceViewResolver"</span> <span class="built_in">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">property</span> <span class="built_in">name</span>=<span class="string">"prefix"</span> value=<span class="string">"/views/"</span>/&gt;</span><br><span class="line">    &lt;<span class="keyword">property</span> <span class="built_in">name</span>=<span class="string">"suffix"</span> value=<span class="string">".jsp"</span>/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<p>进行该配置后，每次对请求的是图处理都会按照 此方式进行解析。<br><strong>如果我们使用 Spring-MVC 的注解，需要在该配置文件下，引入 mvc 命名空间，用 <a href="mvc:annotation-driven/" target="_blank" rel="noopener">mvc:annotation-driven/</a> 进行声明</strong></p>
 
       
 

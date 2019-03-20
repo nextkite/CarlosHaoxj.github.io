@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2018/12/21/Spring%20Boot-基础搭建、整合应用/federica-galli.jpg">
-<meta property="og:updated_time" content="2019-03-17T10:45:22.000Z">
+<meta property="og:updated_time" content="2019-03-20T08:25:44.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Boot(-):基础搭建、整合应用">
 <meta name="twitter:image" content="http://yoursite.com/2018/12/21/Spring%20Boot-基础搭建、整合应用/federica-galli.jpg">
@@ -242,41 +242,14 @@ mybatis.type-aliases-package=com.example.domain
 <li>模版中的表达式支持 Spring 表达式语言（Spring EL）</li>
 </ul>
 <p>Spring Boot 中使用，在 maven 中添加依赖</p>
-<pre><code>&lt;dependency&gt;
-       &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-       &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre><p>还需要在 <code>application.properties</code> 中进行 <code>thymeleaf</code> 配置</p>
-<pre><code># thymeleaf 配置
-spring.thymeleaf.prefix=classpath:/templates/    // 模版加载位置
-spring.thymeleaf.suffix=.html            // 指定后缀
-spring.thymeleaf.mode=HTML                
-spring.thymeleaf.encoding=UTF-8           // 指定编码
-# 热部署文件，页面不产生缓存，及时更新
-spring.thymeleaf.cache=false
-spring.resources.chain.strategy.content.enabled=true
-spring.resources.chain.strategy.content.paths=/**
-</code></pre><h3 id="初识-Thymeleaf"><a href="#初识-Thymeleaf" class="headerlink" title="初识 Thymeleaf"></a>初识 Thymeleaf</h3><blockquote>
-<p>通过 HTML 的标签属性渲染标签内容 </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>还需要在 <code>application.properties</code> 中进行 <code>thymeleaf</code> 配置</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># thymeleaf 配置</span><br><span class="line"><span class="keyword">spring</span>.thymeleaf.prefix=classpath:/templates/    <span class="comment">// 模版加载位置</span></span><br><span class="line"><span class="keyword">spring</span>.thymeleaf.suffix=.html			<span class="comment">// 指定后缀</span></span><br><span class="line"><span class="keyword">spring</span>.thymeleaf.mode=HTML				</span><br><span class="line"><span class="keyword">spring</span>.thymeleaf.encoding=UTF<span class="number">-8</span>		   <span class="comment">// 指定编码</span></span><br><span class="line"># 热部署文件，页面不产生缓存，及时更新</span><br><span class="line"><span class="keyword">spring</span>.thymeleaf.cache=false</span><br><span class="line"><span class="keyword">spring</span>.resources.chain.strategy.content.enabled=true</span><br><span class="line"><span class="keyword">spring</span>.resources.chain.strategy.content.paths=<span class="comment">/**</span></span><br></pre></td></tr></table></figure>
+<h3 id="初识-Thymeleaf"><a href="#初识-Thymeleaf" class="headerlink" title="初识 Thymeleaf"></a>初识 Thymeleaf</h3><blockquote>
+<p>通过 HTML 的标签属性渲染标签内容  </p>
 </blockquote>
-<pre><code>&lt;!DOCTYPE html SYSTEM &quot;http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd&quot;&gt;
-
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;
-  xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;
-
-  &lt;head&gt;
-    &lt;title&gt;Good Thymes Virtual Grocery&lt;/title&gt;
-        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
-        &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; media=&quot;all&quot; href=&quot;../../css/gtvg.css&quot; th:href=&quot;@{/css/gtvg.css}&quot; /&gt;
- &lt;/head&gt;
-  &lt;body&gt;
-
-        &lt;p th:text=&quot;#{home.welcome}&quot;&gt;Welcome to our grocery store!&lt;/p&gt;
-
-  &lt;/body&gt;
-
-&lt;/html&gt;
-</code></pre><h3 id="语法使用"><a href="#语法使用" class="headerlink" title="语法使用"></a>语法使用</h3><h4 id="表达式支持语法"><a href="#表达式支持语法" class="headerlink" title="表达式支持语法"></a>表达式支持语法</h4><h5 id="字面"><a href="#字面" class="headerlink" title="字面"></a>字面</h5><ul>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">   <span class="meta">&lt;!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd"&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/1999/xhtml"</span></span></span></span><br><span class="line"><span class="xml">     xmlns:th="http://www.thymeleaf.org"&gt;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"> 	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">   	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Good Thymes Virtual Grocery<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="xml">   		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=UTF-8"</span> /&gt;</span></span></span><br><span class="line"><span class="xml">   		<span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">media</span>=<span class="string">"all"</span> <span class="attr">href</span>=<span class="string">"../../css/gtvg.css"</span> <span class="attr">th:href</span>=<span class="string">"@</span></span></span><span class="template-tag">&#123;/<span class="name">css</span>/gtvg.css&#125;</span><span class="xml"><span class="tag"><span class="string">"</span> /&gt;</span></span></span><br><span class="line"><span class="xml">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml"> 	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">  	 	<span class="tag">&lt;<span class="name">p</span> <span class="attr">th:text</span>=<span class="string">"#</span></span></span><span class="template-variable">&#123;home.welcome&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span>Welcome to our grocery store!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"> 	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="语法使用"><a href="#语法使用" class="headerlink" title="语法使用"></a>语法使用</h3><h4 id="表达式支持语法"><a href="#表达式支持语法" class="headerlink" title="表达式支持语法"></a>表达式支持语法</h4><h5 id="字面"><a href="#字面" class="headerlink" title="字面"></a>字面</h5><ul>
 <li>文本文字（Text literals）:<code>one text, Another one!,...</code></li>
 <li>数字文本 (Number Literals) :<code>0, 34 ,0.4...</code></li>
 <li>布尔文本 (Boolean Literals) : <code>true false</code></li>

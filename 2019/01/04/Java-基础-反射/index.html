@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/01/04/Java-基础-反射/lum3n.jpg">
-<meta property="og:updated_time" content="2019-03-17T11:01:23.509Z">
+<meta property="og:updated_time" content="2019-03-20T08:20:31.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-反射">
 <meta name="twitter:image" content="http://yoursite.com/2019/01/04/Java-基础-反射/lum3n.jpg">
@@ -202,44 +202,17 @@
 <p>通过编译之后的字节码文件获取类中对象，可以得到类中的所有属性，方法，并且可以动态的操作该类。反射的关键源于 Class 类发挥的作用，该类在 <code>java.lang.Class</code>包下。</p>
 <h2 id="Class-类"><a href="#Class-类" class="headerlink" title="Class 类"></a>Class 类</h2><p>java.lang.Class 类的实例对象，任何一个类都是 Classs 实例对象，获取 Class 对象的三种方式</p>
 <p>我们先定义一个 Student 类，在该类中定义变量和方法</p>
-<pre><code>class Student{
-    private String name;
-    public void show(){
-        System.out.println(&quot;show&quot;);
-    }
-}
-</code></pre><p>然后编写一个测试类，分别测试三种获取 Class 对象的方式</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Student</span>&#123;</span><br><span class="line">   	<span class="keyword">private</span> String name;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       	System.<span class="keyword">out</span>.println(<span class="string">"show"</span>);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后编写一个测试类，分别测试三种获取 Class 对象的方式</p>
 <p>第一种方式 <code>Class c_0 = Student.class;</code>，我们知道当运行一段代码第一步是进行编译，Java 程序文件后缀在编译之前 <code>.java</code> 文件，编译之后为 <code>.class</code> 文件，只要编译通过就会生成，第一种方式直接调用 Student 类的字节码文件，获取所需要的对象</p>
 <p>第二种方式 <code>Class c_1 = student.getClass();</code>，当我已经实例化一个 Student 对象，学习 Object 类知道所有类默认继承 Object 类，在 Object 类下有一个方法可以获取类信息，直接调用即可。</p>
 <p>第三种方式 </p>
-<pre><code>Class c_2 = null;
-c_2 = Class.forName(&quot;这里写类的全称&quot;);// 比如 demo.Student
-</code></pre><p>测试程序主要代码</p>
-<pre><code>public class test {
-public static void main(String[] args) throws ClassNotFoundException {
-    Student student = new Student();
-    Class c_0 = Student.class;
-
-    Class c_1 = student.getClass();
-
-    Class c_2 = null;
-    c_2 = Class.forName(&quot;demo.Student&quot;);
-
-    System.out.println(c_0);
-    System.out.println(c_1);
-    System.out.println(c_2);
-
-    System.out.println(c_0 == c_1);
-    System.out.println(c_0 == c_2);
-    }
-}
-</code></pre><p>打印结果为</p>
-<pre><code>class demo.Student
-class demo.Student
-class demo.Student
-true
-true
-</code></pre><p>先查看 Class 类的三个对象，然后进行比较发现不论属于哪一种方式创建 Class 类创建的对象，他们都属于同一个对象，并没有重新编译生成。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Class</span> c_2 = <span class="keyword">null</span>;</span><br><span class="line">c_2 = <span class="keyword">Class</span>.forName(<span class="string">"这里写类的全称"</span>);<span class="comment">// 比如 demo.Student</span></span><br></pre></td></tr></table></figure>
+<p>测试程序主要代码</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> test &#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">       Student student = <span class="keyword">new</span> Student();</span><br><span class="line">       <span class="keyword">Class</span> c_0 = Student.<span class="keyword">class</span>;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">Class</span> c_1 = student.getClass();</span><br><span class="line"></span><br><span class="line">       <span class="keyword">Class</span> c_2 = <span class="keyword">null</span>;</span><br><span class="line">       c_2 = <span class="keyword">Class</span>.forName(<span class="string">"demo.Student"</span>);</span><br><span class="line"></span><br><span class="line">       System.out.<span class="keyword">println</span>(c_0);</span><br><span class="line">       System.out.<span class="keyword">println</span>(c_1);</span><br><span class="line">       System.out.<span class="keyword">println</span>(c_2);</span><br><span class="line">       </span><br><span class="line">       System.out.<span class="keyword">println</span>(c_0 == c_1);</span><br><span class="line">       System.out.<span class="keyword">println</span>(c_0 == c_2);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打印结果为</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">demo</span>.<span class="title">Student</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">demo</span>.<span class="title">Student</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">demo</span>.<span class="title">Student</span></span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>先查看 Class 类的三个对象，然后进行比较发现不论属于哪一种方式创建 Class 类创建的对象，他们都属于同一个对象，并没有重新编译生成。</p>
 <p>获取程序在运行时刻的内部结构只是第一步，我们可以继续挖掘内部结构信息，比如声明定义的方法，变量等，常用的 Class 类下的方法主要有 <code>getConstructor</code>, <code>getField</code> 和 <code>getMethod</code> 分别获取构造方法，获取域还有方法，这里三个方法除了会获取 public 的函数对象，还会获取继承父类的所有元素。相比对应的 <code>getDeclaredConstructor</code>, <code>getDeclaredField</code>, <code>getDeclareMethod</code>这三个方法同样回去构造方法，域还有方法，但是这三个方法只会获取对象本身的方法，不问访问权限。每个方法都有自己的所属类。</p>
 
       

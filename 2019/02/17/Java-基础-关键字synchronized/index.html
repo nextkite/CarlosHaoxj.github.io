@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/hello-i.jpg">
-<meta property="og:updated_time" content="2019-03-20T05:32:28.904Z">
+<meta property="og:updated_time" content="2019-03-20T08:20:53.626Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-关键字synchronized">
 <meta name="twitter:image" content="http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/hello-i.jpg">
@@ -322,83 +322,10 @@
 <li>对静态方法</li>
 <li>对代码块（括号里方法可以是实例对象也可以是类的 Class 对象）</li>
 </ul>
-<h4 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h4><pre><code>public class test01 implements Runnable{
-    static int i = 0;
-    public static void main(String[] args) throws InterruptedException {
-        test01 test01 = new test01();
-        Thread thread1 = new Thread(test01);
-        Thread thread2 = new Thread(test01);
-
-        thread1.start();
-        thread2.start();
-
-        thread1.join();
-        thread2.join();
-
-        System.out.println(i);
-    }
-    public void run(){
-        for (int i = 0;i &lt; 10000;i++){
-            test();
-        }
-    }
-    public static synchronized void test(){
-        i++;
-    }
-}
-</code></pre><h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><pre><code>public class test01 implements Runnable{
-    static int i = 0;
-    public static void main(String[] args) throws InterruptedException {
-        test01 test01 = new test01();
-        Thread thread1 = new Thread(test01);
-        Thread thread2 = new Thread(test01);
-
-        thread1.start();
-        thread2.start();
-
-        thread1.join();
-        thread2.join();
-
-        System.out.println(i);
-    }
-    public void run(){
-        for (int i = 0;i &lt; 10000;i++){
-            test();
-        }
-    }
-    // 静态方法
-    public static synchronized void test(){
-        i++;
-    }
-}
-</code></pre><h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><pre><code>public class test01 implements Runnable{
-    static test01 test01 = new test01();
-    static int i = 0;
-    public static void main(String[] args) throws InterruptedException {
-        test01 test01 = new test01();
-        Thread thread1 = new Thread(test01);
-        Thread thread2 = new Thread(test01);
-
-        thread1.start();
-        thread2.start();
-
-        thread1.join();
-        thread2.join();
-
-        System.out.println(i);
-    }
-    public void run(){
-        synchronized (test01){
-            for (int i = 0; i &lt; 10000; i++) {
-                test();
-            }
-        }
-    }
-    public void test(){
-        i++;
-    }
-}
-</code></pre><p>以上代码测试在多线程状态下，对静态方法加关键字 <code>synchronized</code> 与不加的区别。经过多次执行，在不加关键字的情况下，对共享变量 <code>i</code> 的值是不相同，并且多数是小于 20000。当使用 <code>synchronized</code> 修饰后，变量的值都是恒定不变 20000</p>
+<h4 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test01</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">   	<span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">       	test01 test01 = <span class="keyword">new</span> test01();</span><br><span class="line">       	Thread thread1 = <span class="keyword">new</span> Thread(test01);</span><br><span class="line">       	Thread thread2 = <span class="keyword">new</span> Thread(test01);</span><br><span class="line"></span><br><span class="line">       	thread1.start();</span><br><span class="line">       	thread2.start();</span><br><span class="line"></span><br><span class="line">       	thread1.join();</span><br><span class="line">       	thread2.join();</span><br><span class="line"></span><br><span class="line">       	System.out.println(i);</span><br><span class="line">   	&#125;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">       	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">10000</span>;i++)&#123;</span><br><span class="line">           	test();</span><br><span class="line">       	&#125;</span><br><span class="line">   	&#125;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">       	i++;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test01</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">   	<span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">       	test01 test01 = <span class="keyword">new</span> test01();</span><br><span class="line">       	Thread thread1 = <span class="keyword">new</span> Thread(test01);</span><br><span class="line">       	Thread thread2 = <span class="keyword">new</span> Thread(test01);</span><br><span class="line">       	</span><br><span class="line">       	thread1.start();</span><br><span class="line">       	thread2.start();</span><br><span class="line"></span><br><span class="line">       	thread1.join();</span><br><span class="line">       	thread2.join();</span><br><span class="line"></span><br><span class="line">       	System.out.println(i);</span><br><span class="line">   	&#125;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">       	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">10000</span>;i++)&#123;</span><br><span class="line">           	test();</span><br><span class="line">       	&#125;</span><br><span class="line">   	&#125;</span><br><span class="line">   	<span class="comment">// 静态方法</span></span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">       	i++;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test01</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> test01 test01 = <span class="keyword">new</span> test01();</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        test01 test01 = <span class="keyword">new</span> test01();</span><br><span class="line">        Thread thread1 = <span class="keyword">new</span> Thread(test01);</span><br><span class="line">        Thread thread2 = <span class="keyword">new</span> Thread(test01);</span><br><span class="line"></span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line"></span><br><span class="line">        thread1.join();</span><br><span class="line">        thread2.join();</span><br><span class="line"></span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (test01)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</span><br><span class="line">                test();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码测试在多线程状态下，对静态方法加关键字 <code>synchronized</code> 与不加的区别。经过多次执行，在不加关键字的情况下，对共享变量 <code>i</code> 的值是不相同，并且多数是小于 20000。当使用 <code>synchronized</code> 修饰后，变量的值都是恒定不变 20000</p>
 <h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p>虚拟机在对 Java 代码编译之后，在被关键字 <code>synchronized</code> 修饰之后的代码块的前后分别形成 <code>monitorenter</code> 和 <code>monitrorexit</code> 这两个字节码需要一个参数 <code>reference</code> 类型来指明锁定和解锁对象。如果 <code>synchronized</code> 指定了对象参数，就是这个对象的 <code>reference</code> 否则根据修饰实例方法或者是类方法，取对应的对象实例或 Class 对象作为锁对象。</p>
 <ul>
 <li>monitorenter:同步代码块开始位置，执行该指令首先获取对象锁，如果获取失败，阻塞等待，或当前对象已经拥有对象的锁，锁的计数器加1</li>

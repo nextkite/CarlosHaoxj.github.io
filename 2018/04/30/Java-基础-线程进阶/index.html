@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2018/04/30/Java-基础-线程进阶/julian-christian.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/04/30/Java-基础-线程进阶/Thread.png">
-<meta property="og:updated_time" content="2019-03-17T10:29:37.200Z">
+<meta property="og:updated_time" content="2019-03-20T08:22:31.670Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-线程进阶">
 <meta name="twitter:image" content="http://yoursite.com/2018/04/30/Java-基础-线程进阶/julian-christian.jpg">
@@ -214,63 +214,16 @@
 <p>互斥是因，同步是果；互斥是方法，同步是目的。</p>
 <p>互斥同步最主要的问题就是进行线程阻塞和唤醒所带来的性能问题，也称为阻塞同步。实现互斥方法需要使用关键字 synchronized 。</p>
 <p>使用一个带有 synchronized 和 不带有 synchronized 案例来进行比较<br>编写一个类实现 Runnable 接口</p>
-<pre><code>class MyThread implements Runnable {
-    private int val = 10;
-    public void run() {
-        while (val &gt; 0) {
-            show();
-            try {
-                Thread.sleep(100);    // 睡眠一秒实现线程交替执行
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    public void show(){
-            System.out.println(Thread.currentThread().getName() + &quot; = &quot; + val--);
-    }
-}
-</code></pre><p>添加测试类</p>
-<pre><code>public class Thread_1 {
-    public static void main(String[] args) {
-        MyThread myThread = new MyThread();
-        Thread thread = new Thread(myThread);
-        Thread thread1 = new Thread(myThread);
-        thread.start();
-        thread1.start();
-    }
-}
-</code></pre><p>运行结果</p>
-<pre><code>Thread-0 = 10
-Thread-1 = 9
-Thread-1 = 8
-Thread-0 = 7
-Thread-1 = 6
-Thread-0 = 6
-Thread-0 = 5
-Thread-1 = 4
-Thread-0 = 3
-Thread-1 = 3
-Thread-0 = 2
-Thread-1 = 1
-</code></pre><p>这里我们先不加 synchronized ，从结果可以看出数据没有同步，有错误，对同一个数据进行修改，没有实现线程安全。接下来修改 show() 方法，再词比较结果</p>
-<pre><code>public void show(){
-    synchronized (MyThread.class){
-        System.out.println(Thread.currentThread().getName() + &quot; = &quot; + val--);
-    }
-}
-</code></pre><p>修改后的结果为</p>
-<pre><code>Thread-0 = 10
-Thread-1 = 9
-Thread-0 = 8
-Thread-1 = 7
-Thread-1 = 6
-Thread-0 = 5
-Thread-1 = 4
-Thread-0 = 3
-Thread-1 = 2
-Thread-0 = 1
-</code></pre><p>由运行结果清楚可知论哪一个线程进入，对于数据修改都进行同步，没有出现数据不匹配，实现了线程安全。这里实现线程安全的方式只是加锁，但是遇到问题就给加锁是不可取的对数据进行读写操作需要加锁，如果代码中没有进行变量的交互，线程之间不会造成影响，也称线程安全。互斥同步属于一种悲观的并发策略，只要是不去做正确的同步措施，数据肯定会出现问题。无论共享数据是否真的会出现竞争，都要进行加锁（实际上可以优化掉部分不必要的锁）。这里只是简单使用了 synchronzied ，锁的知识还需要深入挖掘分析，后面会详细写一篇关于锁的学习记录。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">   	<span class="keyword">private</span> <span class="keyword">int</span> val = <span class="number">10</span>;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">           <span class="keyword">while</span> (val &gt; <span class="number">0</span>) &#123;</span><br><span class="line">               show();</span><br><span class="line">               <span class="keyword">try</span> &#123;</span><br><span class="line">                   Thread.sleep(<span class="number">100</span>);	<span class="comment">// 睡眠一秒实现线程交替执行</span></span><br><span class="line">               &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                   e.printStackTrace();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">   	&#125;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">           	System.out.println(Thread.currentThread().getName() + <span class="string">" = "</span> + val--);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加测试类</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread_1</span> </span>&#123;</span><br><span class="line">   	<span class="keyword">public</span> <span class="keyword">static</span> void main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">       	MyThread myThread = <span class="keyword">new</span> <span class="type">MyThread</span>();</span><br><span class="line">       	Thread thread = <span class="keyword">new</span> <span class="type">Thread</span>(myThread);</span><br><span class="line">       	Thread thread1 = <span class="keyword">new</span> <span class="type">Thread</span>(myThread);</span><br><span class="line">       	thread.start();</span><br><span class="line">       	thread1.start();</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Thread-0</span> = <span class="number">10</span></span><br><span class="line"><span class="attr">Thread-1</span> = <span class="number">9</span></span><br><span class="line"><span class="attr">Thread-1</span> = <span class="number">8</span></span><br><span class="line"><span class="attr">Thread-0</span> = <span class="number">7</span></span><br><span class="line"><span class="attr">Thread-1</span> = <span class="number">6</span></span><br><span class="line"><span class="attr">Thread-0</span> = <span class="number">6</span></span><br><span class="line"><span class="attr">Thread-0</span> = <span class="number">5</span></span><br><span class="line"><span class="attr">Thread-1</span> = <span class="number">4</span></span><br><span class="line"><span class="attr">Thread-0</span> = <span class="number">3</span></span><br><span class="line"><span class="attr">Thread-1</span> = <span class="number">3</span></span><br><span class="line"><span class="attr">Thread-0</span> = <span class="number">2</span></span><br><span class="line"><span class="attr">Thread-1</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>这里我们先不加 synchronized ，从结果可以看出数据没有同步，有错误，对同一个数据进行修改，没有实现线程安全。接下来修改 show() 方法，再词比较结果</p>
+<figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> show()&#123;</span><br><span class="line">       <span class="keyword">synchronized</span> (MyThread.<span class="keyword">class</span>)&#123;</span><br><span class="line">           System.<span class="keyword">out</span>.println(Thread.currentThread().getName() + <span class="string">" = "</span> + val--);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>修改后的结果为</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Thread-0</span> = <span class="number">10</span></span><br><span class="line"><span class="attr">Thread-1</span> = <span class="number">9</span></span><br><span class="line"><span class="attr">Thread-0</span> = <span class="number">8</span></span><br><span class="line"><span class="attr">Thread-1</span> = <span class="number">7</span></span><br><span class="line"><span class="attr">Thread-1</span> = <span class="number">6</span></span><br><span class="line"><span class="attr">Thread-0</span> = <span class="number">5</span></span><br><span class="line"><span class="attr">Thread-1</span> = <span class="number">4</span></span><br><span class="line"><span class="attr">Thread-0</span> = <span class="number">3</span></span><br><span class="line"><span class="attr">Thread-1</span> = <span class="number">2</span></span><br><span class="line"><span class="attr">Thread-0</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>由运行结果清楚可知论哪一个线程进入，对于数据修改都进行同步，没有出现数据不匹配，实现了线程安全。这里实现线程安全的方式只是加锁，但是遇到问题就给加锁是不可取的对数据进行读写操作需要加锁，如果代码中没有进行变量的交互，线程之间不会造成影响，也称线程安全。互斥同步属于一种悲观的并发策略，只要是不去做正确的同步措施，数据肯定会出现问题。无论共享数据是否真的会出现竞争，都要进行加锁（实际上可以优化掉部分不必要的锁）。这里只是简单使用了 synchronzied ，锁的知识还需要深入挖掘分析，后面会详细写一篇关于锁的学习记录。</p>
 <h3 id="不共享状态"><a href="#不共享状态" class="headerlink" title="不共享状态"></a>不共享状态</h3><ol>
 <li>无状态对象： 无状态对象一定是线程安全的，因为不会影响到其他线程。</li>
 <li>线程关闭： 仅在单线程环境下使用。</li>
