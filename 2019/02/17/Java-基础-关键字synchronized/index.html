@@ -17,7 +17,8 @@
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/hello-i.jpg">
-<meta property="og:updated_time" content="2019-03-20T08:20:53.626Z">
+<meta property="og:image" content="http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/线程安全.png">
+<meta property="og:updated_time" content="2019-03-21T00:48:40.575Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-关键字synchronized">
 <meta name="twitter:image" content="http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/hello-i.jpg">
@@ -75,6 +76,10 @@
     		
     			
     			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">搜索</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
     			
             
     			
@@ -194,7 +199,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2019/02/17/Java-基础-关键字synchronized/hello-i.jpg" alt="picture"><br><a id="more"></a></p>
+        <p><img src="/2019/02/17/Java-基础-关键字synchronized/hello-i.jpg" alt="picture"><br><a id="more"></a><br><img src="/2019/02/17/Java-基础-关键字synchronized/线程安全.png" alt="synchronized"></p>
 <h1 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h1><p>为什么出现线程不安全？</p>
 <blockquote>
 <p>在多线程状态下，对共享数据（临界资源）的读写操作不同步导致线程不安全</p>
@@ -574,17 +579,25 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
       
       
     
+      
+      
+      
+    
     
 
     <ul style="width: 70%">
     
     
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">搜索</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">搜索</a></li>
       
         
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -671,6 +684,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     	</section>
     
 
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="http://www.hackone.xyz/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>黑客学习者</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
     
 
     
