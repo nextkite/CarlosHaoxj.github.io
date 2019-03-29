@@ -8,18 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
 
 
-  <title>Archives: 2019 | CarlosHaoxj&#39;s Blog</title>
+  <title>JVM-内存区域 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM-内存区域">
+<meta property="og:url" content="http://yoursite.com/2019/02/25/JVM-内存区域/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="Java">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/02/25/JVM-内存区域/michael.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/25/JVM-内存区域/内存区域.png">
+<meta property="og:updated_time" content="2019-03-28T15:29:43.197Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CarlosHaoxj&#39;s Blog">
-<meta name="twitter:description" content="Java">
+<meta name="twitter:title" content="JVM-内存区域">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/25/JVM-内存区域/michael.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -177,85 +179,99 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-JVM-内存区域" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/27/Java-基础-序列化与反序列化/" class="archive-article-date">
-  	<time datetime="2019-03-27T05:06:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/27/Java-基础-序列化与反序列化/">Java-基础-序列化与反序列化</a>
+    <h1 class="article-title" itemprop="name">
+      JVM-内存区域
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/25/JVM-内存区域/" class="archive-article-date">
+        
+        <a href="/2019/02/25/JVM-内存区域/" class="archive-article-date">
   	<time datetime="2019-02-25T05:09:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/25/JVM-内存区域/">JVM-内存区域</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/2019/02/25/JVM-内存区域/michael.jpg" alt="JVM"><br><a id="more"></a></p>
+<h1 id="JVM-内存区域"><a href="#JVM-内存区域" class="headerlink" title="JVM-内存区域"></a>JVM-内存区域</h1><h2 id="线程私有"><a href="#线程私有" class="headerlink" title="线程私有"></a>线程私有</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined）</p>
+<h3 id="Java-虚拟机栈"><a href="#Java-虚拟机栈" class="headerlink" title="Java 虚拟机栈"></a>Java 虚拟机栈</h3><p>每一个线程都有自己的虚拟机栈，方法调用到返回的过程对应虚拟机中入栈到出栈的过程。</p>
+<ul>
+<li>基本数据类型：byte,char,int,long,short,double,boolen,long</li>
+<li>对象引用：非对象本身，指向对象地址的引用指针或者是指向一个代表对象的句柄或与此对象相关的位置</li>
+<li>returnAddress类型：指向一条字节码指令的地址</li>
+</ul>
+<p>栈溢出两种异常：</p>
+<ul>
+<li>StackOverflowError: 线程请求栈的深度大于虚拟机容许深度</li>
+<li>OutOfMemoryError: 虚拟机动态扩展无法申请到足够内存空间</li>
+</ul>
+<p>当单线程情况下只会出现 StackOverflowError 异常，</p>
+<h3 id="本地栈"><a href="#本地栈" class="headerlink" title="本地栈"></a>本地栈</h3><p>区别于 Java 虚拟机栈，虚拟机执行 Java 方法服务，本地方法栈为虚拟机使用到的 Native 方法服务</p>
+<h2 id="线程共享"><a href="#线程共享" class="headerlink" title="线程共享"></a>线程共享</h2><h3 id="Java-堆"><a href="#Java-堆" class="headerlink" title="Java 堆"></a>Java 堆</h3><p>堆的存在是为实现存放对象实例，不是所有对象实例都存放在堆中（例如：Class 对象存在方法区中），在虚拟机启动时创建。Java 堆大小使用 -Xms(初始化大小) 和 -Xmx(最大扩展) 控制，不可无限制的创建对象，当对象数量达到最大堆容量限制就会产生内存溢出异常</p>
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>该区域存放已被虚拟机加载的类信息，常量，静态变量；运行时常量池属于方法区中一部分，Class 文件常量池在累加载后进入该区域，常量池用于存放编译器生成的各种字面量和符号引用；</p>
+<p>String.intern() 是一个 Native 方法，作用是：如果字符串常量池中包含此 String 对象的字符床，返回代表池中字符串的 String 对象，否则将次 String 字符串添加到常量池中，返回此 String 对象的引用。不断向常量池中添加对象，会产生 OutOfMemeoryError 异常</p>
+<h2 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h2><p>JDK 1.4 中加入 NIO，通过 DirectByteBuffer 对象为该块内存的引用进行操作</p>
+<h2 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h2><p>当虚拟机收到一条 new 指令，先检查这个指令的参数能否在常量池中找到一个类的符号引用，并且检查这个类是否被已被类加载，解析和初始化过。如果没有，必须先去执行类加载过程</p>
+<h3 id="分配内存"><a href="#分配内存" class="headerlink" title="分配内存"></a>分配内存</h3><ol>
+<li>指针碰撞：用于 Java 堆内存是规整的，已使用内存和未使用的内存区分开，中间分界点放一个指针，另一个指针指向空闲 的内存区域</li>
+<li>空闲列表：用于 Java 堆内存是不规整的，</li>
+</ol>
+<p>在分配内存后，虚拟机会将分配到的内存空间都初始化为零（不包扩对象头），这也是在 Java 中变量不赋值就可以使用</p>
+<h3 id="内存布局"><a href="#内存布局" class="headerlink" title="内存布局"></a>内存布局</h3><h4 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h4><p>对象头由对象自身运行时数据与类型指针两部分组成；类型指针指向它的类元数据的指针，虚拟机通过这个指针确定这个对象是哪个类的实例</p>
+<h4 id="实例数据"><a href="#实例数据" class="headerlink" title="实例数据"></a>实例数据</h4><p>该区域存储对象真正有效的信息，记录对象实现的所有过程，该区域设定父类变量会出现在子类之前，常常使用的子类会覆盖父类定义的变量</p>
+<h4 id="对齐填充"><a href="#对齐填充" class="headerlink" title="对齐填充"></a>对齐填充</h4><p>自动内存管理系统要求对象的起始地址必须是 8 字节的整数倍，对象大小必须是 8 的整数倍，当对象的实例数据大小不够时就需要对齐填充</p>
+<h3 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h3><p>使用对象需要通过栈上的引用指针来操作堆上的具体对象，两种对象的访问定位</p>
+<ol>
+<li>句柄：Java 堆中会分配出一块内存来作为句柄池，来存放对象的句柄地址，包含对象的实例数据和对象的类型数据，需要俩个指针定位；优势，引用指针存放稳定的句柄地址，对象被移动的时候，只会更改句柄中实例对象的指针，引用指针本身保持不变</li>
+<li>直接访问：直接指向对象，对象本身包含类型指针；优势是访问速度快，因为它减少了一次指针定位开销</li>
+</ol>
+<p><img src="/2019/02/25/JVM-内存区域/内存区域.png" alt="内存区域"></p>
+<blockquote>
+<p>以上内容参考自    《深入理解 Java 虚拟机》</p>
+</blockquote>
 
-        <div class="article-info info-on-right">
-          
+      
+
+
+	
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢您的支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -267,7 +283,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -280,164 +296,113 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/25/JVM-内存区域/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/17/Java-基础-关键字synchronized/" class="archive-article-date">
-  	<time datetime="2019-02-17T13:38:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-17</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/03/27/Java-基础-序列化与反序列化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java-基础-序列化与反序列化
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/02/17/Java-基础-关键字synchronized/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java-基础-关键字synchronized</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/17/Java-基础-关键字synchronized/">Java-基础-关键字synchronized</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/04/Java-基础-反射/" class="archive-article-date">
-  	<time datetime="2019-01-04T06:41:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/04/Java-基础-反射/">Java-基础-反射</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/02/设计模式-单例模式及案例/" class="archive-article-date">
-  	<time datetime="2019-01-02T05:05:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/02/设计模式-单例模式及案例/">设计模式-单例模式及案例</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/设计模式//" class="article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -486,8 +451,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
