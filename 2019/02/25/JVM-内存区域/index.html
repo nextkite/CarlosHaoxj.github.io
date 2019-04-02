@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/02/25/JVM-内存区域/michael.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/02/25/JVM-内存区域/内存区域.png">
-<meta property="og:updated_time" content="2019-03-28T15:29:43.197Z">
+<meta property="og:updated_time" content="2019-03-30T11:11:00.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM-内存区域">
 <meta name="twitter:image" content="http://yoursite.com/2019/02/25/JVM-内存区域/michael.jpg">
@@ -216,7 +216,7 @@
 <h3 id="本地栈"><a href="#本地栈" class="headerlink" title="本地栈"></a>本地栈</h3><p>区别于 Java 虚拟机栈，虚拟机执行 Java 方法服务，本地方法栈为虚拟机使用到的 Native 方法服务</p>
 <h2 id="线程共享"><a href="#线程共享" class="headerlink" title="线程共享"></a>线程共享</h2><h3 id="Java-堆"><a href="#Java-堆" class="headerlink" title="Java 堆"></a>Java 堆</h3><p>堆的存在是为实现存放对象实例，不是所有对象实例都存放在堆中（例如：Class 对象存在方法区中），在虚拟机启动时创建。Java 堆大小使用 -Xms(初始化大小) 和 -Xmx(最大扩展) 控制，不可无限制的创建对象，当对象数量达到最大堆容量限制就会产生内存溢出异常</p>
 <h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>该区域存放已被虚拟机加载的类信息，常量，静态变量；运行时常量池属于方法区中一部分，Class 文件常量池在累加载后进入该区域，常量池用于存放编译器生成的各种字面量和符号引用；</p>
-<p>String.intern() 是一个 Native 方法，作用是：如果字符串常量池中包含此 String 对象的字符床，返回代表池中字符串的 String 对象，否则将次 String 字符串添加到常量池中，返回此 String 对象的引用。不断向常量池中添加对象，会产生 OutOfMemeoryError 异常</p>
+<p>String.intern() 是一个 Native 方法，作用是：如果字符串常量池中包含此 String 对象的字符串，返回代表池中字符串的 String 对象，否则将次 String 字符串添加到常量池中，返回此 String 对象的引用。不断向常量池中添加对象，会产生 OutOfMemeoryError 异常</p>
 <h2 id="直接内存"><a href="#直接内存" class="headerlink" title="直接内存"></a>直接内存</h2><p>JDK 1.4 中加入 NIO，通过 DirectByteBuffer 对象为该块内存的引用进行操作</p>
 <h2 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h2><p>当虚拟机收到一条 new 指令，先检查这个指令的参数能否在常量池中找到一个类的符号引用，并且检查这个类是否被已被类加载，解析和初始化过。如果没有，必须先去执行类加载过程</p>
 <h3 id="分配内存"><a href="#分配内存" class="headerlink" title="分配内存"></a>分配内存</h3><ol>
@@ -358,11 +358,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/03/27/Java-基础-序列化与反序列化/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/02/28/JVM-垃圾处理机制/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Java-基础-序列化与反序列化
+          JVM-垃圾处理机制
         
       </div>
     </a>

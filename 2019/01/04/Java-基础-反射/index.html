@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/01/04/Java-基础-反射/lum3n.jpg">
-<meta property="og:updated_time" content="2019-03-20T08:20:31.790Z">
+<meta property="og:updated_time" content="2019-03-30T02:25:25.564Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-反射">
 <meta name="twitter:image" content="http://yoursite.com/2019/01/04/Java-基础-反射/lum3n.jpg">
@@ -217,7 +217,7 @@
 <p>打印结果为</p>
 <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">demo</span>.<span class="title">Student</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">demo</span>.<span class="title">Student</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">demo</span>.<span class="title">Student</span></span></span><br><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <p>先查看 Class 类的三个对象，然后进行比较发现不论属于哪一种方式创建 Class 类创建的对象，他们都属于同一个对象，并没有重新编译生成。</p>
-<p>获取程序在运行时刻的内部结构只是第一步，我们可以继续挖掘内部结构信息，比如声明定义的方法，变量等，常用的 Class 类下的方法主要有 <code>getConstructor</code>, <code>getField</code> 和 <code>getMethod</code> 分别获取构造方法，获取域还有方法，这里三个方法除了会获取 public 的函数对象，还会获取继承父类的所有元素。相比对应的 <code>getDeclaredConstructor</code>, <code>getDeclaredField</code>, <code>getDeclareMethod</code>这三个方法同样回去构造方法，域还有方法，但是这三个方法只会获取对象本身的方法，不问访问权限。每个方法都有自己的所属类。</p>
+<p>获取程序在运行时刻的内部结构只是第一步，我们可以继续挖掘内部结构信息，比如声明定义的方法，变量等，常用的 Class 类下的方法主要有 <code>getConstructor</code>, <code>getField</code> 和 <code>getMethod</code> 分别获取构造方法，获取域还有方法，这里三个方法除了会获取 public 的函数对象，还会获取继承父类的所有元素。相比对应的 <code>getDeclaredConstructor</code>, <code>getDeclaredField</code>, <code>getDeclareMethod</code>这三个方法同样获取构造方法，域还有方法，但是这三个方法只会获取对象本身的方法，不问访问权限。每个方法都有自己的所属类。</p>
 
       
 
@@ -340,11 +340,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/02/17/Java-基础-关键字synchronized/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/01/27/Java-基础-序列化与反序列化/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Java-基础-关键字synchronized
+          Java-基础-序列化与反序列化
         
       </div>
     </a>
