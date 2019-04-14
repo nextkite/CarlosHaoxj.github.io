@@ -8,18 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
 
 
-  <title>Archives: 2018/4 | CarlosHaoxj&#39;s Blog</title>
+  <title>阿里云基本配置 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Java">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2018/04/index.html">
+  <meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里云基本配置">
+<meta property="og:url" content="http://yoursite.com/2019/04/14/阿里云基本配置/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="Java">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/04/14/阿里云基本配置/unsplash.jpg">
+<meta property="og:updated_time" content="2019-04-14T13:51:06.330Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CarlosHaoxj&#39;s Blog">
-<meta name="twitter:description" content="Java">
+<meta name="twitter:title" content="阿里云基本配置">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/14/阿里云基本配置/unsplash.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -177,48 +178,152 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-阿里云基本配置" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      阿里云基本配置
+    </h1>
+  
+
+        
+        <a href="/2019/04/14/阿里云基本配置/" class="archive-article-date">
+  	<time datetime="2019-04-14T01:29:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-14</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/2019/04/14/阿里云基本配置/unsplash.jpg" alt="阿里云基本配置"><br><a id="more"></a></p>
+<h1 id="阿里云基本配置"><a href="#阿里云基本配置" class="headerlink" title="阿里云基本配置"></a>阿里云基本配置</h1><p>服务器系统镜像为 CentOS_7.3，安装 MySQL 5.7</p>
+<h2 id="安装-yum-repo"><a href="#安装-yum-repo" class="headerlink" title="安装 yum repo"></a>安装 yum repo</h2><ol>
+<li>MySQL 官网下载 yum repo 配置文件 <code>wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm</code></li>
+<li>repo 安装 <code>rpm -ivh mysql57-community-release-el7-9.noarch.rpm</code></li>
+<li>安装 MySQL;<ul>
+<li>安装:<code>yum install mysql-server</code></li>
+<li>启动:<code>systemctl start mysqld</code></li>
+<li>查看:<code>systemctl status mysqld</code></li>
+</ul>
+</li>
+<li>配置 MySQL，使用命令查看安装时的临时密码<code>grep &#39;temporary password&#39; /var/log/mysqld.log</code>;如果没有找到，输入命令 <code>rm -rf /var/lib/mysql</code>，删除 MySQL 残留数据；再次启动 MySQL</li>
+<li>输入命令 <code>mysql_secure_installation</code>；设置安全选项，执行命令后的依次完成一下操作<ul>
+<li>Enter current password for root (enter for none):    输入当前root密码(没有输入)</li>
+<li>Set root password? [Y/n]                             设置root密码?(是/否)</li>
+<li>New password:                                        输入新root密码 </li>
+<li>Re-enter new password:                               确认输入root密码</li>
+<li>Password updated successfully!                       密码更新成功</li>
+<li>Remove anonymous users? [Y/n]                        删除匿名用户?(是/否)</li>
+<li>Disallow root login remotely? [Y/n]                  不允许root登录远程?(是/否)</li>
+<li>Reload privilege tables now? [Y/n]                   现在重新加载权限表(是/否)</li>
+</ul>
+</li>
+<li>使用 <code>mysql -u root -p</code>，输入上一个操作设置的密码登录 MySQL</li>
+<li>MySQL 相关设置<ul>
+<li>systemctl stop mysqld         关闭MySQL</li>
+<li>systemctl restart mysqld     重启MySQL</li>
+<li>systemctl status mysqld         查看MySQL运行状态</li>
+<li>systemctl enable mysqld         设置开机启动</li>
+<li>systemctl disable mysqld     关闭开机启动</li>
+</ul>
+</li>
+<li>配置默认编码</li>
+</ol>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/my.cnf</span><br><span class="line"><span class="comment">#添加</span></span><br><span class="line">[mysqld]</span><br><span class="line">character_set_server=utf8</span><br><span class="line">init_connect='SET NAMES utf8'</span><br></pre></td></tr></table></figure>
+<p>相关文件路径</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">配置文件：<span class="meta-keyword">/etc/</span>my.cnf </span><br><span class="line">日志文件：<span class="meta-keyword">/var/</span>log<span class="comment">//var/log/mysqld.log </span></span><br><span class="line">服务启动脚本：<span class="meta-keyword">/usr/</span>lib<span class="meta-keyword">/systemd/</span>system/mysqld.service </span><br><span class="line">socket文件：<span class="meta-keyword">/var/</span>run<span class="meta-keyword">/mysqld/</span>mysqld.pid</span><br></pre></td></tr></table></figure>
+<p>容许用户远程登录 MySQL</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -pvmwaremysql&gt;use mysql;</span><br><span class="line"></span><br><span class="line">mysql&gt;<span class="keyword">update</span> <span class="keyword">user</span> <span class="keyword">set</span> host = <span class="string">'%'</span> <span class="keyword">where</span> <span class="keyword">user</span> = <span class="string">'root'</span>;</span><br><span class="line"></span><br><span class="line">mysql&gt;<span class="keyword">select</span> host, <span class="keyword">user</span> <span class="keyword">from</span> <span class="keyword">user</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h2><p>Nginx (发音为[engine x])专为性能优化而开发，其最知名的优点是它的稳定性和低系统资源消耗，以及对并发连接的高处理能力(单台物理服务器可支持30000～50000个并发连接)， 是一个高性能的 HTTP 和反向代理服务器，也是一个IMAP/POP3/SMTP 代理服。</p>
+<h3 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h3><ol>
+<li>gcc 安装    <code>yum -y install gcc-c++</code></li>
+<li>pcre 安装    <code>yum -y install pcre pcre-devel</code> PCRE(Perl Compatible Regular Expressions) 是一个Perl库，包括 perl 兼容的正则表达式库。nginx 的 http 模块使用 pcre 来解析正则表达式，所以需要在 linux 上安装 pcre 库，pcre-devel 是使用 pcre 开发的一个二次开发库。nginx也需要此库。</li>
+<li>zlib 安装    <code>yum -y install zlib zlib-devel</code>zlib 库提供了很多种压缩和解压缩的方式， nginx 使用 zlib 对 http 包的内容进行 gzip ，所以需要在 Centos 上安装 zlib 库。</li>
+<li>OpenSSL 安装    <code>yum -y install openssl openssl-devel</code>OpenSSL 是一个强大的安全套接字层密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及 SSL 协议，并提供丰富的应用程序供测试或其它目的使用。<br>nginx 不仅支持 http 协议，还支持 https（即在ssl协议上传输http），所以需要在 Centos 安装 OpenSSL 库。</li>
+</ol>
+<h3 id="Nginx-安装"><a href="#Nginx-安装" class="headerlink" title="Nginx 安装"></a>Nginx 安装</h3><p>版本链接<a href="https://nginx.org/en/download.html" target="_blank" rel="noopener">Nginx</a></p>
+<ol>
+<li>使用 wget 命令下载，如：<code>wget -c https://nginx.org/download/nginx-1.12.2.tar.gz</code></li>
+<li>解压到当前文件夹，路径自己选择 </li>
+<li>新建 nginx 用户和组</li>
+</ol>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">groupadd nginx</span><br><span class="line">useradd -g nginx -d /<span class="built_in">home</span>/nginx nginx</span><br><span class="line">passwd nginx</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>创建安装目录 <code>mkdir -p /usr/local/nginx</code></li>
+<li>创建数据存放目录 <code>mkdir -p /data/web</code></li>
+<li>为用户 nginx 赋权 <code>chown -R nginx:nginx /data/web</code></li>
+<li>编译安装 <code>cd nginx-1.12.1</code></li>
+<li>输入以下参数</li>
+</ol>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">./configure \</span><br><span class="line">-<span class="ruby">-prefix=<span class="regexp">/usr/local</span><span class="regexp">/nginx \</span></span></span><br><span class="line"><span class="ruby">--without-http_memcached_module \</span></span><br><span class="line"><span class="ruby">--user=nginx  \</span></span><br><span class="line"><span class="ruby">--group=nginx \</span></span><br><span class="line"><span class="ruby">--with-http_stub_status_module \</span></span><br><span class="line"><span class="ruby">--with-http_ssl_module \</span></span><br><span class="line"><span class="ruby">--with-http_gzip_static_module</span></span><br></pre></td></tr></table></figure>
+<p>成功编译打印</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Configuration summary</span><br><span class="line">  + using<span class="built_in"> system </span>PCRE library</span><br><span class="line">  + using<span class="built_in"> system </span>OpenSSL library</span><br><span class="line">  + using<span class="built_in"> system </span>zlib library</span><br><span class="line">  </span><br><span class="line">  nginx path prefix: <span class="string">"/usr/local/nginx"</span></span><br><span class="line">  nginx binary file: <span class="string">"/usr/local/nginx/sbin/nginx"</span></span><br><span class="line">  nginx modules path: <span class="string">"/usr/local/nginx/modules"</span></span><br><span class="line">  nginx configuration prefix: <span class="string">"/usr/local/nginx/conf"</span></span><br><span class="line">  nginx configuration file: <span class="string">"/usr/local/nginx/conf/nginx.conf"</span></span><br><span class="line">  nginx pid file: <span class="string">"/usr/local/nginx/logs/nginx.pid"</span></span><br><span class="line">  nginx <span class="builtin-name">error</span> log file: <span class="string">"/usr/local/nginx/logs/error.log"</span></span><br><span class="line">  nginx http access log file: <span class="string">"/usr/local/nginx/logs/access.log"</span></span><br><span class="line">  nginx http<span class="built_in"> client </span>request body temporary files: <span class="string">"client_body_temp"</span></span><br><span class="line">  nginx http<span class="built_in"> proxy </span>temporary files: <span class="string">"proxy_temp"</span></span><br><span class="line">  nginx http fastcgi temporary files: <span class="string">"fastcgi_temp"</span></span><br><span class="line">  nginx http uwsgi temporary files: <span class="string">"uwsgi_temp"</span></span><br><span class="line">  nginx http scgi temporary files: <span class="string">"scgi_temp"</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<ol>
+<li>安装 <code>make &amp;&amp; make install</code></li>
+<li>常用命令<ul>
+<li>启动： <code>nginx</code></li>
+<li>停止： <code>systemctl stop nginx.service</code></li>
+<li>重启： <code>systemctl restart nginx.service</code></li>
+<li>检查语法： <code>nginx -t</code></li>
+<li>动态加载： <code>nginx -s reload</code></li>
+<li>开机启动： <code>systemctl enable nginx.service</code></li>
+</ul>
+</li>
+</ol>
+<p>如果提示：Job for nginx.service failed because the control process exited with error code. See “systemctl status nginx.service” and “journalctl -xe” for details.</p>
+<p>先使用 <code>netstat -tnlp</code> 找到 nginx 进程，<code>kill -9 nginx</code></p>
+
+      
+
+
+	
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢您的支持<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/30/Java-基础-线程进阶/" class="archive-article-date">
-  	<time datetime="2018-04-30T00:50:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/30/Java-基础-线程进阶/">Java-基础-线程进阶</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -231,115 +336,104 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/04/14/阿里云基本配置/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/29/Java-基础-线程入门/" class="archive-article-date">
-  	<time datetime="2018-04-29T01:39:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-29</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/02/28/JVM-垃圾处理机制/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JVM-垃圾处理机制</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/29/Java-基础-线程入门/">Java-基础-线程入门</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/24/Java-基础-集合框架/" class="archive-article-date">
-  	<time datetime="2018-04-24T00:16:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/24/Java-基础-集合框架/">Java-基础-集合框架</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -388,8 +482,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
