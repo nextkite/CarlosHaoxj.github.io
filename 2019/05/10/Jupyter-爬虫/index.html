@@ -10,17 +10,17 @@
 
   <title>Jupyter_爬虫 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="安装 miniconda1234mkdir minicodndacd minicodndawget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.shbash Anaconda3-4.4.0-Linux-x86_64.sh 升级 conda upgrade conda 创建虚拟环境conda create -n jup">
+  <meta name="description" content="安装 miniconda1234mkdir minicodndacd minicodndawget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.shbash Anaconda3-4.4.0-Linux-x86_64.sh 升级 conda upgrade conda">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jupyter_爬虫">
 <meta property="og:url" content="http://yoursite.com/2019/05/10/Jupyter-爬虫/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="安装 miniconda1234mkdir minicodndacd minicodndawget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.shbash Anaconda3-4.4.0-Linux-x86_64.sh 升级 conda upgrade conda 创建虚拟环境conda create -n jup">
+<meta property="og:description" content="安装 miniconda1234mkdir minicodndacd minicodndawget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.shbash Anaconda3-4.4.0-Linux-x86_64.sh 升级 conda upgrade conda">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-10T14:03:31.781Z">
+<meta property="og:updated_time" content="2019-05-25T07:50:05.297Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jupyter_爬虫">
-<meta name="twitter:description" content="安装 miniconda1234mkdir minicodndacd minicodndawget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.shbash Anaconda3-4.4.0-Linux-x86_64.sh 升级 conda upgrade conda 创建虚拟环境conda create -n jup">
+<meta name="twitter:description" content="安装 miniconda1234mkdir minicodndacd minicodndawget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.shbash Anaconda3-4.4.0-Linux-x86_64.sh 升级 conda upgrade conda">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -199,7 +199,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="安装-miniconda"><a href="#安装-miniconda" class="headerlink" title="安装 miniconda"></a>安装 miniconda</h1><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> minicodnda</span><br><span class="line"><span class="keyword">cd</span> minicodnda</span><br><span class="line">wget http<span class="variable">s:</span>//repo.continuum.io/archive/Anaconda3-<span class="number">4.4</span>.<span class="number">0</span>-Linux-x86_64.<span class="keyword">sh</span></span><br><span class="line">bash Anaconda3-<span class="number">4.4</span>.<span class="number">0</span>-Linux-x86_64.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
-<p>升级 conda upgrade conda</p>
+<p>升级 conda upgrade conda<br><a id="more"></a></p>
 <h2 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h2><p>conda create -n jupyter python=3.7 -y</p>
 <ul>
 <li>激活 conda activate jupyter</li>
@@ -212,11 +212,10 @@
 <li>jupyter –version<br>通过远程方式访问 jupyter notebook 测试 jupyter<h2 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h2></li>
 <li>jupyter notebook –generate-config<br>如果出现提示-allow-root，请在之前的命令后面加 –allow-root<br>jupyter notebook –generate-config –allow-root</li>
 </ul>
-<h3 id="打开ipython，创建一个登录jupyter的密码"><a href="#打开ipython，创建一个登录jupyter的密码" class="headerlink" title="打开ipython，创建一个登录jupyter的密码"></a>打开ipython，创建一个登录jupyter的密码</h3><p>   [root@localhost ~]# ipython<br>   In [1]: from notebook.auth import passwd<br>   In [2]: passwd()<br>   Enter password:<br>   Verify password:<br>   Out[2]: ‘sha1:5311cd8b9da9:70dd3321fccb5b5d77e66080a5d3d943ab9752b4’<br>   In [3]:exit</p>
+<h3 id="打开ipython，创建一个登录jupyter的密码"><a href="#打开ipython，创建一个登录jupyter的密码" class="headerlink" title="打开ipython，创建一个登录jupyter的密码"></a>打开ipython，创建一个登录jupyter的密码</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># ipython</span></span><br><span class="line">In [<span class="number">1</span>]: from notebook.auth import passwd</span><br><span class="line">In [<span class="number">2</span>]: passwd()</span><br><span class="line">Enter password: </span><br><span class="line">Verify password: </span><br><span class="line">Out[<span class="number">2</span>]: <span class="string">'sha1:5311cd8b9da9:70dd3321fccb5b5d77e66080a5d3d943ab9752b4'</span></span><br><span class="line">In [<span class="number">3</span>]:<span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
 <p>其中记录下Out[2]里的：sha1:5311cd8b9da9:70dd3321fccb5b5d77e66080a5d3d943ab9752b4</p>
-<h3 id="修改jupyper配置文件"><a href="#修改jupyper配置文件" class="headerlink" title="修改jupyper配置文件"></a>修改jupyper配置文件</h3><p>vi /root/.jupyter/jupyter_notebook_config.py 或者<br>vi ~/.jupyter/jupyter_notebook_config.py<br>在文件中添加以下的参数：</p>
-<p>   c.NotebookApp.ip=’*’<br>   c.NotebookApp.password = u’sha1:5311cd8b9da9:70dd3321fccb5b5d77e66080a5d3d943ab9752b4’<br>   c.NotebookApp.open_browser = False<br>   c.NotebookApp.port =8888    #随便指定一个端口，使用默认8888也可以</p>
-<p>进行后台运行，&amp; 该终端不影响该端口任务<br>nohub jupyter notebook –ip=0.0.0.0 –no-browser –allow-root &amp;</p>
+<h3 id="修改jupyper配置文件"><a href="#修改jupyper配置文件" class="headerlink" title="修改jupyper配置文件"></a>修改jupyper配置文件</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vi /root/.jupyter/jupyter_notebook_config<span class="selector-class">.py</span> 或者 </span><br><span class="line">vi ~/.jupyter/jupyter_notebook_config<span class="selector-class">.py</span> </span><br><span class="line">在文件中添加以下的参数：</span><br><span class="line"></span><br><span class="line">   c<span class="selector-class">.NotebookApp</span><span class="selector-class">.ip</span>=<span class="string">'*'</span></span><br><span class="line">   c<span class="selector-class">.NotebookApp</span><span class="selector-class">.password</span> = u<span class="string">'sha1:5311cd8b9da9:70dd3321fccb5b5d77e66080a5d3d943ab9752b4'</span></span><br><span class="line">   c<span class="selector-class">.NotebookApp</span><span class="selector-class">.open_browser</span> = False</span><br><span class="line">   c<span class="selector-class">.NotebookApp</span><span class="selector-class">.port</span> =<span class="number">8888</span>    #随便指定一个端口，使用默认<span class="number">8888</span>也可以</span><br></pre></td></tr></table></figure>
+<p>进行后台运行，&amp; 该终端不影响该端口任务<br><code>nohub jupyter notebook --ip=0.0.0.0 --no-browser --allow-root &amp;</code></p>
 <p>关掉 jupyter 内核 <code>pkill jupyter</code></p>
 <p>pip3 install ipython</p>
 <p>brew install jupyter</p>
