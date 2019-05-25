@@ -10,18 +10,20 @@
 
   <title>Java-基础-线程进阶 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Java">
+  <meta name="description" content="线程之前的学习我们知道，线程是比进程更轻量级的调度执行单位，线程把进程的资源分配和执行调度分开，线程可共享进程资源(内存地址，问价 I/O 等)，又可独立调度( CPU 是调度的基本单位) 线程调度线程调度是指系统为线程分配的处理器 分为两种  协同式线程调度 抢占式线程调度  Java 语言中使用的是抢占式线程调度，线程的调度不由本身决定，在整个的运行期间线程是可控的，不会发生某个线程的异常从而">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java-基础-线程进阶">
 <meta property="og:url" content="http://yoursite.com/2018/04/30/Java-基础-线程进阶/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="线程之前的学习我们知道，线程是比进程更轻量级的调度执行单位，线程把进程的资源分配和执行调度分开，线程可共享进程资源(内存地址，问价 I/O 等)，又可独立调度( CPU 是调度的基本单位) 线程调度线程调度是指系统为线程分配的处理器 分为两种  协同式线程调度 抢占式线程调度  Java 语言中使用的是抢占式线程调度，线程的调度不由本身决定，在整个的运行期间线程是可控的，不会发生某个线程的异常从而">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2018/04/30/Java-基础-线程进阶/julian-christian.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/04/30/Java-基础-线程进阶/Thread.png">
-<meta property="og:updated_time" content="2019-03-20T08:22:31.670Z">
+<meta property="og:updated_time" content="2019-05-25T04:55:13.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-线程进阶">
-<meta name="twitter:image" content="http://yoursite.com/2018/04/30/Java-基础-线程进阶/julian-christian.jpg">
+<meta name="twitter:description" content="线程之前的学习我们知道，线程是比进程更轻量级的调度执行单位，线程把进程的资源分配和执行调度分开，线程可共享进程资源(内存地址，问价 I/O 等)，又可独立调度( CPU 是调度的基本单位) 线程调度线程调度是指系统为线程分配的处理器 分为两种  协同式线程调度 抢占式线程调度  Java 语言中使用的是抢占式线程调度，线程的调度不由本身决定，在整个的运行期间线程是可控的，不会发生某个线程的异常从而">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/30/Java-基础-线程进阶/Thread.png">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -199,14 +201,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2018/04/30/Java-基础-线程进阶/julian-christian.jpg" alt="julian"><br><a id="more"></a></p>
-<h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><p>之前的学习我们知道，线程是比进程更轻量级的调度执行单位，线程把进程的资源分配和执行调度分开，线程可共享进程资源(内存地址，问价 I/O 等)，又可独立调度( CPU 是调度的基本单位)</p>
+        <h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><p>之前的学习我们知道，线程是比进程更轻量级的调度执行单位，线程把进程的资源分配和执行调度分开，线程可共享进程资源(内存地址，问价 I/O 等)，又可独立调度( CPU 是调度的基本单位)</p>
 <h2 id="线程调度"><a href="#线程调度" class="headerlink" title="线程调度"></a>线程调度</h2><p>线程调度是指系统为线程分配的处理器 分为两种</p>
 <ol>
 <li>协同式线程调度</li>
 <li>抢占式线程调度</li>
 </ol>
-<p>Java 语言中使用的是抢占式线程调度，线程的调度不由本身决定，在整个的运行期间线程是可控的，不会发生某个线程的异常从而导致整个进程的阻塞。使用优先级来判断执行顺序，之前介绍过在 Java 中线程优先级分为 10 个等级，优先级越高，越容易被执行。另一种协同式线程调度同样属于多线程调度，与抢占式线程调度的工作方式不同，使用协同式线程调度的系统，线程的执行时间由线程本身来决定，只有当一个线程执行执行完毕，然后通知系统切换另一个线程，与串行概念相同。使用该方式避免了线程同步的概念，只有一个线程执行完毕后，才会执行下一个。但是如果某个线程出现编写问题，一直不告诉系统需要切换下一个线程，那么程序就会一直阻塞在哪里，会导致系统的崩溃。</p>
+<p>Java 语言中使用的是抢占式线程调度，线程的调度不由本身决定，在整个的运行期间线程是可控的，不会发生某个线程的异常从而导致整个进程的阻塞。使用优先级来判断执行顺序，之前介绍过在 Java 中线程优先级分为 10 个等级，优先级越高，越容易被执行。另一种协同式线程调度同样属于多线程调度，与抢占式线程调度的工作方式不同，使用协同式线程调度的系统，线程的执行时间由线程本身来决定，只有当一个线程执行执行完毕，然后通知系统切换另一个线程，与串行概念相同。使用该方式避免了线程同步的概念，只有一个线程执行完毕后，才会执行下一个。但是如果某个线程出现编写问题，一直不告诉系统需要切换下一个线程，那么程序就会一直阻塞在哪里，会导致系统的崩溃。<br><a id="more"></a></p>
 <h2 id="线程状态转换"><a href="#线程状态转换" class="headerlink" title="线程状态转换"></a>线程状态转换</h2><p>一个线程有五种状态，创建，运行，等待，阻塞，终止。五种状态之间是如何转换的，下图很清晰的为我们解释清楚他们之间的状态转换<br><img src="/2018/04/30/Java-基础-线程进阶/Thread.png" alt="Thread"><br>切记在任意时间点，一个线程有且只有一种状态。</p>
 <h2 id="线程的三大特性"><a href="#线程的三大特性" class="headerlink" title="线程的三大特性"></a>线程的三大特性</h2><h3 id="原子性-Atomicity"><a href="#原子性-Atomicity" class="headerlink" title="原子性 (Atomicity)"></a>原子性 (Atomicity)</h3><p>原子性是指一个操作不可中断，一旦一个操作开始，就不会被其他的线程干扰，比如给 i 进行赋值，线程 A 赋值 1，线程 B 赋值 -1。i 的值要么是 1 ，要么是 -1，线程 A 和 线程 B 之间没有干扰，赋值过程中不可被中断</p>
 <h3 id="可见性-Visibility"><a href="#可见性-Visibility" class="headerlink" title="可见性 (Visibility)"></a>可见性 (Visibility)</h3><p>当一个线程对某一个共享数据进行修改，其他的线程能否知道这个修改。在 Java 中可见性可以通过关键字 synchronized 和 final 来实现。</p>

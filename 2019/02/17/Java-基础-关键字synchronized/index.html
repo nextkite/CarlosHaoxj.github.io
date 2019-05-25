@@ -10,18 +10,20 @@
 
   <title>Java-基础-关键字synchronized | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Java">
+  <meta name="description" content="线程安全为什么出现线程不安全？  在多线程状态下，对共享数据（临界资源）的读写操作不同步导致线程不安全  书中定义  当多个线程访问一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或者在调用方法进行任何其他的协调操作，调用这个对象的行为都可以获得正确的结果，那这个对象就是线程安全的。《Java Concurrency In Practice》Brian Go">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java-基础-关键字synchronized">
 <meta property="og:url" content="http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="线程安全为什么出现线程不安全？  在多线程状态下，对共享数据（临界资源）的读写操作不同步导致线程不安全  书中定义  当多个线程访问一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或者在调用方法进行任何其他的协调操作，调用这个对象的行为都可以获得正确的结果，那这个对象就是线程安全的。《Java Concurrency In Practice》Brian Go">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/hello-i.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/线程安全.png">
-<meta property="og:updated_time" content="2019-03-21T00:48:40.575Z">
+<meta property="og:updated_time" content="2019-05-25T04:54:40.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-关键字synchronized">
-<meta name="twitter:image" content="http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/hello-i.jpg">
+<meta name="twitter:description" content="线程安全为什么出现线程不安全？  在多线程状态下，对共享数据（临界资源）的读写操作不同步导致线程不安全  书中定义  当多个线程访问一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或者在调用方法进行任何其他的协调操作，调用这个对象的行为都可以获得正确的结果，那这个对象就是线程安全的。《Java Concurrency In Practice》Brian Go">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/线程安全.png">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -199,8 +201,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2019/02/17/Java-基础-关键字synchronized/hello-i.jpg" alt="picture"><br><a id="more"></a><br><img src="/2019/02/17/Java-基础-关键字synchronized/线程安全.png" alt="synchronized"></p>
-<h1 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h1><p>为什么出现线程不安全？</p>
+        <h1 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h1><p>为什么出现线程不安全？</p>
 <blockquote>
 <p>在多线程状态下，对共享数据（临界资源）的读写操作不同步导致线程不安全</p>
 </blockquote>
@@ -208,7 +209,7 @@
 <blockquote>
 <p>当多个线程访问一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或者在调用方法进行任何其他的协调操作，调用这个对象的行为都可以获得正确的结果，那这个对象就是线程安全的。<br>《Java Concurrency In Practice》Brian Goetz</p>
 </blockquote>
-<p>代码本身已经封装好必要的解决线程安全问题保障手段，使用者无需关注线程安全问题，直接使用即可。</p>
+<p>代码本身已经封装好必要的解决线程安全问题保障手段，使用者无需关注线程安全问题，直接使用即可。<br><a id="more"></a></p>
 <h2 id="线程安全等级"><a href="#线程安全等级" class="headerlink" title="线程安全等级"></a>线程安全等级</h2><h3 id="不可变"><a href="#不可变" class="headerlink" title="不可变"></a>不可变</h3><p>只要是不可变的对象被正确构建出来，外部可见状态永远不会被改变，一定是线程安全的，最简单的实现线程安全的方法，例如用 final 来保证不可变，从而实现线程安全</p>
 <h3 id="绝对线程安全"><a href="#绝对线程安全" class="headerlink" title="绝对线程安全"></a>绝对线程安全</h3><p>学习集合框架知识我们知道 <code>java.util.Vector</code> 该类是线程安全的，是一个线程安全容器，主要方法都被关键字 <code>synchronized</code> 所修饰，但不保证绝对线程安全，需要在关键位置加入同步措施来实现线程安全</p>
 <p>使用 <code>Vector</code> 类中常用方法做测试，是否绝对线程安全</p>
@@ -336,6 +337,7 @@
 <li>monitorenter:同步代码块开始位置，执行该指令首先获取对象锁，如果获取失败，阻塞等待，或当前对象已经拥有对象的锁，锁的计数器加1</li>
 <li>monitorexit:同步代码块结束位置，锁的计数器减1，当计数器为 0，锁被释放</li>
 </ul>
+<p><img src="/2019/02/17/Java-基础-关键字synchronized/线程安全.png" alt="synchronized"></p>
 <blockquote>
 <p>以上内容参考自    《深入理解 Java 虚拟机》</p>
 </blockquote>

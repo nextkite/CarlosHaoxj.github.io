@@ -10,19 +10,21 @@
 
   <title>Spring IoC | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Spring">
+  <meta name="description" content="认识Spring IoC DI         依赖注入    Dependency Injection IoC         控制反转    Inversion of Control IOC Container     容器         Inversion of Control Container">
+<meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring IoC">
 <meta property="og:url" content="http://yoursite.com/2018/10/20/Spring-IoC/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="认识Spring IoC DI         依赖注入    Dependency Injection IoC         控制反转    Inversion of Control IOC Container     容器         Inversion of Control Container">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2018/10/20/Spring-IoC/mel-poole.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/10/20/Spring-IoC/spring-IoC-1.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/10/20/Spring-IoC/spring-IoC-2.jpg">
-<meta property="og:updated_time" content="2019-03-17T10:47:18.061Z">
+<meta property="og:updated_time" content="2019-05-25T04:56:58.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring IoC">
-<meta name="twitter:image" content="http://yoursite.com/2018/10/20/Spring-IoC/mel-poole.jpg">
+<meta name="twitter:description" content="认识Spring IoC DI         依赖注入    Dependency Injection IoC         控制反转    Inversion of Control IOC Container     容器         Inversion of Control Container">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/20/Spring-IoC/spring-IoC-1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -200,12 +202,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2018/10/20/Spring-IoC/mel-poole.jpg" alt="picture"><br><a id="more"></a></p>
-<h1 id="认识Spring-IoC"><a href="#认识Spring-IoC" class="headerlink" title="认识Spring IoC"></a>认识Spring IoC</h1><ul>
+        <h1 id="认识Spring-IoC"><a href="#认识Spring-IoC" class="headerlink" title="认识Spring IoC"></a>认识Spring IoC</h1><ul>
 <li>DI         依赖注入    Dependency Injection</li>
 <li>IoC         控制反转    Inversion of Control</li>
 <li>IOC Container     容器         Inversion of Control Container</li>
 </ul>
+<a id="more"></a>
 <h2 id="理解-IoC-DI"><a href="#理解-IoC-DI" class="headerlink" title="理解 IoC DI"></a>理解 IoC DI</h2><p>IoC (Inversion of Control) 控制反转，是由软件专家 Michael Mattson 提出的一个理论，用于解决复杂系统中的耦合关系。后来这个理论被逐渐应用到实践中，例如 J2EE 中的 Spring 框架中，IoC 就成为核心功能实现。</p>
 <h3 id="IoC-Inversion-of-Control"><a href="#IoC-Inversion-of-Control" class="headerlink" title="IoC(Inversion of Control)"></a>IoC(Inversion of Control)</h3><p>Spring IoC(Inversion of Control) 别名 DI(Dependency Injection) 依赖注入，而事实上二者并非相同。IoC(Inversion of Control)是面向对象的一种思想，DI(Dependency Injection)是实现这一思想的方法。</p>
 <p>控制反转是目的，依赖注入是实现控制反转的手段。控制反转是将某个类对其内部状态权交给其他机制去完成，为降低类与类之间的耦合度。这个时候就出现了一个新的概念 IoC Container 称为 IoC 容器，在这里面从放着所有类与类依赖关系的方法，这时候 IoC 容器就充当着一个第三方角色，想要解决某个问题直接告诉 IoC 容器，它为我们找到解决问题的方式。</p>

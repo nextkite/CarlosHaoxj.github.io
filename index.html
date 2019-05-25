@@ -179,6 +179,92 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Jupyter-爬虫" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/10/Jupyter-爬虫/">Jupyter_爬虫</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/10/Jupyter-爬虫/" class="archive-article-date">
+  	<time datetime="2019-05-10T07:37:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="安装-miniconda"><a href="#安装-miniconda" class="headerlink" title="安装 miniconda"></a>安装 miniconda</h1><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> minicodnda</span><br><span class="line"><span class="keyword">cd</span> minicodnda</span><br><span class="line">wget http<span class="variable">s:</span>//repo.continuum.io/archive/Anaconda3-<span class="number">4.4</span>.<span class="number">0</span>-Linux-x86_64.<span class="keyword">sh</span></span><br><span class="line">bash Anaconda3-<span class="number">4.4</span>.<span class="number">0</span>-Linux-x86_64.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
+<p>升级 conda upgrade conda</p>
+<h2 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h2><p>conda create -n jupyter python=3.7 -y</p>
+<ul>
+<li>激活 conda activate jupyter</li>
+<li>取消 conda deactivate</li>
+</ul>
+<p>pip install jupyter</p>
+<h3 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h3><ul>
+<li>python –version</li>
+<li>pip –version</li>
+<li>jupyter –version<br>通过远程方式访问 jupyter notebook 测试 jupyter<h2 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h2></li>
+<li>jupyter notebook –generate-config<br>如果出现提示-allow-root，请在之前的命令后面加 –allow-root<br>jupyter notebook –generate-config –allow-root</li>
+</ul>
+<h3 id="打开ipython，创建一个登录jupyter的密码"><a href="#打开ipython，创建一个登录jupyter的密码" class="headerlink" title="打开ipython，创建一个登录jupyter的密码"></a>打开ipython，创建一个登录jupyter的密码</h3><p>   [root@localhost ~]# ipython<br>   In [1]: from notebook.auth import passwd<br>   In [2]: passwd()<br>   Enter password:<br>   Verify password:<br>   Out[2]: ‘sha1:5311cd8b9da9:70dd3321fccb5b5d77e66080a5d3d943ab9752b4’<br>   In [3]:exit</p>
+<p>其中记录下Out[2]里的：sha1:5311cd8b9da9:70dd3321fccb5b5d77e66080a5d3d943ab9752b4</p>
+<h3 id="修改jupyper配置文件"><a href="#修改jupyper配置文件" class="headerlink" title="修改jupyper配置文件"></a>修改jupyper配置文件</h3><p>vi /root/.jupyter/jupyter_notebook_config.py 或者<br>vi ~/.jupyter/jupyter_notebook_config.py<br>在文件中添加以下的参数：</p>
+<p>   c.NotebookApp.ip=’*’<br>   c.NotebookApp.password = u’sha1:5311cd8b9da9:70dd3321fccb5b5d77e66080a5d3d943ab9752b4’<br>   c.NotebookApp.open_browser = False<br>   c.NotebookApp.port =8888    #随便指定一个端口，使用默认8888也可以</p>
+<p>进行后台运行，&amp; 该终端不影响该端口任务<br>nohub jupyter notebook –ip=0.0.0.0 –no-browser –allow-root &amp;</p>
+<p>关掉 jupyter 内核 <code>pkill jupyter</code></p>
+<p>pip3 install ipython</p>
+<p>brew install jupyter</p>
+
+      
+
+
+	
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/10/Jupyter-爬虫/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-阿里云基本配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -199,7 +285,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2019/04/14/阿里云基本配置/unsplash.jpg" alt="阿里云基本配置"><br></p>
+        <h1 id="阿里云基本配置"><a href="#阿里云基本配置" class="headerlink" title="阿里云基本配置"></a>阿里云基本配置</h1><p>服务器系统镜像为 CentOS_7.3，安装 MySQL 5.7</p>
+<h2 id="安装-yum-repo"><a href="#安装-yum-repo" class="headerlink" title="安装 yum repo"></a>安装 yum repo</h2><ol>
+<li>MySQL 官网下载 yum repo 配置文件 <code>wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm</code></li>
+<li>repo 安装 <code>rpm -ivh mysql57-community-release-el7-9.noarch.rpm</code></li>
+<li><p>安装 MySQL;</p>
+<ul>
+<li>安装:<code>yum install mysql-server</code></li>
+<li>启动:<code>systemctl start mysqld</code></li>
+<li>查看:<code>systemctl status mysqld</code></li></ul></li></ol>
         
       
 
@@ -286,7 +380,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2019/02/28/JVM-垃圾处理机制/andisheh.jpg" alt="JVM-垃圾处理机制"><br></p>
+        <h1 id="垃圾处理机制"><a href="#垃圾处理机制" class="headerlink" title="垃圾处理机制"></a>垃圾处理机制</h1><h2 id="辨别对象状态"><a href="#辨别对象状态" class="headerlink" title="辨别对象状态"></a>辨别对象状态</h2><p>Java 堆中存放着大多是对象（Class 对象存放在方法区中），对象两种状态：存活或者死亡，对于已经死亡的对象，就需要 Java 虚拟机通过垃圾处理机制移除，一直存放无用内存会占用没有必要的内存空间，判断对象状态的方式有：引用计数算法和可达性算法。</p>
+<p>判定一个对象是存活还是死亡需要通过两次标记才可实现，通过可达性算法，发现没有与 GC Roots 相连接的引用链，将会进行第一次标记；第二次标记需要判断是否有必要执行 <code>finalize()</code> 方法，有必要执行，在执行过程中重新赋值回到 GC Roots 引用链中，可以实现复活；当没有必要执行，可能是没有覆盖 <code>finalize()</code> 或者 <code>finalize()</code> 已经被其他线程调用，就会进行垃圾回收。总结是：第二次标记可执行 <code>finalize()</code> 能有机会实现自救，不可执行，进行垃圾回收<br><strong>任何一个对象的 <code>finalize()</code> 方法只会被调用一次，也就是说只有一次自救机会</strong></p>
+<h3 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h3><p>为对象添加一个引用计数起，当有一个对象引用时，计数器就加 1，引用失效，计数器就减 1，当引用计数器为 0 时，该对象是不可能再被利用就可移除内存。引用计数器的缺点是：无法解决循环引用问题</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Test test</span>_1 = new Test();</span><br><span class="line"><span class="keyword">Test test</span>_2 = new Test();</span><br><span class="line">test_1.instance = test_2;</span><br><span class="line">test_2.instance = test_1;</span><br></pre></td></tr></table></figure>
         
       
 
@@ -373,7 +470,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2019/02/25/JVM-内存区域/michael.jpg" alt="JVM"><br></p>
+        <h1 id="JVM-内存区域"><a href="#JVM-内存区域" class="headerlink" title="JVM-内存区域"></a>JVM-内存区域</h1><h2 id="线程私有"><a href="#线程私有" class="headerlink" title="线程私有"></a>线程私有</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined）</p>
+<h3 id="Java-虚拟机栈"><a href="#Java-虚拟机栈" class="headerlink" title="Java 虚拟机栈"></a>Java 虚拟机栈</h3><p>每一个线程都有自己的虚拟机栈，方法调用到返回的过程对应虚拟机中入栈到出栈的过程。</p>
+<ul>
+<li>基本数据类型：byte,char,int,long,short,double,boolen,long</li>
+<li>对象引用：非对象本身，指向对象地址的引用指针或者是指向一个代表对象的句柄或与此对象相关的位置</li>
+<li>returnAddress类型：指向一条字节码指令的地址</li>
+</ul>
+<p>栈溢出两种异常：</p>
+<ul>
+<li>StackOverflowError: 线程请求栈的深度大于虚拟机容许深度</li>
+<li>OutOfMemoryError: 虚拟机动态扩展无法申请到足够内存空间</li>
+</ul>
+<p>当单线程情况下只会出现 StackOverflowError 异常，<br></p>
         
       
 
@@ -460,7 +569,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2019/02/17/Java-基础-关键字synchronized/hello-i.jpg" alt="picture"><br></p>
+        <h1 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h1><p>为什么出现线程不安全？</p>
+<blockquote>
+<p>在多线程状态下，对共享数据（临界资源）的读写操作不同步导致线程不安全</p>
+</blockquote>
+<p>书中定义</p>
+<blockquote>
+<p>当多个线程访问一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或者在调用方法进行任何其他的协调操作，调用这个对象的行为都可以获得正确的结果，那这个对象就是线程安全的。<br>《Java Concurrency In Practice》Brian Goetz</p>
+</blockquote>
+<p>代码本身已经封装好必要的解决线程安全问题保障手段，使用者无需关注线程安全问题，直接使用即可。<br></p>
         
       
 
@@ -547,7 +664,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2019/01/27/Java-基础-序列化与反序列化/joshua.jpg" alt="序列化"><br></p>
+        <h1 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h1><ul>
+<li>序列化：        把对象转为字节</li>
+<li>反序列化：    把字节转为对象</li>
+</ul>
+<p>序列化用途：</p>
+<ol>
+<li>把对象的字节保存到硬盘上，在网络上传送对象的字节序列</li>
+<li>通过序列化进行进程间传递对象</li>
+</ol>
+<p>序列化一个对象：</p>
+<ul>
+<li>ObjectOutputStream    输出流</li>
+<li>writerObject(Object obj) 将对象 obj 进行序列化</li>
+</ul>
+<p>反序列化一个对象：</p>
+<ul>
+<li>ObjectInputStream    输入流</li>
+<li>readObject() 从输入流中读取字节序列</li></ul>
         
       
 
@@ -634,7 +768,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2019/01/04/Java-基础-反射/lum3n.jpg" alt="picture"></p>
+        <h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><ul>
+<li>定义：反射机制能够动态的操纵 Java 代码的程序，能够分析类能力的程序。</li>
+</ul>
+<p>通过编译之后的字节码文件获取类中对象，可以得到类中的所有属性，方法，并且可以动态的操作该类。反射的关键源于 Class 类发挥的作用，该类在 <code>java.lang.Class</code>包下。</p>
+<h2 id="Class-类"><a href="#Class-类" class="headerlink" title="Class 类"></a>Class 类</h2><p>java.lang.Class 类的实例对象，任何一个类都是 Classs 实例对象，获取 Class 对象的三种方式</p>
+<p>我们先定义一个 Student 类，在该类中定义变量和方法</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Student</span>&#123;</span><br><span class="line">   	<span class="keyword">private</span> String name;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       	System.<span class="keyword">out</span>.println(<span class="string">"show"</span>);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
       
 
@@ -721,7 +861,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2019/01/02/设计模式-单例模式及案例/kat-stokes.jpg" alt="picture"><br></p>
+        <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><ul>
+<li>单例模式：用来创建独一无二的，只能有一个实例对象，确保一个类只有一个实例，并提供一个全局访问点。</li>
+</ul>
+<p>通俗说单例模式只将对象 new 一次，与工厂模式区别，工厂模式像是与单例模式相同，其实差距很大，工厂模式并不是实现将对象只 new 一次，它是主要避免对象的紧耦合，实现最终的解耦，或者是说单例模式是类的设计者要考虑的问题，工厂模式是类的使用者需要考虑的问题，不要混淆两个设计模式<br>者<br></p>
         
       
 
@@ -808,7 +951,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2018/12/30/这一年，想法指向行动/anete-lusina.jpg" alt="picture"></p>
+        <h1 id="16年，17年"><a href="#16年，17年" class="headerlink" title="16年，17年"></a>16年，17年</h1><p>2018年12月31日，天津，一个人，心情很复杂，负能量爆棚。又是一年末尾，新的一年开始，这是在上大学过的第三个元旦，前俩年到元旦都会非常的兴奋，朋友相聚，新环境的感触。可是今年的我却怎样也开心不起来，变得焦虑，急躁。</p>
+<p>16年上大学开始，每年这时候总会控制不住自己，总想出去看一看。当时自己还想着每年元旦假期换地过（天津，北京，上海…），16年，17年很顺利，没有任何阻碍，完成了计划，每个地方都有收获，同样也有好友相伴。</p>
+<p>16年在天津，三个人的聚会（文盲，旺旺），话题总是离不开这半年换一个城市生活的感受，毕竟都是第一次长时间的在一个陌生的城市生活。17年北京，这次的北京之旅，由16年的三位，变成了两位（旺旺）。这次的相聚，了解到我的准备18年去当兵，去磨练自己。老实说我之前的我也有当兵的想法，但是没有去实现，比较佩服他，支持他。而当时的我对自己也有新的要求，经过一年的时间，所立要求完成了90%，带来更大困惑，未知。（18年9月份他正式参军入伍，知道消息后，准备去火车站送他上车（不容许），只能在入伍前几天见一次，期待两年后的再聚，有成长，有改变）</p>
         
       
 
@@ -895,7 +1040,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2018/12/28/设计模式-工厂模式及案例/roberto-nickson.jpg" alt="picture"><br></p>
+        <h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><p>学习工厂设计模式之前需要掌握两种设计原则：</p>
+<ol>
+<li>依赖倒置原则：依赖抽象，不依赖具体类</li>
+<li>开闭原则：两个主要特征，对于扩展是开放的和对于修改是关闭的。对于扩展是开放的：模块的行为是可扩展的，当应用需求改变时，可对模块进行扩展，使其具有新行为，可以改变模块的功能。对于修改是关闭的：当模块进行扩展时，不必改动源代码或二进制代码，不破坏原有系统结构。</li>
+</ol>
         
       
 
@@ -933,97 +1082,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/12/28/设计模式-工厂模式及案例/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Spring Boot-基础搭建、整合应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/21/Spring Boot-基础搭建、整合应用/">Spring Boot(-):基础搭建、整合应用</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/21/Spring Boot-基础搭建、整合应用/" class="archive-article-date">
-  	<time datetime="2018-12-21T07:57:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/2018/12/21/Spring Boot-基础搭建、整合应用/federica-galli.jpg" alt="piceture"></p>
-        
-      
-
-
-	
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring Boot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端生态/Spring-Boot//" class="article-tag-list-link color2">Spring Boot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/21/Spring Boot-基础搭建、整合应用/">展开全文 >></a>
         </p>
       
 

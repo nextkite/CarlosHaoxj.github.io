@@ -10,17 +10,18 @@
 
   <title>阿里云基本配置 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Linux">
+  <meta name="description" content="阿里云基本配置服务器系统镜像为 CentOS_7.3，安装 MySQL 5.7 安装 yum repo MySQL 官网下载 yum repo 配置文件 wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm repo 安装 rpm -ivh mysql57-community-release-el7-9.">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="阿里云基本配置">
 <meta property="og:url" content="http://yoursite.com/2019/04/14/阿里云基本配置/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="阿里云基本配置服务器系统镜像为 CentOS_7.3，安装 MySQL 5.7 安装 yum repo MySQL 官网下载 yum repo 配置文件 wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm repo 安装 rpm -ivh mysql57-community-release-el7-9.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/04/14/阿里云基本配置/unsplash.jpg">
-<meta property="og:updated_time" content="2019-04-14T13:51:06.330Z">
+<meta property="og:updated_time" content="2019-05-25T04:53:02.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="阿里云基本配置">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/14/阿里云基本配置/unsplash.jpg">
+<meta name="twitter:description" content="阿里云基本配置服务器系统镜像为 CentOS_7.3，安装 MySQL 5.7 安装 yum repo MySQL 官网下载 yum repo 配置文件 wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm repo 安装 rpm -ivh mysql57-community-release-el7-9.">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -198,18 +199,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2019/04/14/阿里云基本配置/unsplash.jpg" alt="阿里云基本配置"><br><a id="more"></a></p>
-<h1 id="阿里云基本配置"><a href="#阿里云基本配置" class="headerlink" title="阿里云基本配置"></a>阿里云基本配置</h1><p>服务器系统镜像为 CentOS_7.3，安装 MySQL 5.7</p>
+        <h1 id="阿里云基本配置"><a href="#阿里云基本配置" class="headerlink" title="阿里云基本配置"></a>阿里云基本配置</h1><p>服务器系统镜像为 CentOS_7.3，安装 MySQL 5.7</p>
 <h2 id="安装-yum-repo"><a href="#安装-yum-repo" class="headerlink" title="安装 yum repo"></a>安装 yum repo</h2><ol>
 <li>MySQL 官网下载 yum repo 配置文件 <code>wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm</code></li>
 <li>repo 安装 <code>rpm -ivh mysql57-community-release-el7-9.noarch.rpm</code></li>
-<li>安装 MySQL;<ul>
+<li><p>安装 MySQL;</p>
+<ul>
 <li>安装:<code>yum install mysql-server</code></li>
 <li>启动:<code>systemctl start mysqld</code></li>
-<li>查看:<code>systemctl status mysqld</code></li>
+<li>查看:<code>systemctl status mysqld</code><a id="more"></a>
+</li>
 </ul>
 </li>
-<li>配置 MySQL，使用命令查看安装时的临时密码<code>grep &#39;temporary password&#39; /var/log/mysqld.log</code>;如果没有找到，输入命令 <code>rm -rf /var/lib/mysql</code>，删除 MySQL 残留数据；再次启动 MySQL</li>
+<li><p>配置 MySQL，使用命令查看安装时的临时密码<code>grep &#39;temporary password&#39; /var/log/mysqld.log</code>;如果没有找到，输入命令 <code>rm -rf /var/lib/mysql</code>，删除 MySQL 残留数据；再次启动 MySQL</p>
+</li>
 <li>输入命令 <code>mysql_secure_installation</code>；设置安全选项，执行命令后的依次完成一下操作<ul>
 <li>Enter current password for root (enter for none):    输入当前root密码(没有输入)</li>
 <li>Set root password? [Y/n]                             设置root密码?(是/否)</li>
@@ -397,6 +400,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/05/10/Jupyter-爬虫/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Jupyter_爬虫
+        
+      </div>
+    </a>
   
   
     <a href="/2019/02/28/JVM-垃圾处理机制/" id="article-nav-older" class="article-nav-link-wrap">

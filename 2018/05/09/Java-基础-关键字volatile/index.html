@@ -10,18 +10,20 @@
 
   <title>Java-基础-关键字volatile | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Java">
+  <meta name="description" content="Java 内存模型Java 内存模型定义：屏蔽掉各种硬件和操作系统的内存访问差异，实现让 Java 程序在各种平台下能达到一致的内存访问效果。避免更换平台后在并发问题上出现访问错误。 在 Java 内存模型中规定所有变量存储在主内存中，每一个线程都有自己工作内存，每个线程都有对变量的读取操作都是在自己的工作内存中操作，线程之间不会有通讯，比如线程 A 对一个变量进行修改，此时的线程 B 并不知道线">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java-基础-关键字volatile">
 <meta property="og:url" content="http://yoursite.com/2018/05/09/Java-基础-关键字volatile/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="Java 内存模型Java 内存模型定义：屏蔽掉各种硬件和操作系统的内存访问差异，实现让 Java 程序在各种平台下能达到一致的内存访问效果。避免更换平台后在并发问题上出现访问错误。 在 Java 内存模型中规定所有变量存储在主内存中，每一个线程都有自己工作内存，每个线程都有对变量的读取操作都是在自己的工作内存中操作，线程之间不会有通讯，比如线程 A 对一个变量进行修改，此时的线程 B 并不知道线">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2018/05/09/Java-基础-关键字volatile/oleg-ivanov.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/05/09/Java-基础-关键字volatile/JVM.png">
-<meta property="og:updated_time" content="2019-03-18T04:24:59.496Z">
+<meta property="og:updated_time" content="2019-05-25T04:54:51.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-关键字volatile">
-<meta name="twitter:image" content="http://yoursite.com/2018/05/09/Java-基础-关键字volatile/oleg-ivanov.jpg">
+<meta name="twitter:description" content="Java 内存模型Java 内存模型定义：屏蔽掉各种硬件和操作系统的内存访问差异，实现让 Java 程序在各种平台下能达到一致的内存访问效果。避免更换平台后在并发问题上出现访问错误。 在 Java 内存模型中规定所有变量存储在主内存中，每一个线程都有自己工作内存，每个线程都有对变量的读取操作都是在自己的工作内存中操作，线程之间不会有通讯，比如线程 A 对一个变量进行修改，此时的线程 B 并不知道线">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/09/Java-基础-关键字volatile/JVM.png">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -199,11 +201,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2018/05/09/Java-基础-关键字volatile/oleg-ivanov.jpg" alt="picture"><br><a id="more"></a></p>
-<h1 id="Java-内存模型"><a href="#Java-内存模型" class="headerlink" title="Java 内存模型"></a>Java 内存模型</h1><p>Java 内存模型定义：屏蔽掉各种硬件和操作系统的内存访问差异，实现让 Java 程序在各种平台下能达到一致的内存访问效果。避免更换平台后在并发问题上出现访问错误。</p>
+        <h1 id="Java-内存模型"><a href="#Java-内存模型" class="headerlink" title="Java 内存模型"></a>Java 内存模型</h1><p>Java 内存模型定义：屏蔽掉各种硬件和操作系统的内存访问差异，实现让 Java 程序在各种平台下能达到一致的内存访问效果。避免更换平台后在并发问题上出现访问错误。</p>
 <p>在 Java 内存模型中规定所有变量存储在主内存中，每一个线程都有自己工作内存，每个线程都有对变量的读取操作都是在自己的工作内存中操作，线程之间不会有通讯，比如线程 A 对一个变量进行修改，此时的线程 B 并不知道线程 A 在对变量进行修改。线程对变量处理完成后到会写到主内存中，主内存内实现线程之间的变量值传递。</p>
-<p>下图为线程、工作内存、主内存之间的关系</p>
-<p><img src="/2018/05/09/Java-基础-关键字volatile/JVM.png" alt="JVM"></p>
+<p>下图为线程、工作内存、主内存之间的关系<br><a id="more"></a><br><img src="/2018/05/09/Java-基础-关键字volatile/JVM.png" alt="JVM"></p>
 <h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>在 Java 内存模型中每个线程都有自己的工作内存，比如在并发情况下的 （i++），当线程 A 先进行 i++ ，此时是在自己的工作内存中进行运算，还没有写到主内存中，线程 B 也在进行 i++ ，也在对 i 变量做更改，再写入主内存中，就会造成数据不一致。只要让在并发的过程中数据进行同步就可避免问题出现，在 Java 中提供的关键字 volatile 就可以解决此类问题</p>
 <p>一旦一个共享变量（类的成员变量、类的静态成员变量）被volatile修饰之后，那么就具备了两层语义：</p>
 <ol>

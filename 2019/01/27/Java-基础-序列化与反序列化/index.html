@@ -10,17 +10,18 @@
 
   <title>Java-基础-序列化与反序列化 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Java">
+  <meta name="description" content="序列化与反序列化 序列化：        把对象转为字节 反序列化：    把字节转为对象  序列化用途：  把对象的字节保存到硬盘上，在网络上传送对象的字节序列 通过序列化进行进程间传递对象  序列化一个对象：  ObjectOutputStream    输出流 writerObject(Object obj) 将对象 obj 进行序列化  反序列化一个对象：  ObjectInputStre">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java-基础-序列化与反序列化">
 <meta property="og:url" content="http://yoursite.com/2019/01/27/Java-基础-序列化与反序列化/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="序列化与反序列化 序列化：        把对象转为字节 反序列化：    把字节转为对象  序列化用途：  把对象的字节保存到硬盘上，在网络上传送对象的字节序列 通过序列化进行进程间传递对象  序列化一个对象：  ObjectOutputStream    输出流 writerObject(Object obj) 将对象 obj 进行序列化  反序列化一个对象：  ObjectInputStre">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/01/27/Java-基础-序列化与反序列化/joshua.jpg">
-<meta property="og:updated_time" content="2019-03-31T00:46:05.734Z">
+<meta property="og:updated_time" content="2019-05-25T04:55:35.571Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-序列化与反序列化">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/27/Java-基础-序列化与反序列化/joshua.jpg">
+<meta name="twitter:description" content="序列化与反序列化 序列化：        把对象转为字节 反序列化：    把字节转为对象  序列化用途：  把对象的字节保存到硬盘上，在网络上传送对象的字节序列 通过序列化进行进程间传递对象  序列化一个对象：  ObjectOutputStream    输出流 writerObject(Object obj) 将对象 obj 进行序列化  反序列化一个对象：  ObjectInputStre">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -198,8 +199,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2019/01/27/Java-基础-序列化与反序列化/joshua.jpg" alt="序列化"><br><a id="more"></a></p>
-<h1 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h1><ul>
+        <h1 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h1><ul>
 <li>序列化：        把对象转为字节</li>
 <li>反序列化：    把字节转为对象</li>
 </ul>
@@ -216,9 +216,9 @@
 <p>反序列化一个对象：</p>
 <ul>
 <li>ObjectInputStream    输入流</li>
-<li>readObject() 从输入流中读取字节序列</li>
+<li>readObject() 从输入流中读取字节序列<a id="more"></a>
+Serializable ， Externalizable    序列化反序列化所需要实现的接口<br>Externalizable 继承自 Serializable </li>
 </ul>
-<p>Serializable ， Externalizable    序列化反序列化所需要实现的接口<br>Externalizable 继承自 Serializable </p>
 <p>demo:</p>
 <pre><code>import java.io.*;
 

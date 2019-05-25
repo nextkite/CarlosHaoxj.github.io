@@ -10,17 +10,18 @@
 
   <title>设计模式-单例模式及案例 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="设计模式">
+  <meta name="description" content="单例模式 单例模式：用来创建独一无二的，只能有一个实例对象，确保一个类只有一个实例，并提供一个全局访问点。  通俗说单例模式只将对象 new 一次，与工厂模式区别，工厂模式像是与单例模式相同，其实差距很大，工厂模式并不是实现将对象只 new 一次，它是主要避免对象的紧耦合，实现最终的解耦，或者是说单例模式是类的设计者要考虑的问题，工厂模式是类的使用者需要考虑的问题，不要混淆两个设计模式者">
+<meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式-单例模式及案例">
 <meta property="og:url" content="http://yoursite.com/2019/01/02/设计模式-单例模式及案例/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="单例模式 单例模式：用来创建独一无二的，只能有一个实例对象，确保一个类只有一个实例，并提供一个全局访问点。  通俗说单例模式只将对象 new 一次，与工厂模式区别，工厂模式像是与单例模式相同，其实差距很大，工厂模式并不是实现将对象只 new 一次，它是主要避免对象的紧耦合，实现最终的解耦，或者是说单例模式是类的设计者要考虑的问题，工厂模式是类的使用者需要考虑的问题，不要混淆两个设计模式者">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/01/02/设计模式-单例模式及案例/kat-stokes.jpg">
-<meta property="og:updated_time" content="2019-03-20T08:21:34.031Z">
+<meta property="og:updated_time" content="2019-05-25T04:53:21.375Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式-单例模式及案例">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/02/设计模式-单例模式及案例/kat-stokes.jpg">
+<meta name="twitter:description" content="单例模式 单例模式：用来创建独一无二的，只能有一个实例对象，确保一个类只有一个实例，并提供一个全局访问点。  通俗说单例模式只将对象 new 一次，与工厂模式区别，工厂模式像是与单例模式相同，其实差距很大，工厂模式并不是实现将对象只 new 一次，它是主要避免对象的紧耦合，实现最终的解耦，或者是说单例模式是类的设计者要考虑的问题，工厂模式是类的使用者需要考虑的问题，不要混淆两个设计模式者">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -198,11 +199,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2019/01/02/设计模式-单例模式及案例/kat-stokes.jpg" alt="picture"><br><a id="more"></a></p>
-<h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><ul>
+        <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><ul>
 <li>单例模式：用来创建独一无二的，只能有一个实例对象，确保一个类只有一个实例，并提供一个全局访问点。</li>
 </ul>
-<p>通俗说单例模式只将对象 new 一次，与工厂模式区别，工厂模式像是与单例模式相同，其实差距很大，工厂模式并不是实现将对象只 new 一次，它是主要避免对象的紧耦合，实现最终的解耦，或者是说单例模式是类的设计者要考虑的问题，工厂模式是类的使用者需要考虑的问题，不要混淆两个设计模式<br>者</p>
+<p>通俗说单例模式只将对象 new 一次，与工厂模式区别，工厂模式像是与单例模式相同，其实差距很大，工厂模式并不是实现将对象只 new 一次，它是主要避免对象的紧耦合，实现最终的解耦，或者是说单例模式是类的设计者要考虑的问题，工厂模式是类的使用者需要考虑的问题，不要混淆两个设计模式<br>者<br><a id="more"></a></p>
 <h2 id="单例模式实现"><a href="#单例模式实现" class="headerlink" title="单例模式实现"></a>单例模式实现</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Singleton</span>&#123;</span><br><span class="line">	<span class="comment">// 记录唯一实例对象</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Singleton uniqueInstance;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Singleton</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 线程非安全  返回 uniqueInstance 对象</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(uniqueInstance == <span class="literal">null</span>)&#123;</span><br><span class="line">			uniqueInstance = <span class="keyword">new</span> Singleton();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> uniqueInstance;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>编写测试类</p>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Test</span>&#123;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span>&#123;</span><br><span class="line">       	Singleton singleton = <span class="keyword">new</span> Singleton();</span><br><span class="line">       	singleton.getInstance();</span><br><span class="line"></span><br><span class="line">       	System.<span class="keyword">out</span>.println(singleton.getInstance());</span><br><span class="line">       	System.<span class="keyword">out</span>.println(singleton.getInstance());</span><br><span class="line">       	System.<span class="keyword">out</span>.println(singleton.getInstance());</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

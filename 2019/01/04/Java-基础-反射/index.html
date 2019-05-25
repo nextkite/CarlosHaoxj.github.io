@@ -10,17 +10,18 @@
 
   <title>Java-基础-反射 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Java">
+  <meta name="description" content="反射 定义：反射机制能够动态的操纵 Java 代码的程序，能够分析类能力的程序。  通过编译之后的字节码文件获取类中对象，可以得到类中的所有属性，方法，并且可以动态的操作该类。反射的关键源于 Class 类发挥的作用，该类在 java.lang.Class包下。 Class 类java.lang.Class 类的实例对象，任何一个类都是 Classs 实例对象，获取 Class 对象的三种方式 我">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java-基础-反射">
 <meta property="og:url" content="http://yoursite.com/2019/01/04/Java-基础-反射/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="反射 定义：反射机制能够动态的操纵 Java 代码的程序，能够分析类能力的程序。  通过编译之后的字节码文件获取类中对象，可以得到类中的所有属性，方法，并且可以动态的操作该类。反射的关键源于 Class 类发挥的作用，该类在 java.lang.Class包下。 Class 类java.lang.Class 类的实例对象，任何一个类都是 Classs 实例对象，获取 Class 对象的三种方式 我">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/01/04/Java-基础-反射/lum3n.jpg">
-<meta property="og:updated_time" content="2019-03-30T02:25:25.564Z">
+<meta property="og:updated_time" content="2019-05-25T04:53:57.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-反射">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/04/Java-基础-反射/lum3n.jpg">
+<meta name="twitter:description" content="反射 定义：反射机制能够动态的操纵 Java 代码的程序，能够分析类能力的程序。  通过编译之后的字节码文件获取类中对象，可以得到类中的所有属性，方法，并且可以动态的操作该类。反射的关键源于 Class 类发挥的作用，该类在 java.lang.Class包下。 Class 类java.lang.Class 类的实例对象，任何一个类都是 Classs 实例对象，获取 Class 对象的三种方式 我">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -198,15 +199,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2019/01/04/Java-基础-反射/lum3n.jpg" alt="picture"></p>
-<a id="more"></a>
-<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><ul>
+        <h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><ul>
 <li>定义：反射机制能够动态的操纵 Java 代码的程序，能够分析类能力的程序。</li>
 </ul>
 <p>通过编译之后的字节码文件获取类中对象，可以得到类中的所有属性，方法，并且可以动态的操作该类。反射的关键源于 Class 类发挥的作用，该类在 <code>java.lang.Class</code>包下。</p>
 <h2 id="Class-类"><a href="#Class-类" class="headerlink" title="Class 类"></a>Class 类</h2><p>java.lang.Class 类的实例对象，任何一个类都是 Classs 实例对象，获取 Class 对象的三种方式</p>
 <p>我们先定义一个 Student 类，在该类中定义变量和方法</p>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Student</span>&#123;</span><br><span class="line">   	<span class="keyword">private</span> String name;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       	System.<span class="keyword">out</span>.println(<span class="string">"show"</span>);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>然后编写一个测试类，分别测试三种获取 Class 对象的方式</p>
 <p>第一种方式 <code>Class c_0 = Student.class;</code>，我们知道当运行一段代码第一步是进行编译，Java 程序文件后缀在编译之前 <code>.java</code> 文件，编译之后为 <code>.class</code> 文件，只要编译通过就会生成，第一种方式直接调用 Student 类的字节码文件，获取所需要的对象</p>
 <p>第二种方式 <code>Class c_1 = student.getClass();</code>，当我已经实例化一个 Student 对象，学习 Object 类知道所有类默认继承 Object 类，在 Object 类下有一个方法可以获取类信息，直接调用即可。</p>

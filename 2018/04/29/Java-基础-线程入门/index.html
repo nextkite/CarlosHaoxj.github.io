@@ -10,17 +10,18 @@
 
   <title>Java-基础-线程入门 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Java">
+  <meta name="description" content="线程(Thread)线程区别于进程  进程：是一个程序的执行过程，是系统中程序的基本单位。运行一个程序即执行一个进程，一个程序对应一个进程，二者创建于销毁等同。  线程：与进程相似，线程比进程的执行单位更小，一个进程中可以创建多个线程，多个线程可以共享同一个内存空间和系统资源。   并发和并行 并行：多个 cpu 实例或者多台机器同时执行一段处理逻辑代码。多核 cpu，每个 cpu 有自己运算器，">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java-基础-线程入门">
 <meta property="og:url" content="http://yoursite.com/2018/04/29/Java-基础-线程入门/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="线程(Thread)线程区别于进程  进程：是一个程序的执行过程，是系统中程序的基本单位。运行一个程序即执行一个进程，一个程序对应一个进程，二者创建于销毁等同。  线程：与进程相似，线程比进程的执行单位更小，一个进程中可以创建多个线程，多个线程可以共享同一个内存空间和系统资源。   并发和并行 并行：多个 cpu 实例或者多台机器同时执行一段处理逻辑代码。多核 cpu，每个 cpu 有自己运算器，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2018/04/29/Java-基础-线程入门/charles.jpg">
-<meta property="og:updated_time" content="2019-03-17T10:54:48.669Z">
+<meta property="og:updated_time" content="2019-05-25T04:55:22.612Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-线程入门">
-<meta name="twitter:image" content="http://yoursite.com/2018/04/29/Java-基础-线程入门/charles.jpg">
+<meta name="twitter:description" content="线程(Thread)线程区别于进程  进程：是一个程序的执行过程，是系统中程序的基本单位。运行一个程序即执行一个进程，一个程序对应一个进程，二者创建于销毁等同。  线程：与进程相似，线程比进程的执行单位更小，一个进程中可以创建多个线程，多个线程可以共享同一个内存空间和系统资源。   并发和并行 并行：多个 cpu 实例或者多台机器同时执行一段处理逻辑代码。多核 cpu，每个 cpu 有自己运算器，">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -198,8 +199,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2018/04/29/Java-基础-线程入门/charles.jpg" alt="picture"><br><a id="more"></a></p>
-<h1 id="线程-Thread"><a href="#线程-Thread" class="headerlink" title="线程(Thread)"></a>线程(Thread)</h1><p>线程区别于进程</p>
+        <h1 id="线程-Thread"><a href="#线程-Thread" class="headerlink" title="线程(Thread)"></a>线程(Thread)</h1><p>线程区别于进程</p>
 <ul>
 <li><p>进程：是一个程序的执行过程，是系统中程序的基本单位。运行一个程序即执行一个进程，一个程序对应一个进程，二者创建于销毁等同。</p>
 </li>
@@ -215,9 +215,9 @@
 <li>可运行线程    标志是调用 <code>start()</code> 方法</li>
 <li>被阻塞线程</li>
 <li>等待线程</li>
-<li>被终止线程</li>
+<li>被终止线程<a id="more"></a>
+被阻塞和等待，当处于这三个状态时，程序不运行任何代码，直到线程调度器重新激活，</li>
 </ol>
-<p>被阻塞和等待，当处于这三个状态时，程序不运行任何代码，直到线程调度器重新激活，</p>
 <ul>
 <li>线程调度器：会决定哪个线程从等待或者被阻塞状态中挑选出来,何时把某个线程送回等待执行状态.它会决定某个线程运行多久。无法去控制调度，它是不确定。调度不能保证任何执行时间和顺序，不能期待它完全平均分配执行，可以用<code>sleep()</code>来保证时间，向该方法传入的时间单位为毫秒。</li>
 </ul>

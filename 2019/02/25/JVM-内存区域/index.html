@@ -10,18 +10,20 @@
 
   <title>JVM-内存区域 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Java">
+  <meta name="description" content="JVM-内存区域线程私有程序计数器当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined） Java 虚拟机栈每一个线程都有自己的虚拟机栈，方法调用到返回的过程对应虚拟机中入栈到出栈的过程。  基本数据类型：byte,char,int,long,short,double,b">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM-内存区域">
 <meta property="og:url" content="http://yoursite.com/2019/02/25/JVM-内存区域/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
+<meta property="og:description" content="JVM-内存区域线程私有程序计数器当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined） Java 虚拟机栈每一个线程都有自己的虚拟机栈，方法调用到返回的过程对应虚拟机中入栈到出栈的过程。  基本数据类型：byte,char,int,long,short,double,b">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/02/25/JVM-内存区域/michael.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/02/25/JVM-内存区域/内存区域.png">
-<meta property="og:updated_time" content="2019-03-30T11:11:00.098Z">
+<meta property="og:updated_time" content="2019-05-25T04:56:19.931Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM-内存区域">
-<meta name="twitter:image" content="http://yoursite.com/2019/02/25/JVM-内存区域/michael.jpg">
+<meta name="twitter:description" content="JVM-内存区域线程私有程序计数器当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined） Java 虚拟机栈每一个线程都有自己的虚拟机栈，方法调用到返回的过程对应虚拟机中入栈到出栈的过程。  基本数据类型：byte,char,int,long,short,double,b">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/25/JVM-内存区域/内存区域.png">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -199,8 +201,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/2019/02/25/JVM-内存区域/michael.jpg" alt="JVM"><br><a id="more"></a></p>
-<h1 id="JVM-内存区域"><a href="#JVM-内存区域" class="headerlink" title="JVM-内存区域"></a>JVM-内存区域</h1><h2 id="线程私有"><a href="#线程私有" class="headerlink" title="线程私有"></a>线程私有</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined）</p>
+        <h1 id="JVM-内存区域"><a href="#JVM-内存区域" class="headerlink" title="JVM-内存区域"></a>JVM-内存区域</h1><h2 id="线程私有"><a href="#线程私有" class="headerlink" title="线程私有"></a>线程私有</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined）</p>
 <h3 id="Java-虚拟机栈"><a href="#Java-虚拟机栈" class="headerlink" title="Java 虚拟机栈"></a>Java 虚拟机栈</h3><p>每一个线程都有自己的虚拟机栈，方法调用到返回的过程对应虚拟机中入栈到出栈的过程。</p>
 <ul>
 <li>基本数据类型：byte,char,int,long,short,double,boolen,long</li>
@@ -212,7 +213,7 @@
 <li>StackOverflowError: 线程请求栈的深度大于虚拟机容许深度</li>
 <li>OutOfMemoryError: 虚拟机动态扩展无法申请到足够内存空间</li>
 </ul>
-<p>当单线程情况下只会出现 StackOverflowError 异常，</p>
+<p>当单线程情况下只会出现 StackOverflowError 异常，<br><a id="more"></a></p>
 <h3 id="本地栈"><a href="#本地栈" class="headerlink" title="本地栈"></a>本地栈</h3><p>区别于 Java 虚拟机栈，虚拟机执行 Java 方法服务，本地方法栈为虚拟机使用到的 Native 方法服务</p>
 <h2 id="线程共享"><a href="#线程共享" class="headerlink" title="线程共享"></a>线程共享</h2><h3 id="Java-堆"><a href="#Java-堆" class="headerlink" title="Java 堆"></a>Java 堆</h3><p>堆的存在是为实现存放对象实例，不是所有对象实例都存放在堆中（例如：Class 对象存在方法区中），在虚拟机启动时创建。Java 堆大小使用 -Xms(初始化大小) 和 -Xmx(最大扩展) 控制，不可无限制的创建对象，当对象数量达到最大堆容量限制就会产生内存溢出异常</p>
 <h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>该区域存放已被虚拟机加载的类信息，常量，静态变量；运行时常量池属于方法区中一部分，Class 文件常量池在累加载后进入该区域，常量池用于存放编译器生成的各种字面量和符号引用；</p>
