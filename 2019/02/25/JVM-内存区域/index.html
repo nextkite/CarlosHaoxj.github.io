@@ -10,19 +10,19 @@
 
   <title>JVM-内存区域 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JVM-内存区域线程私有程序计数器当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined） Java 虚拟机栈每一个线程都有自己的虚拟机栈，方法调用到返回的过程对应虚拟机中入栈到出栈的过程。  基本数据类型：byte,char,int,long,short,double,b">
+  <meta name="description" content="JVM-内存区域线程私有程序计数器当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined） Java 虚拟机栈每一个线程都有自己的虚拟机栈，方法调用到返回的过程对应虚拟机中入栈到出栈的过程。  基本数据类型：byte,char,int,float,short,double,">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM-内存区域">
 <meta property="og:url" content="http://yoursite.com/2019/02/25/JVM-内存区域/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="JVM-内存区域线程私有程序计数器当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined） Java 虚拟机栈每一个线程都有自己的虚拟机栈，方法调用到返回的过程对应虚拟机中入栈到出栈的过程。  基本数据类型：byte,char,int,long,short,double,b">
+<meta property="og:description" content="JVM-内存区域线程私有程序计数器当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined） Java 虚拟机栈每一个线程都有自己的虚拟机栈，方法调用到返回的过程对应虚拟机中入栈到出栈的过程。  基本数据类型：byte,char,int,float,short,double,">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/02/25/JVM-内存区域/内存区域.png">
-<meta property="og:updated_time" content="2019-05-25T04:56:19.931Z">
+<meta property="og:updated_time" content="2019-06-20T09:35:20.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM-内存区域">
-<meta name="twitter:description" content="JVM-内存区域线程私有程序计数器当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined） Java 虚拟机栈每一个线程都有自己的虚拟机栈，方法调用到返回的过程对应虚拟机中入栈到出栈的过程。  基本数据类型：byte,char,int,long,short,double,b">
+<meta name="twitter:description" content="JVM-内存区域线程私有程序计数器当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined） Java 虚拟机栈每一个线程都有自己的虚拟机栈，方法调用到返回的过程对应虚拟机中入栈到出栈的过程。  基本数据类型：byte,char,int,float,short,double,">
 <meta name="twitter:image" content="http://yoursite.com/2019/02/25/JVM-内存区域/内存区域.png">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
@@ -66,7 +66,7 @@
 			
 				<li><a href="/">全部文章</a></li>
 	        
-				<li><a href="/categories/">成长之路</a></li>
+				<li><a href="/archives/">历史归档</a></li>
 	        
 				<li><a href="/categories/长路漫漫/">长路漫漫</a></li>
 	        
@@ -166,7 +166,7 @@
 				
 					<li style="width: 25%"><a href="/">全部文章</a></li>
 		        
-					<li style="width: 25%"><a href="/categories/">成长之路</a></li>
+					<li style="width: 25%"><a href="/archives/">历史归档</a></li>
 		        
 					<li style="width: 25%"><a href="/categories/长路漫漫/">长路漫漫</a></li>
 		        
@@ -208,7 +208,7 @@
         <h1 id="JVM-内存区域"><a href="#JVM-内存区域" class="headerlink" title="JVM-内存区域"></a>JVM-内存区域</h1><h2 id="线程私有"><a href="#线程私有" class="headerlink" title="线程私有"></a>线程私有</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined）</p>
 <h3 id="Java-虚拟机栈"><a href="#Java-虚拟机栈" class="headerlink" title="Java 虚拟机栈"></a>Java 虚拟机栈</h3><p>每一个线程都有自己的虚拟机栈，方法调用到返回的过程对应虚拟机中入栈到出栈的过程。</p>
 <ul>
-<li>基本数据类型：byte,char,int,long,short,double,boolen,long</li>
+<li>基本数据类型：byte,char,int,float,short,double,boolen,long</li>
 <li>对象引用：非对象本身，指向对象地址的引用指针或者是指向一个代表对象的句柄或与此对象相关的位置</li>
 <li>returnAddress类型：指向一条字节码指令的地址</li>
 </ul>
@@ -533,6 +533,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
@@ -541,19 +545,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">生活</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring Boot</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring Boot</a>
               </li>
             
             <div class="clearfix"></div>
