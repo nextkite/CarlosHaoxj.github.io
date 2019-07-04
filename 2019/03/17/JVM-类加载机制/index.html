@@ -19,7 +19,7 @@
 <meta property="og:description" content="类加载机制 概述：虚拟机把描述类的数据从 Class 文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的 Java 类型，这就是虚拟机类加载机制。  类加载的时机类从加载到虚拟机内存中开始，到卸载出内存为止，整个生命周期包括：加载(Loading)、验证(Verification)、准备(Preparation)、解析(Resolution)、初始化(Initial">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/03/17/JVM-类加载机制/类加载机制.png">
-<meta property="og:updated_time" content="2019-06-25T08:44:17.355Z">
+<meta property="og:updated_time" content="2019-07-03T13:46:54.385Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM-类加载机制">
 <meta name="twitter:description" content="类加载机制 概述：虚拟机把描述类的数据从 Class 文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的 Java 类型，这就是虚拟机类加载机制。  类加载的时机类从加载到虚拟机内存中开始，到卸载出内存为止，整个生命周期包括：加载(Loading)、验证(Verification)、准备(Preparation)、解析(Resolution)、初始化(Initial">
@@ -239,7 +239,7 @@
 </ul>
 <p>如果虚拟机不检查输入的字节流，对其完全信任，很可能会因为载入了有害的字节流而导致系统奔溃，所以验证时虚拟机对自身保护的一项重要工作</p>
 <h4 id="文件格式验证"><a href="#文件格式验证" class="headerlink" title="文件格式验证"></a>文件格式验证</h4><p>验证字节流是否符合 Class 文件格式的规范，并且能够被当前版本的虚拟机进行处理。该阶段主要目的是保证输入的字节流能够被正确的解析并存储到方法区之内，格式上符合描述一个 Java 类型信息的要求。该阶段验证是基于二进制字节流进行，只有通过这个阶段的验证，字节流才会进入内存方法区内存储，所以后面三个验证都是基于方法区的存储结构进行的，不会直接操作字节流。</p>
-<h4 id="愿数据验证"><a href="#愿数据验证" class="headerlink" title="愿数据验证"></a>愿数据验证</h4><p>对字节码描述信息进行语义分析，以保证所描述的信息符合 Java 语言规范的要求。</p>
+<h4 id="元数据验证"><a href="#元数据验证" class="headerlink" title="元数据验证"></a>元数据验证</h4><p>对字节码描述信息进行语义分析，以保证所描述的信息符合 Java 语言规范的要求。</p>
 <h4 id="字节码验证"><a href="#字节码验证" class="headerlink" title="字节码验证"></a>字节码验证</h4><p>通过对数据流和控制流分析，确定程序语义是合法的、符合逻辑的。在第二个阶段对元数据信息中的数据类型做完校验后，这个阶段将对类的方法体进行校验分析，保证被校验类的方法在运行时不会做出危害虚拟机安全的事件。</p>
 <h4 id="符号引用验证"><a href="#符号引用验证" class="headerlink" title="符号引用验证"></a>符号引用验证</h4><p>最后一个阶段的校验发生在虚拟机将符号引用转化为直接引用的时候，这个转化动作将在解析阶段中发生。符号引用验证的目的是确保解析动作能正常执行，如果无法通过符号引用验证，那么将会抛出一个 <code>java.lang.IncompatibleClassChangeError</code> 异常的子类，如: <code>java.lang.IllegalAccessErrot</code>, <code>java.lang.NoSuchFieldError</code>, <code>java.lang.NoSuchMethodError</code> 等</p>
 <p>对虚拟机类加载机制来说，验证阶段是一个非常重要的，但不是一定必要的（对程序运行期没有影响）的阶段，如果所运行的全部代码都已经被反复使用和验证过，那么实施阶段就可考虑使用 <code>-Xverify:none</code> 参数来关闭大部分的验证措施，以缩短虚拟机类加载的时间</p>
@@ -316,7 +316,7 @@
 <li>类方法或接口方法符号引用的常量类型定义是分开的，如果在类方法表中发现 class_index 中索引 C 是一个接口，直接抛出 <code>java.lang.IncompatibleClassChangeError</code> 异常</li>
 <li>如果通过第一步，在类 C 中查找是否有简单名称和描述符都与目标相匹配的方法，如果有直接返回这个方法的直接引用，查找结束</li>
 <li>否则，在类 C 的父类中递归查找是否有简单名称和描述符都与目标相匹配的方法，如果有直接返回这个方法的直接引用，查找结束</li>
-<li>否在，在类 C 实现的接口列表以及他们的父接口之中递归查找是否有简单名称和描述符与目标相匹配的方法，如果存在相匹配的方法，说明类 C 是一个抽象方法，查找结束，抛出 <code>java.lang.AbstractMethodError</code> 异常</li>
+<li>否则，在类 C 实现的接口列表以及他们的父接口之中递归查找是否有简单名称和描述符与目标相匹配的方法，如果存在相匹配的方法，说明类 C 是一个抽象方法，查找结束，抛出 <code>java.lang.AbstractMethodError</code> 异常</li>
 <li>否则，查找失败，抛出 <code>java.lang.NoSuchMethodError</code> 异常</li>
 </ol>
 <p>如果查找过程中成功返回直接引用，将会对这个方法进行权限验证，如果发现不具备对此方法的权限，抛出 <code>java.lang.IllegalAccessError</code> 异常</p>
@@ -331,12 +331,12 @@
 <h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>该阶段是类加载过程的最后一步，除了在类加载阶段可以由用户自定义加载器之外，其余所有动作都是由虚拟机主导和控制，初始化阶段才是真正执行类中定义的 Java 程序代码 (字节码)</p>
 <p>准备阶段系统为变量已经赋一个初始值，并不是开发人员所要求的值，自定义变量的值将会在初始阶段进行赋值。该阶段是执行类构造器 <code>&lt;clinit&gt;()</code> 方法的过程</p>
 <ul>
-<li><clinit>() 方法是由编译器自动收集类中所有类变量的赋值动作和静态语句块中语句合并产生的，编译器收集的顺序是由语句在源文件中出现的顺序决定，静态语句块中只能访问到定义在静态语句块之前的变量，定义在它之后的变量，在前面的静态语句块可以赋值，但不能访问</clinit></li>
-<li><clinit>() 方法与类的构造函数不同，它不需要显示地调用父类构造器，虚拟机会保证在子类的 <clinit>() 方法执行之前，父类的 <clinit>() 已经执行完毕。在虚拟机中第一个被执行的 <clinit>() 方法的类肯定是 <code>java.lang.Object</code></clinit></clinit></clinit></clinit></li>
-<li>因为父类的 <clinit>() 先执行，所以父类中定义的静态语句块要有优先于子类的静态语句块变量赋值操作</clinit></li>
-<li><clinit>() 该方法不是必须执行，如果一个类中没有静态语句块和变量赋值操作，那么编译器不会为这个类生成 <clinit>() 方法</clinit></clinit></li>
-<li>接口中不能使用静态语句块，但是在接口中能有赋值操作，所以类和接口都会生成 <clinit>() 方法。接口与类不同的是，执行接口的 <clinit>() 方法不需要先执行其父接口的 <clinit>() ，只有当父接口中定义的变量使用时才会被初始化，接口的实现类初始化也一样不会执行接口的 <clinit>() 方法</clinit></clinit></clinit></clinit></li>
-<li>虚拟机会保证一个类的 <clinit>() 方法在多线程环境中被正确加锁、同步，如果多线程同时去初始化一个类，那么只会有一个线程去执行这个类的 <clinit>() 方法，其他的线程需要等待，直到活动 线程执行 <clinit>() 方法完毕。如果在一个类的 <clinit>() 方法中有耗时很长的操作，就可能造成多个进程阻塞</clinit></clinit></clinit></clinit></li>
+<li><code>&lt;clinit&gt;()</code> 方法是由编译器自动收集类中所有类变量的赋值动作和静态语句块中语句合并产生的，编译器收集的顺序是由语句在源文件中出现的顺序决定，静态语句块中只能访问到定义在静态语句块之前的变量，定义在它之后的变量，在前面的静态语句块可以赋值，但不能访问</li>
+<li><code>&lt;clinit&gt;()</code> 方法与类的构造函数不同，它不需要显示地调用父类构造器，虚拟机会保证在子类的 <code>&lt;clinit&gt;()</code> 方法执行之前，父类的 <code>&lt;clinit&gt;()</code> 已经执行完毕。在虚拟机中第一个被执行的 <code>&lt;clinit&gt;()</code> 方法的类肯定是 <code>java.lang.Object</code></li>
+<li>因为父类的 <code>&lt;clinit&gt;()</code> 先执行，所以父类中定义的静态语句块要有优先于子类的静态语句块变量赋值操作</li>
+<li><code>&lt;clinit&gt;()</code> 该方法不是必须执行，如果一个类中没有静态语句块和变量赋值操作，那么编译器不会为这个类生成 <code>&lt;clinit&gt;()</code> 方法</li>
+<li>接口中不能使用静态语句块，但是在接口中能有赋值操作，所以类和接口都会生成 <code>&lt;clinit&gt;()</code> 方法。接口与类不同的是，执行接口的 <code>&lt;clinit&gt;()</code> 方法不需要先执行其父接口的 <code>&lt;clinit&gt;()</code> ，只有当父接口中定义的变量使用时才会被初始化，接口的实现类初始化也一样不会执行接口的 <code>&lt;clinit&gt;()</code> 方法</li>
+<li>虚拟机会保证一个类的 <code>&lt;clinit&gt;()</code> 方法在多线程环境中被正确加锁、同步，如果多线程同时去初始化一个类，那么只会有一个线程去执行这个类的 <code>&lt;clinit&gt;()</code> 方法，其他的线程需要等待，直到活动 线程执行 <code>&lt;clinit&gt;()</code> 方法完毕。如果在一个类的 <code>&lt;clinit&gt;()</code> 方法中有耗时很长的操作，就可能造成多个进程阻塞</li>
 </ul>
 <p><img src="/2019/03/17/JVM-类加载机制/类加载机制.png" alt="类加载机制"></p>
 <blockquote>
@@ -464,11 +464,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/04/14/阿里云基本配置/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/03/20/JVM-类加载器/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          阿里云基本配置
+          JVM-类加载器
         
       </div>
     </a>
