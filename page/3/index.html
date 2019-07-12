@@ -183,6 +183,188 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-基础-关键字volatile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/09/Java-基础-关键字volatile/">Java-基础-关键字volatile</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/09/Java-基础-关键字volatile/" class="archive-article-date">
+  	<time datetime="2018-05-09T04:51:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Java-内存模型"><a href="#Java-内存模型" class="headerlink" title="Java 内存模型"></a>Java 内存模型</h1><p>Java 内存模型定义：屏蔽掉各种硬件和操作系统的内存访问差异，实现让 Java 程序在各种平台下能达到一致的内存访问效果。避免更换平台后在并发问题上出现访问错误。</p>
+<p>在 Java 内存模型中规定所有变量存储在主内存中，每一个线程都有自己工作内存，每个线程都有对变量的读取操作都是在自己的工作内存中操作，线程之间不会有通讯，比如线程 A 对一个变量进行修改，此时的线程 B 并不知道线程 A 在对变量进行修改。线程对变量处理完成后到会写到主内存中，主内存内实现线程之间的变量值传递。</p>
+<p>下图为线程、工作内存、主内存之间的关系<br></p>
+        
+      
+
+
+	
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/09/Java-基础-关键字volatile/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-基础-线程进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/30/Java-基础-线程进阶/">Java-基础-线程进阶</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/30/Java-基础-线程进阶/" class="archive-article-date">
+  	<time datetime="2018-04-30T00:50:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><p>之前的学习我们知道，线程是比进程更轻量级的调度执行单位，线程把进程的资源分配和执行调度分开，线程可共享进程资源(内存地址，问价 I/O 等)，又可独立调度( CPU 是调度的基本单位)</p>
+<h2 id="线程调度"><a href="#线程调度" class="headerlink" title="线程调度"></a>线程调度</h2><p>线程调度是指系统为线程分配的处理器 分为两种</p>
+<ol>
+<li>协同式线程调度</li>
+<li>抢占式线程调度</li>
+</ol>
+<p>Java 语言中使用的是抢占式线程调度，线程的调度不由本身决定，在整个的运行期间线程是可控的，不会发生某个线程的异常从而导致整个进程的阻塞。使用优先级来判断执行顺序，之前介绍过在 Java 中线程优先级分为 10 个等级，优先级越高，越容易被执行。另一种协同式线程调度同样属于多线程调度，与抢占式线程调度的工作方式不同，使用协同式线程调度的系统，线程的执行时间由线程本身来决定，只有当一个线程执行执行完毕，然后通知系统切换另一个线程，与串行概念相同。使用该方式避免了线程同步的概念，只有一个线程执行完毕后，才会执行下一个。但是如果某个线程出现编写问题，一直不告诉系统需要切换下一个线程，那么程序就会一直阻塞在哪里，会导致系统的崩溃。<br></p>
+        
+      
+
+
+	
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/30/Java-基础-线程进阶/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java-基础-线程入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -505,6 +687,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">

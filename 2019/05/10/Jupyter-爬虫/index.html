@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
 <meta property="og:description" content="安装 miniconda1234mkdir minicodndacd minicodndawget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.shbash Anaconda3-4.4.0-Linux-x86_64.sh 升级 conda upgrade conda">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-20T01:46:08.907Z">
+<meta property="og:updated_time" content="2019-07-12T13:40:50.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jupyter_爬虫">
 <meta name="twitter:description" content="安装 miniconda1234mkdir minicodndacd minicodndawget https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.shbash Anaconda3-4.4.0-Linux-x86_64.sh 升级 conda upgrade conda">
@@ -220,7 +220,7 @@
 <h3 id="打开ipython，创建一个登录jupyter的密码"><a href="#打开ipython，创建一个登录jupyter的密码" class="headerlink" title="打开ipython，创建一个登录jupyter的密码"></a>打开ipython，创建一个登录jupyter的密码</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># ipython</span></span><br><span class="line">In [<span class="number">1</span>]: from notebook.auth import passwd</span><br><span class="line">In [<span class="number">2</span>]: passwd()</span><br><span class="line">Enter password: </span><br><span class="line">Verify password: </span><br><span class="line">Out[<span class="number">2</span>]: <span class="string">'sha1:5311cd8b9da9:70dd3321fccb5b5d77e66080a5d3d943ab9752b4'</span></span><br><span class="line">In [<span class="number">3</span>]:<span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
 <p>其中记录下Out[2]里的：sha1:5311cd8b9da9:70dd3321fccb5b5d77e66080a5d3d943ab9752b4</p>
 <h3 id="修改jupyper配置文件"><a href="#修改jupyper配置文件" class="headerlink" title="修改jupyper配置文件"></a>修改jupyper配置文件</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vi /root/.jupyter/jupyter_notebook_config<span class="selector-class">.py</span> 或者 </span><br><span class="line">vi ~/.jupyter/jupyter_notebook_config<span class="selector-class">.py</span> </span><br><span class="line">在文件中添加以下的参数：</span><br><span class="line"></span><br><span class="line">   c<span class="selector-class">.NotebookApp</span><span class="selector-class">.ip</span>=<span class="string">'*'</span></span><br><span class="line">   c<span class="selector-class">.NotebookApp</span><span class="selector-class">.password</span> = u<span class="string">'sha1:5311cd8b9da9:70dd3321fccb5b5d77e66080a5d3d943ab9752b4'</span></span><br><span class="line">   c<span class="selector-class">.NotebookApp</span><span class="selector-class">.open_browser</span> = False</span><br><span class="line">   c<span class="selector-class">.NotebookApp</span><span class="selector-class">.port</span> =<span class="number">8888</span>    #随便指定一个端口，使用默认<span class="number">8888</span>也可以</span><br></pre></td></tr></table></figure>
-<p>进行后台运行，&amp; 该终端不影响该端口任务<br><code>nohub jupyter notebook --ip=0.0.0.0 --no-browser --allow-root &amp;</code></p>
+<p>进行后台运行，&amp; 该终端不影响该端口任务<br><code>nohup jupyter notebook --ip=0.0.0.0 --no-browser --allow-root &amp; 或者 &gt;/dev/null 2&gt;&amp;1</code></p>
 <p>关掉 jupyter 内核 <code>pkill jupyter</code></p>
 <p>pip3 install ipython</p>
 <p>brew install jupyter</p>
@@ -517,6 +517,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">

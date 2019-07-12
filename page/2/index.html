@@ -183,6 +183,203 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-基础-序列化与反序列化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/27/Java-基础-序列化与反序列化/">Java-基础-序列化与反序列化</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/27/Java-基础-序列化与反序列化/" class="archive-article-date">
+  	<time datetime="2019-01-27T05:06:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h1><ul>
+<li>序列化：        把对象转为字节</li>
+<li>反序列化：    把字节转为对象</li>
+</ul>
+<p>序列化用途：</p>
+<ol>
+<li>把对象的字节保存到硬盘上，在网络上传送对象的字节序列</li>
+<li>通过序列化进行进程间传递对象</li>
+</ol>
+<p>序列化一个对象：</p>
+<ul>
+<li>ObjectOutputStream    输出流</li>
+<li>writerObject(Object obj) 将对象 obj 进行序列化</li>
+</ul>
+<p>反序列化一个对象：</p>
+<ul>
+<li>ObjectInputStream    输入流</li>
+<li>readObject() 从输入流中读取字节序列</li></ul>
+        
+      
+
+
+	
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/27/Java-基础-序列化与反序列化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java-基础-反射" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/04/Java-基础-反射/">Java-基础-反射</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/04/Java-基础-反射/" class="archive-article-date">
+  	<time datetime="2019-01-04T06:41:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><ul>
+<li>定义：反射机制能够动态的操纵 Java 代码的程序，能够分析类能力的程序。</li>
+</ul>
+<p>通过编译之后的字节码文件获取类中对象，可以得到类中的所有属性，方法，并且可以动态的操作该类。反射的关键源于 Class 类发挥的作用，该类在 <code>java.lang.Class</code>包下。</p>
+<h2 id="Class-类"><a href="#Class-类" class="headerlink" title="Class 类"></a>Class 类</h2><p>java.lang.Class 类的实例对象，任何一个类都是 Classs 实例对象，获取 Class 对象的三种方式</p>
+<p>我们先定义一个 Student 类，在该类中定义变量和方法</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Student</span>&#123;</span><br><span class="line">   	<span class="keyword">private</span> String name;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       	System.<span class="keyword">out</span>.println(<span class="string">"show"</span>);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      
+
+
+	
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/04/Java-基础-反射/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-设计模式-单例模式及案例" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -922,188 +1119,6 @@
 
 
   
-    <article id="post-Java-基础-关键字volatile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/09/Java-基础-关键字volatile/">Java-基础-关键字volatile</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/09/Java-基础-关键字volatile/" class="archive-article-date">
-  	<time datetime="2018-05-09T04:51:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Java-内存模型"><a href="#Java-内存模型" class="headerlink" title="Java 内存模型"></a>Java 内存模型</h1><p>Java 内存模型定义：屏蔽掉各种硬件和操作系统的内存访问差异，实现让 Java 程序在各种平台下能达到一致的内存访问效果。避免更换平台后在并发问题上出现访问错误。</p>
-<p>在 Java 内存模型中规定所有变量存储在主内存中，每一个线程都有自己工作内存，每个线程都有对变量的读取操作都是在自己的工作内存中操作，线程之间不会有通讯，比如线程 A 对一个变量进行修改，此时的线程 B 并不知道线程 A 在对变量进行修改。线程对变量处理完成后到会写到主内存中，主内存内实现线程之间的变量值传递。</p>
-<p>下图为线程、工作内存、主内存之间的关系<br></p>
-        
-      
-
-
-	
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/09/Java-基础-关键字volatile/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java-基础-线程进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/30/Java-基础-线程进阶/">Java-基础-线程进阶</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/30/Java-基础-线程进阶/" class="archive-article-date">
-  	<time datetime="2018-04-30T00:50:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><p>之前的学习我们知道，线程是比进程更轻量级的调度执行单位，线程把进程的资源分配和执行调度分开，线程可共享进程资源(内存地址，问价 I/O 等)，又可独立调度( CPU 是调度的基本单位)</p>
-<h2 id="线程调度"><a href="#线程调度" class="headerlink" title="线程调度"></a>线程调度</h2><p>线程调度是指系统为线程分配的处理器 分为两种</p>
-<ol>
-<li>协同式线程调度</li>
-<li>抢占式线程调度</li>
-</ol>
-<p>Java 语言中使用的是抢占式线程调度，线程的调度不由本身决定，在整个的运行期间线程是可控的，不会发生某个线程的异常从而导致整个进程的阻塞。使用优先级来判断执行顺序，之前介绍过在 Java 中线程优先级分为 10 个等级，优先级越高，越容易被执行。另一种协同式线程调度同样属于多线程调度，与抢占式线程调度的工作方式不同，使用协同式线程调度的系统，线程的执行时间由线程本身来决定，只有当一个线程执行执行完毕，然后通知系统切换另一个线程，与串行概念相同。使用该方式避免了线程同步的概念，只有一个线程执行完毕后，才会执行下一个。但是如果某个线程出现编写问题，一直不告诉系统需要切换下一个线程，那么程序就会一直阻塞在哪里，会导致系统的崩溃。<br></p>
-        
-      
-
-
-	
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/30/Java-基础-线程进阶/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1235,6 +1250,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
