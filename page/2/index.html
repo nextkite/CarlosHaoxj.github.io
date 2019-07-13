@@ -183,6 +183,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java-基础-关键字synchronized" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/17/Java-基础-关键字synchronized/">Java-基础-关键字synchronized</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/17/Java-基础-关键字synchronized/" class="archive-article-date">
+  	<time datetime="2019-02-17T13:38:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h1><p>为什么出现线程不安全？</p>
+<blockquote>
+<p>在多线程状态下，对共享数据（临界资源）的读写操作不同步导致线程不安全</p>
+</blockquote>
+<p>书中定义</p>
+<blockquote>
+<p>当多个线程访问一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或者在调用方法进行任何其他的协调操作，调用这个对象的行为都可以获得正确的结果，那这个对象就是线程安全的。<br>《Java Concurrency In Practice》Brian Goetz</p>
+</blockquote>
+<p>代码本身已经封装好必要的解决线程安全问题保障手段，使用者无需关注线程安全问题，直接使用即可。<br></p>
+        
+      
+
+
+	
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/17/Java-基础-关键字synchronized/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java-基础-序列化与反序列化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -313,7 +408,7 @@
 <p>通过编译之后的字节码文件获取类中对象，可以得到类中的所有属性，方法，并且可以动态的操作该类。反射的关键源于 Class 类发挥的作用，该类在 <code>java.lang.Class</code>包下。</p>
 <h2 id="Class-类"><a href="#Class-类" class="headerlink" title="Class 类"></a>Class 类</h2><p>java.lang.Class 类的实例对象，任何一个类都是 Classs 实例对象，获取 Class 对象的三种方式</p>
 <p>我们先定义一个 Student 类，在该类中定义变量和方法</p>
-<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Student</span>&#123;</span><br><span class="line">   	<span class="keyword">private</span> String name;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       	System.<span class="keyword">out</span>.println(<span class="string">"show"</span>);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</span><br><span class="line">   	<span class="keyword">private</span> String name;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">       	System.out.println(<span class="string">"show"</span>);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
       
 
@@ -995,101 +1090,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/10/20/Spring-IoC/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Spring-MVC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/30/Spring-MVC/">Spring-MVC</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/30/Spring-MVC/" class="archive-article-date">
-  	<time datetime="2018-07-30T01:59:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Spring-MVC-认识"><a href="#Spring-MVC-认识" class="headerlink" title="Spring-MVC 认识"></a>Spring-MVC 认识</h1><p>要学习使用 Sring-MVC 需要了解，掌握一副图，展示了它的工作原理。需要理解并记牢每一步的所要完成的任务。</p>
-<p><img src="/2018/07/30/Spring-MVC/spring-MVC-01.jpg" alt="spring-MVC-01"></p>
-<ul>
-<li>用户发送一个请求，请求先到达 DispatcherServlet ，它需要知道，应该将请求交给哪一个控制器去处理请求</li>
-<li>DispatcherServlet 会去 Hander Mapping （处理器映射）查询下一站应该去何处。Hander Mapping 会将 DispatcherServlet 携带的 URL 进行判断，将结果告诉 DispatcherServlet ，然后将请求送达对应的控制器</li>
-<li>控制器进行数据逻辑处理，处理后会产生用户所需要的信息（Model），还需要一个展示模型的页面（JSP）,控制器将处理完的结果进行整理（ModelAndView）,返回给 DispatcherServlet</li>
-<li>这时候的虽然得到了 ModelAndView ，但是这里的 View 仅仅是一个逻辑名称，所以接下来需要将信息交给 ViewResolver（视图解析器）进行处理，返回一个相应的页面。</li>
-<li>最后将解析完成的 ModelAndView 返回给用户。</li>
-</ul>
-        
-      
-
-
-	
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spring-MVC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/30/Spring-MVC/">展开全文 >></a>
         </p>
       
 

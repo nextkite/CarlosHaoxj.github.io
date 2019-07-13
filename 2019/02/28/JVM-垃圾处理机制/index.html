@@ -19,7 +19,7 @@
 <meta property="og:description" content="垃圾处理机制辨别对象状态Java 堆中存放着大多是对象（Class 对象存放在方法区中），对象两种状态：存活或者死亡，对于已经死亡的对象，就需要 Java 虚拟机通过垃圾处理机制移除，一直存放无用内存会占用没有必要的内存空间，判断对象状态的方式有：引用计数算法和可达性算法。 判定一个对象是存活还是死亡需要通过两次标记才可实现，通过可达性算法，发现没有与 GC Roots 相连接的引用链，将会进行第">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/02/28/JVM-垃圾处理机制/垃圾处理机制.png">
-<meta property="og:updated_time" content="2019-05-25T04:56:10.776Z">
+<meta property="og:updated_time" content="2019-07-13T00:49:29.162Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM-垃圾处理机制">
 <meta name="twitter:description" content="垃圾处理机制辨别对象状态Java 堆中存放着大多是对象（Class 对象存放在方法区中），对象两种状态：存活或者死亡，对于已经死亡的对象，就需要 Java 虚拟机通过垃圾处理机制移除，一直存放无用内存会占用没有必要的内存空间，判断对象状态的方式有：引用计数算法和可达性算法。 判定一个对象是存活还是死亡需要通过两次标记才可实现，通过可达性算法，发现没有与 GC Roots 相连接的引用链，将会进行第">
@@ -208,7 +208,7 @@
         <h1 id="垃圾处理机制"><a href="#垃圾处理机制" class="headerlink" title="垃圾处理机制"></a>垃圾处理机制</h1><h2 id="辨别对象状态"><a href="#辨别对象状态" class="headerlink" title="辨别对象状态"></a>辨别对象状态</h2><p>Java 堆中存放着大多是对象（Class 对象存放在方法区中），对象两种状态：存活或者死亡，对于已经死亡的对象，就需要 Java 虚拟机通过垃圾处理机制移除，一直存放无用内存会占用没有必要的内存空间，判断对象状态的方式有：引用计数算法和可达性算法。</p>
 <p>判定一个对象是存活还是死亡需要通过两次标记才可实现，通过可达性算法，发现没有与 GC Roots 相连接的引用链，将会进行第一次标记；第二次标记需要判断是否有必要执行 <code>finalize()</code> 方法，有必要执行，在执行过程中重新赋值回到 GC Roots 引用链中，可以实现复活；当没有必要执行，可能是没有覆盖 <code>finalize()</code> 或者 <code>finalize()</code> 已经被其他线程调用，就会进行垃圾回收。总结是：第二次标记可执行 <code>finalize()</code> 能有机会实现自救，不可执行，进行垃圾回收<br><strong>任何一个对象的 <code>finalize()</code> 方法只会被调用一次，也就是说只有一次自救机会</strong></p>
 <h3 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h3><p>为对象添加一个引用计数起，当有一个对象引用时，计数器就加 1，引用失效，计数器就减 1，当引用计数器为 0 时，该对象是不可能再被利用就可移除内存。引用计数器的缺点是：无法解决循环引用问题</p>
-<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Test test</span>_1 = new Test();</span><br><span class="line"><span class="keyword">Test test</span>_2 = new Test();</span><br><span class="line">test_1.instance = test_2;</span><br><span class="line">test_2.instance = test_1;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Test test_1 = <span class="keyword">new</span> Test();</span><br><span class="line">Test test_2 = <span class="keyword">new</span> Test();</span><br><span class="line">test_1.instance = test_2;</span><br><span class="line">test_2.instance = test_1;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h4 id="JDK-1-2-之后四种引用"><a href="#JDK-1-2-之后四种引用" class="headerlink" title="JDK 1.2 之后四种引用"></a>JDK 1.2 之后四种引用</h4><ol>
 <li>强引用(Strong Reference)：<code>Object object = new Object()</code> 属于强引用，只要是强引用存在，垃圾回收器永远不会回收被引用对象</li>

@@ -19,7 +19,7 @@
 <meta property="og:description" content="异常处理每个程序在运行时，都会出现不被期望的事，它的出现组织了程序正常执行，这种情况被称为异常。在 Java 语言中提供了解决方法：异常处理机制。 异常处理机制Java 中异常可以是函数运行时引发的，也可是通过 throw 语句抛出。Throwable 类是异常处理的顶级父类。一个对象只有一个 Throable 类，或者说一个对象只有是 Throwable 类的直接或间接实例，他才是一个异常对象，">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2018/11/22/Java-基础-异常处理机制/Throwable.png">
-<meta property="og:updated_time" content="2019-05-25T04:55:47.590Z">
+<meta property="og:updated_time" content="2019-07-13T00:49:13.727Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-异常处理机制">
 <meta name="twitter:description" content="异常处理每个程序在运行时，都会出现不被期望的事，它的出现组织了程序正常执行，这种情况被称为异常。在 Java 语言中提供了解决方法：异常处理机制。 异常处理机制Java 中异常可以是函数运行时引发的，也可是通过 throw 语句抛出。Throwable 类是异常处理的顶级父类。一个对象只有一个 Throable 类，或者说一个对象只有是 Throwable 类的直接或间接实例，他才是一个异常对象，">
@@ -254,11 +254,8 @@
 </table>
 <h3 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h3><p>定义：一个方法不处理该异常，向上传递。谁调用该方法，谁来处理。<br><br>关键字 throw 和 throws 区别：<br><br>throw: 用于方法体内。throw 后接的是异常对象，或者异常对象的引用。<br><br>throws: 用于方法名后，多个异常使用逗号分隔，检查异常处理时使用该关键字。异常不一定发生。注意：如果在 main 方法使用该关键字，会导致程序终断。</p>
 <h3 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h3><p>使用 try…catch 来捕获异常，try 后可以有多个 catch 可以针对不同的异常进行处理。需要注意的是捕获异常的大小区分，当进行捕获异常时，先要捕获小的异常，再捕获大的异常。</p>
-<h3 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h3><p>已经被封装好的异常处理是通常在写程序中较多出现的错误，而在写程序过程中，会出现某个程序中特有的问题，我们想要进行异常处理，但是这些异常却没有被 Java 封装成对象。所以这时候我们就需要自己来完成所要解决的异常处理。创建自定义异常必须要继承 Throwable 或者它的子类 Excepeiton。</p>
-<pre><code>class 自定义异常 extends 异常类型（Exception）{
-    // 在这里重写有参和无参构造方法
-}
-</code></pre>
+<h3 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h3><p>已经被封装好的异常处理是通常在写程序中较多出现的错误，而在写程序过程中，会出现某个程序中特有的问题，我们想要进行异常处理，但是这些异常却没有被 Java 封装成对象。所以这时候我们就需要自己来完成所要解决的异常处理。创建自定义异常必须要继承 Throwable 或者它的子类 Excepeiton。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 自定义异常 <span class="keyword">extends</span> 异常类型（<span class="title">Exception</span>）</span>&#123;</span><br><span class="line">	<span class="comment">// 在这里重写有参和无参构造方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
       
 
 

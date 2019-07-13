@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
 <meta property="og:description" content="序列化与反序列化 序列化：        把对象转为字节 反序列化：    把字节转为对象  序列化用途：  把对象的字节保存到硬盘上，在网络上传送对象的字节序列 通过序列化进行进程间传递对象  序列化一个对象：  ObjectOutputStream    输出流 writerObject(Object obj) 将对象 obj 进行序列化  反序列化一个对象：  ObjectInputStre">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-25T04:55:35.571Z">
+<meta property="og:updated_time" content="2019-07-13T00:48:57.636Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-序列化与反序列化">
 <meta name="twitter:description" content="序列化与反序列化 序列化：        把对象转为字节 反序列化：    把字节转为对象  序列化用途：  把对象的字节保存到硬盘上，在网络上传送对象的字节序列 通过序列化进行进程间传递对象  序列化一个对象：  ObjectOutputStream    输出流 writerObject(Object obj) 将对象 obj 进行序列化  反序列化一个对象：  ObjectInputStre">
@@ -223,62 +223,9 @@
 <li>readObject() 从输入流中读取字节序列<a id="more"></a>
 Serializable ， Externalizable    序列化反序列化所需要实现的接口<br>Externalizable 继承自 Serializable </li>
 </ul>
-<p>demo:</p>
-<pre><code>import java.io.*;
-
-public class test_1 {
-        public static void main(String [] args) throws IOException, ClassNotFoundException {
-        SerialieUser();        // 进行序列化
-        User user = desSerialieUser(); // 进行反序列化，返回 User 对象
-        System.out.println(user);
-}
-
-private static User desSerialieUser() throws IOException, ClassNotFoundException {
-    // 读取 path 路径文件
-    ObjectInputStream ob = new ObjectInputStream(new FileInputStream(new File(&quot;path&quot;)));
-    // 从输入流中读取字节序列
-    User user = (User) ob.readObject();
-    System.out.println(&quot;反序列化成功&quot;);
-    ob.close();
-    return user;
-}
-
-private static void SerialieUser() throws IOException {
-        User user = new User();
-        user.setName(&quot;张三&quot;);
-        user.setPassword(&quot;li123&quot;);
-        // 将序列化对象写入到 path 路径下
-        ObjectOutputStream ob = new ObjectOutputStream(new FileOutputStream(new File(&quot;/Users/carlos/Documents/a.txt&quot;)));
-        ob.writeObject(user);
-        System.out.println(&quot;序列化成功&quot;);
-        ob.close();
-
-    }
-}
-class User implements Serializable{
-    private static final long serialVersionUID = -5809782578272943999L;
-    String name;
-    String password;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-}
-</code></pre><p>serialVersionUID 序列化版本号，实现 Serializable 接口都有表示序列化版本的标志符的静态变量</p>
-<pre><code>private static final long serialVersionUID = -5809782578272943999L;
-</code></pre><ol>
+<p>demo:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test_1</span> </span>&#123;</span><br><span class="line">  	 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException </span>&#123;</span><br><span class="line">       	SerialieUser();		<span class="comment">// 进行序列化</span></span><br><span class="line">       	User user = desSerialieUser(); <span class="comment">// 进行反序列化，返回 User 对象</span></span><br><span class="line">       	System.out.println(user);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> User <span class="title">desSerialieUser</span><span class="params">()</span> <span class="keyword">throws</span> IOException, ClassNotFoundException </span>&#123;</span><br><span class="line">       <span class="comment">// 读取 path 路径文件</span></span><br><span class="line">       ObjectInputStream ob = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(<span class="string">"path"</span>)));</span><br><span class="line">       <span class="comment">// 从输入流中读取字节序列</span></span><br><span class="line">       User user = (User) ob.readObject();</span><br><span class="line">       System.out.println(<span class="string">"反序列化成功"</span>);</span><br><span class="line">       ob.close();</span><br><span class="line">       <span class="keyword">return</span> user;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SerialieUser</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">       	User user = <span class="keyword">new</span> User();</span><br><span class="line">       	user.setName(<span class="string">"张三"</span>);</span><br><span class="line">       	user.setPassword(<span class="string">"li123"</span>);</span><br><span class="line">       	<span class="comment">// 将序列化对象写入到 path 路径下</span></span><br><span class="line">       	ObjectOutputStream ob = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(<span class="string">"/Users/carlos/Documents/a.txt"</span>)));</span><br><span class="line">       	ob.writeObject(user);</span><br><span class="line">       	System.out.println(<span class="string">"序列化成功"</span>);</span><br><span class="line">       	ob.close();</span><br><span class="line"></span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line">   	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">5809782578272943999L</span>;</span><br><span class="line">   	String name;</span><br><span class="line">   	String password;</span><br><span class="line"></span><br><span class="line">   	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       	<span class="keyword">return</span> name;</span><br><span class="line">   	&#125;</span><br><span class="line"></span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">       	<span class="keyword">this</span>.name = name;</span><br><span class="line">   	&#125;</span><br><span class="line"></span><br><span class="line">   	<span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       	<span class="keyword">return</span> password;</span><br><span class="line">   	&#125;</span><br><span class="line"></span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</span><br><span class="line">       	<span class="keyword">this</span>.password = password;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>serialVersionUID 序列化版本号，实现 Serializable 接口都有表示序列化版本的标志符的静态变量<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">5809782578272943999L</span>;</span><br></pre></td></tr></table></figure></p>
+<ol>
 <li>序列化只对对象状态保存，不管对象方法</li>
 <li>当父类实现序列化，子类不需要实现接口 Serializable 自动实现序列化</li>
 <li>当一个对象的实例变量引用其他对象，序列化该对象时会同时序列化引用对象</li>

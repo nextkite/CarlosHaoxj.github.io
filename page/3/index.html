@@ -183,6 +183,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Spring-MVC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/30/Spring-MVC/">Spring-MVC</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/30/Spring-MVC/" class="archive-article-date">
+  	<time datetime="2018-07-30T01:59:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Spring-MVC-认识"><a href="#Spring-MVC-认识" class="headerlink" title="Spring-MVC 认识"></a>Spring-MVC 认识</h1><p>要学习使用 Sring-MVC 需要了解，掌握一副图，展示了它的工作原理。需要理解并记牢每一步的所要完成的任务。</p>
+<p><img src="/2018/07/30/Spring-MVC/spring-MVC-01.jpg" alt="spring-MVC-01"></p>
+<ul>
+<li>用户发送一个请求，请求先到达 DispatcherServlet ，它需要知道，应该将请求交给哪一个控制器去处理请求</li>
+<li>DispatcherServlet 会去 Hander Mapping （处理器映射）查询下一站应该去何处。Hander Mapping 会将 DispatcherServlet 携带的 URL 进行判断，将结果告诉 DispatcherServlet ，然后将请求送达对应的控制器</li>
+<li>控制器进行数据逻辑处理，处理后会产生用户所需要的信息（Model），还需要一个展示模型的页面（JSP）,控制器将处理完的结果进行整理（ModelAndView）,返回给 DispatcherServlet</li>
+<li>这时候的虽然得到了 ModelAndView ，但是这里的 View 仅仅是一个逻辑名称，所以接下来需要将信息交给 ViewResolver（视图解析器）进行处理，返回一个相应的页面。</li>
+<li>最后将解析完成的 ModelAndView 返回给用户。</li>
+</ul>
+        
+      
+
+
+	
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spring-MVC</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/30/Spring-MVC/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Java-基础-关键字volatile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
