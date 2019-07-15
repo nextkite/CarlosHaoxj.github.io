@@ -183,6 +183,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SpringBoot-接收参数方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/SpringBoot-接收参数方法/">SpringBoot-接收参数方法</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/20/SpringBoot-接收参数方法/" class="archive-article-date">
+  	<time datetime="2019-06-20T07:29:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SpringBoot-接收参数方法"><a href="#SpringBoot-接收参数方法" class="headerlink" title="SpringBoot 接收参数方法"></a>SpringBoot 接收参数方法</h1><h2 id="请求路径参数"><a href="#请求路径参数" class="headerlink" title="请求路径参数"></a>请求路径参数</h2><ul>
+<li>@PathVariable: 获取路径参数 <strong>url/{id}</strong></li>
+<li>@RequestParam: 获取查询参数 <strong>url/?id=</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">//访问路径：http://localhost:8080/hello/&#123;id&#125;</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(value = <span class="string">"/hello/&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello_1</span><span class="params">(@PathVariable(name = <span class="string">"id"</span>)</span> Integer id)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"id:"</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//访问路径：http://localhost:8080/hello?id=1</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(value = <span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello_2</span><span class="params">(@RequestParam(<span class="string">"id"</span>)</span> Integer id)</span>&#123;</span><br><span class="line">        <span class="comment">// 如果传进来的参数为空的话，可以设置为默认的</span></span><br><span class="line">        <span class="comment">// @RequestParam(value = "id", required = false, defaultValue = "5"</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"id:"</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Body-参数"><a href="#Body-参数" class="headerlink" title="Body 参数"></a>Body 参数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@PostMapping</span>(path = <span class="string">"/hello1"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello_3</span><span class="params">(@RequestBody Object object)</span> </span>&#123;</span><br><span class="line">        System.out.println(object.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="无注解"><a href="#无注解" class="headerlink" title="无注解"></a>无注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">//访问路径：http://localhost:8080/hello?id=1551</span></span><br><span class="line">    <span class="meta">@PostMapping</span>(path = <span class="string">"/hello2"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello2</span><span class="params">(Object object)</span> </span>&#123;</span><br><span class="line">        System.out.println(object.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="请求头参数以及-Cookie"><a href="#请求头参数以及-Cookie" class="headerlink" title="请求头参数以及 Cookie"></a>请求头参数以及 Cookie</h3><ul>
+<li>@RequestHeader</li>
+<li>@CookieValue<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/hello3"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello3</span><span class="params">(@RequestHeader(name = <span class="string">"myHeader"</span>)</span> String myHeader,</span></span><br><span class="line"><span class="function">            @<span class="title">CookieValue</span><span class="params">(name = <span class="string">"myCookie"</span>)</span> String myCookie) </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"myHeader="</span> + myHeader);</span><br><span class="line">        System.out.println(<span class="string">"myCookie="</span> + myCookie);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+
+
+	
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring Boot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/后端生态/Spring-Boot//" class="article-tag-list-link color2">Spring Boot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/20/SpringBoot-接收参数方法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-距2020还有200天" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -653,7 +754,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="JVM-编译器优化"><a href="#JVM-编译器优化" class="headerlink" title="JVM-编译器优化"></a>JVM-编译器优化</h1>
+        <h1 id="JVM-编译器优化"><a href="#JVM-编译器优化" class="headerlink" title="JVM-编译器优化"></a>JVM-编译器优化</h1><ol>
+<li><em>.java 转变成 </em>.class 过程；前端编译器，Sun 的 Javac</li>
+<li>字节码转机器码；JIT编译器，HotSpot VM 的 C1、C2编译器</li>
+<li>编译成本地机器代码；AOT编译器</li>
+</ol>
         
       
 
@@ -988,105 +1093,6 @@
 
 
   
-    <article id="post-JVM-内存区域" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/25/JVM-内存区域/">JVM-内存区域</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/25/JVM-内存区域/" class="archive-article-date">
-  	<time datetime="2019-02-25T05:09:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="JVM-内存区域"><a href="#JVM-内存区域" class="headerlink" title="JVM-内存区域"></a>JVM-内存区域</h1><h2 id="线程私有"><a href="#线程私有" class="headerlink" title="线程私有"></a>线程私有</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>当前线程执行的字节码行号指示器，每个线程都有独立的程序计数器，线程间互不影响，独立存储。当执行 Java 方法时指向下个要执行的字节码行号；当执行该计数器值为空（Undefined）</p>
-<h3 id="Java-虚拟机栈"><a href="#Java-虚拟机栈" class="headerlink" title="Java 虚拟机栈"></a>Java 虚拟机栈</h3><p>每一个线程都有自己的虚拟机栈，方法调用到返回的过程对应虚拟机中入栈到出栈的过程。</p>
-<ul>
-<li>基本数据类型：byte,char,int,float,short,double,boolen,long</li>
-<li>对象引用：非对象本身，指向对象地址的引用指针或者是指向一个代表对象的句柄或与此对象相关的位置</li>
-<li>returnAddress类型：指向一条字节码指令的地址</li>
-</ul>
-<p>栈溢出两种异常：</p>
-<ul>
-<li>StackOverflowError: 线程请求栈的深度大于虚拟机容许深度</li>
-<li>OutOfMemoryError: 虚拟机动态扩展无法申请到足够内存空间</li>
-</ul>
-<p>当单线程情况下只会出现 StackOverflowError 异常，<br></p>
-        
-      
-
-
-	
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/25/JVM-内存区域/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1233,6 +1239,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring Boot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
@@ -1242,10 +1252,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring Boot</a>
               </li>
             
             <div class="clearfix"></div>
