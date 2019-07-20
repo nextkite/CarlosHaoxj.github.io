@@ -10,18 +10,18 @@
 
   <title>SpringBoot-接收参数方法 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="SpringBoot 接收参数方法请求路径参数 @PathVariable: 获取路径参数 url/{id} @RequestParam: 获取查询参数 url/?id=12345678910111213141516@RestControllerpublic class ControllerTest &amp;#123;    //访问路径：http://localhost:8080/hello/&amp;#12">
+  <meta name="description" content="SpringBoot 接收参数方法请求路径参数 @PathVariable: 获取路径参数 url/{id} @RequestParam: 获取查询参数 url/?id=">
 <meta name="keywords" content="Spring Boot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot-接收参数方法">
 <meta property="og:url" content="http://yoursite.com/2019/06/20/SpringBoot-接收参数方法/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="SpringBoot 接收参数方法请求路径参数 @PathVariable: 获取路径参数 url/{id} @RequestParam: 获取查询参数 url/?id=12345678910111213141516@RestControllerpublic class ControllerTest &amp;#123;    //访问路径：http://localhost:8080/hello/&amp;#12">
+<meta property="og:description" content="SpringBoot 接收参数方法请求路径参数 @PathVariable: 获取路径参数 url/{id} @RequestParam: 获取查询参数 url/?id=">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-13T15:00:09.605Z">
+<meta property="og:updated_time" content="2019-07-15T11:41:43.810Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot-接收参数方法">
-<meta name="twitter:description" content="SpringBoot 接收参数方法请求路径参数 @PathVariable: 获取路径参数 url/{id} @RequestParam: 获取查询参数 url/?id=12345678910111213141516@RestControllerpublic class ControllerTest &amp;#123;    //访问路径：http://localhost:8080/hello/&amp;#12">
+<meta name="twitter:description" content="SpringBoot 接收参数方法请求路径参数 @PathVariable: 获取路径参数 url/{id} @RequestParam: 获取查询参数 url/?id=">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -205,9 +205,10 @@
       
         <h1 id="SpringBoot-接收参数方法"><a href="#SpringBoot-接收参数方法" class="headerlink" title="SpringBoot 接收参数方法"></a>SpringBoot 接收参数方法</h1><h2 id="请求路径参数"><a href="#请求路径参数" class="headerlink" title="请求路径参数"></a>请求路径参数</h2><ul>
 <li>@PathVariable: 获取路径参数 <strong>url/{id}</strong></li>
-<li>@RequestParam: 获取查询参数 <strong>url/?id=</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">//访问路径：http://localhost:8080/hello/&#123;id&#125;</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(value = <span class="string">"/hello/&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello_1</span><span class="params">(@PathVariable(name = <span class="string">"id"</span>)</span> Integer id)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"id:"</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//访问路径：http://localhost:8080/hello?id=1</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(value = <span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello_2</span><span class="params">(@RequestParam(<span class="string">"id"</span>)</span> Integer id)</span>&#123;</span><br><span class="line">        <span class="comment">// 如果传进来的参数为空的话，可以设置为默认的</span></span><br><span class="line">        <span class="comment">// @RequestParam(value = "id", required = false, defaultValue = "5"</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"id:"</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>@RequestParam: 获取查询参数 <strong>url/?id=</strong><a id="more"></a>
 </li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">//访问路径：http://localhost:8080/hello/&#123;id&#125;</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(value = <span class="string">"/hello/&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello_1</span><span class="params">(@PathVariable(name = <span class="string">"id"</span>)</span> Integer id)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"id:"</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//访问路径：http://localhost:8080/hello?id=1</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(value = <span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello_2</span><span class="params">(@RequestParam(<span class="string">"id"</span>)</span> Integer id)</span>&#123;</span><br><span class="line">        <span class="comment">// 如果传进来的参数为空的话，可以设置为默认的</span></span><br><span class="line">        <span class="comment">// @RequestParam(value = "id", required = false, defaultValue = "5"</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"id:"</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="Body-参数"><a href="#Body-参数" class="headerlink" title="Body 参数"></a>Body 参数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@PostMapping</span>(path = <span class="string">"/hello1"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello_3</span><span class="params">(@RequestBody Object object)</span> </span>&#123;</span><br><span class="line">        System.out.println(object.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="无注解"><a href="#无注解" class="headerlink" title="无注解"></a>无注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">//访问路径：http://localhost:8080/hello?id=1551</span></span><br><span class="line">    <span class="meta">@PostMapping</span>(path = <span class="string">"/hello2"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello2</span><span class="params">(Object object)</span> </span>&#123;</span><br><span class="line">        System.out.println(object.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="请求头参数以及-Cookie"><a href="#请求头参数以及-Cookie" class="headerlink" title="请求头参数以及 Cookie"></a>请求头参数以及 Cookie</h3><ul>
@@ -513,11 +514,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spring-MVC</a>
+                <a href="javascript:void(0)" class="js-tag color2">Spring Boot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring Boot</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spring-MVC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,6 +531,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
             
             <div class="clearfix"></div>

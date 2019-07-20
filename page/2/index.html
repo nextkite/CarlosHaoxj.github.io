@@ -183,6 +183,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JVM-垃圾处理机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/28/JVM-垃圾处理机制/">JVM-垃圾处理机制</a>
+    </h1>
+  
+
+        
+        <a href="/2019/02/28/JVM-垃圾处理机制/" class="archive-article-date">
+  	<time datetime="2019-02-28T00:43:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="垃圾处理机制"><a href="#垃圾处理机制" class="headerlink" title="垃圾处理机制"></a>垃圾处理机制</h1><h2 id="辨别对象状态"><a href="#辨别对象状态" class="headerlink" title="辨别对象状态"></a>辨别对象状态</h2><p>Java 堆中存放着大多是对象（Class 对象存放在方法区中），对象两种状态：存活或者死亡，对于已经死亡的对象，就需要 Java 虚拟机通过垃圾处理机制移除，一直存放无用内存会占用没有必要的内存空间，判断对象状态的方式有：引用计数算法和可达性算法。</p>
+<p>判定一个对象是存活还是死亡需要通过两次标记才可实现，通过可达性算法，发现没有与 GC Roots 相连接的引用链，将会进行第一次标记；第二次标记需要判断是否有必要执行 <code>finalize()</code> 方法，有必要执行，在执行过程中重新赋值回到 GC Roots 引用链中，可以实现复活；当没有必要执行，可能是没有覆盖 <code>finalize()</code> 或者 <code>finalize()</code> 已经被其他线程调用，就会进行垃圾回收。总结是：第二次标记可执行 <code>finalize()</code> 能有机会实现自救，不可执行，进行垃圾回收<br><strong>任何一个对象的 <code>finalize()</code> 方法只会被调用一次，也就是说只有一次自救机会</strong></p>
+<h3 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h3><p>为对象添加一个引用计数起，当有一个对象引用时，计数器就加 1，引用失效，计数器就减 1，当引用计数器为 0 时，该对象是不可能再被利用就可移除内存。引用计数器的缺点是：无法解决循环引用问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Test test_1 = <span class="keyword">new</span> Test();</span><br><span class="line">Test test_2 = <span class="keyword">new</span> Test();</span><br><span class="line">test_1.instance = test_2;</span><br><span class="line">test_2.instance = test_1;</span><br></pre></td></tr></table></figure>
+        
+      
+
+
+	
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/28/JVM-垃圾处理机制/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-JVM-内存区域" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1040,93 +1130,6 @@
 
 
   
-    <article id="post-Spring-IoC-源码解读" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/20/Spring-IoC-源码解读/">Spring IoC 源码解读</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/20/Spring-IoC-源码解读/" class="archive-article-date">
-  	<time datetime="2018-11-20T11:55:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Spring-IoC"><a href="#Spring-IoC" class="headerlink" title="Spring IoC"></a>Spring IoC</h1><p>IoC(Inversion of Control):Spring 框架中重要的一种理念，之前有过这方面的介绍。这篇主要记录 IoC 实现过程，如何完成控制反转。我们在使用 Spring 时，需要一种描述让 IoC 容器知道创建的对象与对象的关系，这个描述就是我们的可配置文件。（xml, properties）。</p>
-        
-      
-
-
-	
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/20/Spring-IoC-源码解读/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1269,11 +1272,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spring-MVC</a>
+                <a href="javascript:void(0)" class="js-tag color2">Spring Boot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring Boot</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spring-MVC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1286,6 +1289,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
             
             <div class="clearfix"></div>

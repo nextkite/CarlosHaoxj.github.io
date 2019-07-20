@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
 
 
-  <title>Java-基础-反射 | CarlosHaoxj&#39;s Blog</title>
+  <title>JVM-运行期优化 | CarlosHaoxj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="反射 定义：反射机制能够动态的操纵 Java 代码的程序，能够分析类能力的程序。  通过编译之后的字节码文件获取类中对象，可以得到类中的所有属性，方法，并且可以动态的操作该类。反射的关键源于 Class 类发挥的作用，该类在 java.lang.Class包下。 Class 类java.lang.Class 类的实例对象，任何一个类都是 Classs 实例对象，获取 Class 对象的三种方式 我">
-<meta name="keywords" content="Java">
+  <meta name="description" content="JVM 运行期优化Java 程序最初是通过解释器（Interpreter）进行解释执行的，当虚拟机发现某个方法或者代码块运行特别频繁时，就会把这些代码认定为 “热点代码”。为了提高热点代码的执行效率，虚拟机将会把这些代码编译成与本地相关的机器码，并进行各种层次优化，完成这个任务的编译器称之为即时编译器。">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java-基础-反射">
-<meta property="og:url" content="http://yoursite.com/2019/01/04/Java-基础-反射/index.html">
+<meta property="og:title" content="JVM-运行期优化">
+<meta property="og:url" content="http://yoursite.com/2019/03/27/JVM-运行期优化/index.html">
 <meta property="og:site_name" content="CarlosHaoxj&#39;s Blog">
-<meta property="og:description" content="反射 定义：反射机制能够动态的操纵 Java 代码的程序，能够分析类能力的程序。  通过编译之后的字节码文件获取类中对象，可以得到类中的所有属性，方法，并且可以动态的操作该类。反射的关键源于 Class 类发挥的作用，该类在 java.lang.Class包下。 Class 类java.lang.Class 类的实例对象，任何一个类都是 Classs 实例对象，获取 Class 对象的三种方式 我">
+<meta property="og:description" content="JVM 运行期优化Java 程序最初是通过解释器（Interpreter）进行解释执行的，当虚拟机发现某个方法或者代码块运行特别频繁时，就会把这些代码认定为 “热点代码”。为了提高热点代码的执行效率，虚拟机将会把这些代码编译成与本地相关的机器码，并进行各种层次优化，完成这个任务的编译器称之为即时编译器。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-13T00:47:10.258Z">
+<meta property="og:updated_time" content="2019-07-20T08:24:26.445Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java-基础-反射">
-<meta name="twitter:description" content="反射 定义：反射机制能够动态的操纵 Java 代码的程序，能够分析类能力的程序。  通过编译之后的字节码文件获取类中对象，可以得到类中的所有属性，方法，并且可以动态的操作该类。反射的关键源于 Class 类发挥的作用，该类在 java.lang.Class包下。 Class 类java.lang.Class 类的实例对象，任何一个类都是 Classs 实例对象，获取 Class 对象的三种方式 我">
+<meta name="twitter:title" content="JVM-运行期优化">
+<meta name="twitter:description" content="JVM 运行期优化Java 程序最初是通过解释器（Interpreter）进行解释执行的，当虚拟机发现某个方法或者代码块运行特别频繁时，就会把这些代码认定为 “热点代码”。为了提高热点代码的执行效率，虚拟机将会把这些代码编译成与本地相关的机器码，并进行各种层次优化，完成这个任务的编译器称之为即时编译器。">
   
     <link rel="alternative" href="/atom.xml" title="CarlosHaoxj&#39;s Blog" type="application/atom+xml">
   
@@ -183,45 +183,104 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java-基础-反射" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-JVM-运行期优化" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Java-基础-反射
+      JVM-运行期优化
     </h1>
   
 
         
-        <a href="/2019/01/04/Java-基础-反射/" class="archive-article-date">
-  	<time datetime="2019-01-04T06:41:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-04</time>
+        <a href="/2019/03/27/JVM-运行期优化/" class="archive-article-date">
+  	<time datetime="2019-03-27T11:42:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><ul>
-<li>定义：反射机制能够动态的操纵 Java 代码的程序，能够分析类能力的程序。</li>
-</ul>
-<p>通过编译之后的字节码文件获取类中对象，可以得到类中的所有属性，方法，并且可以动态的操作该类。反射的关键源于 Class 类发挥的作用，该类在 <code>java.lang.Class</code>包下。</p>
-<h2 id="Class-类"><a href="#Class-类" class="headerlink" title="Class 类"></a>Class 类</h2><p>java.lang.Class 类的实例对象，任何一个类都是 Classs 实例对象，获取 Class 对象的三种方式</p>
-<p>我们先定义一个 Student 类，在该类中定义变量和方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</span><br><span class="line">   	<span class="keyword">private</span> String name;</span><br><span class="line">   	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">       	System.out.println(<span class="string">"show"</span>);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="JVM-运行期优化"><a href="#JVM-运行期优化" class="headerlink" title="JVM 运行期优化"></a>JVM 运行期优化</h1><p>Java 程序最初是通过解释器（Interpreter）进行解释执行的，当虚拟机发现某个方法或者代码块运行特别频繁时，就会把这些代码认定为 “热点代码”。为了提高热点代码的执行效率，虚拟机将会把这些代码编译成与本地相关的机器码，并进行各种层次优化，完成这个任务的编译器称之为即时编译器。</p>
 <a id="more"></a>
-<p>然后编写一个测试类，分别测试三种获取 Class 对象的方式</p>
-<p>第一种方式 <code>Class c_0 = Student.class;</code>，我们知道当运行一段代码第一步是进行编译，Java 程序文件后缀在编译之前 <code>.java</code> 文件，编译之后为 <code>.class</code> 文件，只要编译通过就会生成，第一种方式直接调用 Student 类的字节码文件，获取所需要的对象</p>
-<p>第二种方式 <code>Class c_1 = student.getClass();</code>，当我已经实例化一个 Student 对象，学习 Object 类知道所有类默认继承 Object 类，在 Object 类下有一个方法可以获取类信息，直接调用即可。</p>
-<p>第三种方式 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Class c_2 = <span class="keyword">null</span>;</span><br><span class="line">c_2 = Class.forName(<span class="string">"这里写类的全称"</span>);<span class="comment">// 比如 demo.Student</span></span><br></pre></td></tr></table></figure>
-<p>测试程序主要代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException </span>&#123;</span><br><span class="line">       Student student = <span class="keyword">new</span> Student();</span><br><span class="line">       Class c_0 = Student.class;</span><br><span class="line"></span><br><span class="line">       Class c_1 = student.getClass();</span><br><span class="line"></span><br><span class="line">       Class c_2 = <span class="keyword">null</span>;</span><br><span class="line">       c_2 = Class.forName(<span class="string">"demo.Student"</span>);</span><br><span class="line"></span><br><span class="line">       System.out.println(c_0);</span><br><span class="line">       System.out.println(c_1);</span><br><span class="line">       System.out.println(c_2);</span><br><span class="line">       </span><br><span class="line">       System.out.println(c_0 == c_1);</span><br><span class="line">       System.out.println(c_0 == c_2);</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>打印结果为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class demo.Student</span><br><span class="line">class demo.Student</span><br><span class="line">class demo.Student</span><br><span class="line">true</span><br><span class="line">true</span><br></pre></td></tr></table></figure>
-<p>先查看 Class 类的三个对象，然后进行比较发现不论属于哪一种方式创建 Class 类创建的对象，他们都属于同一个对象，并没有重新编译生成。</p>
-<p>获取程序在运行时刻的内部结构只是第一步，我们可以继续挖掘内部结构信息，比如声明定义的方法，变量等，常用的 Class 类下的方法主要有 <code>getConstructor</code>, <code>getField</code> 和 <code>getMethod</code> 分别获取构造方法，获取域还有方法，这里三个方法除了会获取 public 的函数对象，还会获取继承父类的所有元素。相比对应的 <code>getDeclaredConstructor</code>, <code>getDeclaredField</code>, <code>getDeclareMethod</code>这三个方法同样获取构造方法，域还有方法，但是这三个方法只会获取对象本身的方法，不问访问权限。每个方法都有自己的所属类。</p>
+<h2 id="解释器与编译器"><a href="#解释器与编译器" class="headerlink" title="解释器与编译器"></a>解释器与编译器</h2><p>HotSpot 虚拟机中内置俩个解释器，分别称为 Client Compiler 和 Server Compiler；程序使用哪一个编译器取决于虚拟机运行模式，HotSpot 会根据自身版本与宿主机器的硬件性能自动选择运行模式；用户可以使用 “-client” 或 “-server” 参数去强制只能虚拟机运行模式。</p>
+<p>为了在程序启动响应速度与运行效率达到最佳平衡，HotSpot 会逐渐启用分层编译；最初在 JDK 1.6 时期出现，在 JDK 1.7 的 Server 模式虚拟机中默认编译策略。分层编译，三层：</p>
+<ol>
+<li>第 0 层：程序解释执行，解释器不开启性能监控功能，可出发第一层编译</li>
+<li>第 1 层：Client Compiler 编译，将字节码编译成本地代码，进行简单可靠的优化，如有必要将加入性能优化逻辑</li>
+<li>第 2 层：Server Compiler 编译，将字节码编译成本地代码，但是会启用一些编译耗时较长的优化，甚至会根据性能监控信息进行一些不可靠的激进优化</li>
+</ol>
+<p>实施分层编译后，Client Compiler 和 Server Compiler 将会同时工作，许多代码都可能被多次编译。</p>
+<h3 id="编译对象与触发条件"><a href="#编译对象与触发条件" class="headerlink" title="编译对象与触发条件"></a>编译对象与触发条件</h3><p>”热点代码“ 分类</p>
+<ul>
+<li><p>被多次调用的方法（方法调用计数器）：一个方法被调用多次，自然就成为 “热点代码”</p>
+</li>
+<li><p>被多次执行的循环体 （回边计数器）：一个方法被调用一次或少量的几次，但是方法体内部存在循环次数较多的循环体</p>
+</li>
+</ul>
+<h4 id="判断一段代码是否为-“热点代码”"><a href="#判断一段代码是否为-“热点代码”" class="headerlink" title="判断一段代码是否为 “热点代码”"></a>判断一段代码是否为 “热点代码”</h4><h5 id="采样热点探测"><a href="#采样热点探测" class="headerlink" title="采样热点探测"></a>采样热点探测</h5><p>周期性检查各个线程的栈顶，如果发现某个方法经常出现在栈顶，那么这个方法就是 “热点代码”</p>
+<ul>
+<li>优点：简单、高效，还可以获取方法调用关系</li>
+<li>缺点：很难精确确认一个方法的热度，容易收到线程阻塞或者别的外界因素影响而扰乱热点检测</li>
+</ul>
+<h5 id="基于计数器的热点探测"><a href="#基于计数器的热点探测" class="headerlink" title="基于计数器的热点探测"></a>基于计数器的热点探测</h5><p>会为每个方法建立计数器，统计方法执行次数，如果执行次数超过一定阈值，就会判为 “热点代码”</p>
+<p>在 HotSpot 虚拟机中采用基于计数器的热点监测，因此会为每个方法设定两类计数器</p>
+<h5 id="方法调用计数器"><a href="#方法调用计数器" class="headerlink" title="方法调用计数器"></a>方法调用计数器</h5><p>用于统计方法被调用的次数，默认阈值在 Server 模式下是 10000 次，在 Client 模式下为 1500 次，可以通过 -XX:CompileThreshold 来认为设定。</p>
+<p>当一个方法被调用时，会检查该方法是否被 JIT 编译过的版本，如果存在</p>
+<p>优先使用编译后的本地代码执行，如果不存在</p>
+<p>将会在此方法的调用计数器上加 1，然后判断方法调用计数器与回边计数器值之和是否超过方法调用器的阈值，如果超过</p>
+<p>将会向编译器提交一个编译请求</p>
+<p>如果不做任何设置，执行引擎不会同步等待编译请求完成，而是继续进入解释器按照解释方式执行字节码，直到提交的请求被编译器提交完成</p>
+<p>方法调用器次数并不是绝对次数，相对的执行频率，一段时间内被调用的次数。当超过一定时间限度，如果方法调用次数仍然不满足提交给编译器执行，这个方法调用器次数就会减少一半，该过程称为方法调用器热度衰减，这段时间称为此方法统计的半衰周期。</p>
+<h5 id="回边计数器"><a href="#回边计数器" class="headerlink" title="回边计数器"></a>回边计数器</h5><p>统计一个方法体中循环体执行次数，。在字节码中遇到控制流向后跳转的指令称之为 “回边”，建立回边计数器目的为触发 OSR 编译</p>
+<ul>
+<li>OSR 编译：On Stack Replacement 栈上替换，即方法栈帧还在栈上，方法就被替换了</li>
+</ul>
+<p>虚拟机运行在Client模式下，回边计数器阈值计算公式为： 方法调用计数器阈值(CompileThreshold) * OSR比率(OnStackReplacePercentage) / 100．其中OnStackReplacePercentage默认值为933，如果都取默认值，那Client模式虚拟机的回边计数器的阈值为13995．</p>
+<p>虚拟机运行在Server模式下，回边计数器阈值的计算公式为： 方法调用计数器阈值(CompileThreshold) * (OSR比率(OnStackReplacePercentage) - 解释器监控比率(InterpreterProfilePercentage)) / 100．其中OnStackReplacePercentage的默认值为140，InterpreterProfilePercentage的默认值为33，如果都取默认值，那Server模式虚拟机回边计数器的阈值为10700．</p>
+<p>当解释器收到一条回边指令，会先查找将要执行的代码片段是否有已经编译好的版本，如果有</p>
+<p>优先执行已经编译好的版本，否则</p>
+<p>回边计数器值加 1，然后判断方法调用计数器与回边计数器值之和是否超过方法调用器的阈值，如果超过</p>
+<p>将会提交一个 OSR 编译请求，并且将回边计数器值降低， 便于继续在解释器中执行循环，</p>
+<p>与方法调用器相比，回边计数器没有热度衰减过程，计数器统计的次数就是循环执行的绝对次数</p>
+<h3 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h3><p>在默认设置下，无论是方法调用产生的即时编译请求，还是OSR编译请求，虚拟机在代码编译器还未完成之前，都仍然将按照解释方式继续执行，而编译动作则在后台的编译线程中进行．用户可以通过参数<strong>-XX:-BackgroundCompilation</strong>来进制后台编译，在禁止后台编译后，一旦达到JIT的编译条件，执行线程向虚拟机提交编译请求后将一直等待，直到编译过程完成后再开始执行编译器输出的本地代码．</p>
+<p>那么在后台执行编译过程中，编译器做了什么事情呢？Server Compiler和Client Compiler两个编译器的编译过程是不一样的．对于Client Compiler来说，它是一个简单快速的三段式编译器，主要的关注点在于局部性的优化，而放弃了许多耗时较长的全局优化手段．</p>
+<h3 id="第一阶段"><a href="#第一阶段" class="headerlink" title="第一阶段"></a>第一阶段</h3><p>一个平台独立的前端将字节码构造成一种高级中间代码表示(High Level Intermediate Representation, HIR)．HIR使用静态单分配(Static Single Assignment, SSA)的形式来代表代码值，这可以使得一些在HIR的构造过程之中和之后进行的优化动作更加容易实现．在此之前编译器会在字节码上完成一部分基础优化，如方法内联，常量传播等优化将在字节码被构造成HIR之前完成．</p>
+<h3 id="第二阶段"><a href="#第二阶段" class="headerlink" title="第二阶段"></a>第二阶段</h3><p>一个平台相关的后端从HIR中产生低级中间代码完成(Low-Level Intermediate Representation, LIR)，而在此之前会在HIR上完成另外一种优化，如空值检查清除，范围检查清除等，以便让HIR达到更高效的代码表示形式</p>
+<h3 id="第三阶段"><a href="#第三阶段" class="headerlink" title="第三阶段"></a>第三阶段</h3><p>最后阶段是在平台相关的后端使用线性扫描算法和LIR上分配寄存器，并在LIR上做窥孔优化，然后产生机器代码．Client Compiler的大致执行过程如下图所示:</p>
+<h2 id="编译优化技术"><a href="#编译优化技术" class="headerlink" title="编译优化技术"></a>编译优化技术</h2><h3 id="公共子表达式消除"><a href="#公共子表达式消除" class="headerlink" title="公共子表达式消除"></a>公共子表达式消除</h3><ul>
+<li>含义：如果一个表达式 E 已经计算过了，并且从先前的计算到现在 E 中所有变量的值都没有发生变化，那么E的这次出现就成为了公共子表达式</li>
+<li>局部公共子表达式消除：优化仅限于程序基本块</li>
+<li>全局公共子表达式消除：范围涵盖了多个基本块</li>
+</ul>
+<p>假设存在如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> d = (c * b) * <span class="number">12</span> + a + (a + b * c);</span><br></pre></td></tr></table></figure>
+<p>当这段代码进入到虚拟机即时编译器后，它将进行如下优化：编译器检测到”c<em>b”与”b</em>c”是一样的表达式，而且在计算期间b与c的值是不变的．因此，这条表达式就可能被视为:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> d = E * <span class="number">12</span> + a + (a + E);</span><br></pre></td></tr></table></figure>
+<p>这时，编译器还可能进行另外一种优化：代数化简，把表达式变为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> d = E * <span class="number">13</span> + a * <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="数组范围检查消除"><a href="#数组范围检查消除" class="headerlink" title="数组范围检查消除"></a>数组范围检查消除</h3><p>果数组的下标是一个常量，如 foo[3]，只要在编译器根据数据流分析来确定foo.length 的值，并判断下标 ”3” 没有越界，执行的时候就无须判断了。更加常见的情况是数组访问发生在循环之中，并且使用循环变量来进行数组访问，如果编译器只要通过数据流分析就可以判定循环变量的取值范围永远在 [0, foo.length) 之内，那在整个循环中就可以把数组的上下界检查消除，这可以节省很多次的条件判断操作．</p>
+<h3 id="方法内联"><a href="#方法内联" class="headerlink" title="方法内联"></a>方法内联</h3><p>方法内联看起来只不过是将目标方法的代码复制到发起调用的方法中，避免发生真实的方法调用而已．但实际上Java虚拟机中的内联过程远远没有那么简单，因为如果不是即时编译器做了一些特别的努力，按照经典编译原理的优化理论，大多数的  Java 方法都无法进行内联</p>
+<p>无法内联的原因很简单，对于虚方法来说，Java 只有在运行时才能确定到底要调用方法的哪个版本。在编译器的方法内联过程中，<strong>根本就无法完成</strong></p>
+<p>为了解决虚方法的内联问题，Java 虚拟机设计团队想了很多办法，首先是引入了一种名为 ”类型继承关系分析” (Class Hierarchy Analysis, CHA) 的技术，这是一种基于整个应用程序的类型分析技术，它用于确定在目前已加载的类中，某个接口是否有多于一种的实现，某个类是否存在子类，子类是否为抽象类等信息．</p>
+<p>编译器在进行内联时，如果是非虚方法，那么直接进行内联就可以了，这时候的内联是有稳定前提保障的。如果遇到虚方法，则会向 CHA 查询此方法在当前程序下是否有多个目标版本可供选择，如果查询结果只有一个版本，那也可以进行内联，不过这种内联就属于激进优化，需要预留一个＂逃生门＂，称为守护内联。</p>
+<p>如果程序的后续执行过程中，虚拟机一直没有加载到会令这个方法的接受者的继承关系发生变化的类，那这个内联优化的代码就可以一直使用下去。但如果加载了导致继承关系发生变化的新类，那就需要抛弃已经编译好的版本，退回到解释状态执行，或者重新进行编译。</p>
+<p>如果向 CHA 查询出来的结果是有多个版本的目标方法可供选择，则编译器还将会进行最后一次努力，使用内联缓存来完成方法内联，这是一个建立在目标方法正常入口之前的缓存，它的工作原理大致是：在未发生方法调用之前，内联缓存状态为空，当第一次调用发生后，缓存记录下方法接受者的版本信息，并且每次进行方法调用时都比较接受者版本，如果以后进来的每次调用的方法接受者版本都是一样的，那这个内联还可以一直用下去。如果发生了方法接受者不一致的情况，就说明程序真正使用了虚方法的多态特性，这时才会取消内敛，查找虚方法表进行方法分派</p>
+<h3 id="逃逸分析"><a href="#逃逸分析" class="headerlink" title="逃逸分析"></a>逃逸分析</h3><p>逃逸分析的基本行为就是分析对象动态作用域：当一个对象在方法中被定义后，他可能被外部方法所引用</p>
+<ul>
+<li><p>方法逃逸：作为调用参数传递到其他方法中</p>
+</li>
+<li><p>线程逃逸：被外部线程访问到，譬如赋值给类变量或可以在其他线程中访问的实例变量</p>
+</li>
+</ul>
+<h4 id="栈上分配"><a href="#栈上分配" class="headerlink" title="栈上分配"></a>栈上分配</h4><p>Java 堆中的对象对于各个线程都是共享和可见的，可以回收堆中不再使用的对象，但回收动作无论是筛选可回收对象，还是回收和整理内存都需要耗费时间。如果确定一个对象不会逃逸出方法之外，那让这个对象在栈上分配内存将会是一个很不错的主意，对象所占用的内存空间就可以随栈帧出栈而销毁。在一般应用中，不会逃逸的局部变量所占的比例很大，如果能使用栈上分配，那大量的对象就会随着方法的结束而自动销毁了，垃圾回收系统的压力将会小很多</p>
+<h4 id="同步消除"><a href="#同步消除" class="headerlink" title="同步消除"></a>同步消除</h4><p>线程同步本身是一个相对耗时的过程，如果逃逸分析能够确定一个变量不会逃逸出线程，无法被其他线程访问，那这个变量的读写肯定就不会有竞争，对这个变量实施的同步措施也就可以消除掉</p>
+<h4 id="标量替换"><a href="#标量替换" class="headerlink" title="标量替换"></a>标量替换</h4><p>标量是指一个数据已经无法再分解为更小的数据来表示了。Java 虚拟机中原始数据类型 (int, long 等数值类型以及 reference 类型等)都不能再进一步分解，它们就可以称为标量。相对的，如果一个数据可以继续分解，那么它就称作聚合量，Java 中的对象就是最典型的聚合量．如果把一个 Java 对象拆散，根据程序访问的情况，将其使用到的成员变量恢复原始数据来访问就叫做标量替换。如果逃逸分析证明一个对象不会被外部访问，并且这个对象可以被拆散的话，那程序真正执行的时候将可能不创建这个对象，而改为直接创建它的若干个被这个方法使用到的成员变量来代替。将对象拆分后，除了可以让对象的成员变量在栈上 (栈上存储的数据，有很大概率会被虚拟机分配至物理机器的高速寄存器中存储)分配和读写之外，还可以为后续进一步的优化手段创建条件．</p>
+<blockquote>
+<p>以上内容参考自    《深入理解 Java 虚拟机》</p>
+</blockquote>
 
       
 
@@ -263,7 +322,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -330,7 +389,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/04/Java-基础-反射/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/27/JVM-运行期优化/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -344,18 +403,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/01/27/Java-基础-序列化与反序列化/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/04/05/MySQL-索引/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Java-基础-序列化与反序列化
+          MySQL-索引
         
       </div>
     </a>
   
   
-    <a href="/2019/01/02/设计模式-单例模式及案例/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">设计模式-单例模式及案例</div>
+    <a href="/2019/03/23/JVM-编译器优化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JVM-编译器优化</div>
       <i class="icon-circle-right"></i>
     </a>
   

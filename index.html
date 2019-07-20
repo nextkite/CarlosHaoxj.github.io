@@ -205,16 +205,8 @@
       
         <h1 id="SpringBoot-接收参数方法"><a href="#SpringBoot-接收参数方法" class="headerlink" title="SpringBoot 接收参数方法"></a>SpringBoot 接收参数方法</h1><h2 id="请求路径参数"><a href="#请求路径参数" class="headerlink" title="请求路径参数"></a>请求路径参数</h2><ul>
 <li>@PathVariable: 获取路径参数 <strong>url/{id}</strong></li>
-<li>@RequestParam: 获取查询参数 <strong>url/?id=</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">//访问路径：http://localhost:8080/hello/&#123;id&#125;</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(value = <span class="string">"/hello/&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello_1</span><span class="params">(@PathVariable(name = <span class="string">"id"</span>)</span> Integer id)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"id:"</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//访问路径：http://localhost:8080/hello?id=1</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(value = <span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello_2</span><span class="params">(@RequestParam(<span class="string">"id"</span>)</span> Integer id)</span>&#123;</span><br><span class="line">        <span class="comment">// 如果传进来的参数为空的话，可以设置为默认的</span></span><br><span class="line">        <span class="comment">// @RequestParam(value = "id", required = false, defaultValue = "5"</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"id:"</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Body-参数"><a href="#Body-参数" class="headerlink" title="Body 参数"></a>Body 参数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@PostMapping</span>(path = <span class="string">"/hello1"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello_3</span><span class="params">(@RequestBody Object object)</span> </span>&#123;</span><br><span class="line">        System.out.println(object.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="无注解"><a href="#无注解" class="headerlink" title="无注解"></a>无注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="comment">//访问路径：http://localhost:8080/hello?id=1551</span></span><br><span class="line">    <span class="meta">@PostMapping</span>(path = <span class="string">"/hello2"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello2</span><span class="params">(Object object)</span> </span>&#123;</span><br><span class="line">        System.out.println(object.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="请求头参数以及-Cookie"><a href="#请求头参数以及-Cookie" class="headerlink" title="请求头参数以及 Cookie"></a>请求头参数以及 Cookie</h3><ul>
-<li>@RequestHeader</li>
-<li>@CookieValue<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/hello3"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello3</span><span class="params">(@RequestHeader(name = <span class="string">"myHeader"</span>)</span> String myHeader,</span></span><br><span class="line"><span class="function">            @<span class="title">CookieValue</span><span class="params">(name = <span class="string">"myCookie"</span>)</span> String myCookie) </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"myHeader="</span> + myHeader);</span><br><span class="line">        System.out.println(<span class="string">"myCookie="</span> + myCookie);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
+<li>@RequestParam: 获取查询参数 <strong>url/?id=</strong></li></ul>
+        
       
 
 
@@ -734,6 +726,93 @@
 
 
   
+    <article id="post-JVM-运行期优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/27/JVM-运行期优化/">JVM-运行期优化</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/27/JVM-运行期优化/" class="archive-article-date">
+  	<time datetime="2019-03-27T11:42:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JVM-运行期优化"><a href="#JVM-运行期优化" class="headerlink" title="JVM 运行期优化"></a>JVM 运行期优化</h1><p>Java 程序最初是通过解释器（Interpreter）进行解释执行的，当虚拟机发现某个方法或者代码块运行特别频繁时，就会把这些代码认定为 “热点代码”。为了提高热点代码的执行效率，虚拟机将会把这些代码编译成与本地相关的机器码，并进行各种层次优化，完成这个任务的编译器称之为即时编译器。</p>
+        
+      
+
+
+	
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/27/JVM-运行期优化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-JVM-编译器优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1003,96 +1082,6 @@
 
 
   
-    <article id="post-JVM-垃圾处理机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/28/JVM-垃圾处理机制/">JVM-垃圾处理机制</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/28/JVM-垃圾处理机制/" class="archive-article-date">
-  	<time datetime="2019-02-28T00:43:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="垃圾处理机制"><a href="#垃圾处理机制" class="headerlink" title="垃圾处理机制"></a>垃圾处理机制</h1><h2 id="辨别对象状态"><a href="#辨别对象状态" class="headerlink" title="辨别对象状态"></a>辨别对象状态</h2><p>Java 堆中存放着大多是对象（Class 对象存放在方法区中），对象两种状态：存活或者死亡，对于已经死亡的对象，就需要 Java 虚拟机通过垃圾处理机制移除，一直存放无用内存会占用没有必要的内存空间，判断对象状态的方式有：引用计数算法和可达性算法。</p>
-<p>判定一个对象是存活还是死亡需要通过两次标记才可实现，通过可达性算法，发现没有与 GC Roots 相连接的引用链，将会进行第一次标记；第二次标记需要判断是否有必要执行 <code>finalize()</code> 方法，有必要执行，在执行过程中重新赋值回到 GC Roots 引用链中，可以实现复活；当没有必要执行，可能是没有覆盖 <code>finalize()</code> 或者 <code>finalize()</code> 已经被其他线程调用，就会进行垃圾回收。总结是：第二次标记可执行 <code>finalize()</code> 能有机会实现自救，不可执行，进行垃圾回收<br><strong>任何一个对象的 <code>finalize()</code> 方法只会被调用一次，也就是说只有一次自救机会</strong></p>
-<h3 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h3><p>为对象添加一个引用计数起，当有一个对象引用时，计数器就加 1，引用失效，计数器就减 1，当引用计数器为 0 时，该对象是不可能再被利用就可移除内存。引用计数器的缺点是：无法解决循环引用问题</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Test test_1 = <span class="keyword">new</span> Test();</span><br><span class="line">Test test_2 = <span class="keyword">new</span> Test();</span><br><span class="line">test_1.instance = test_2;</span><br><span class="line">test_2.instance = test_1;</span><br></pre></td></tr></table></figure>
-        
-      
-
-
-	
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/后端生态//" class="article-tag-list-link color5">后端生态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/28/JVM-垃圾处理机制/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1235,11 +1224,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spring-MVC</a>
+                <a href="javascript:void(0)" class="js-tag color2">Spring Boot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring Boot</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spring-MVC</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1252,6 +1241,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
             
             <div class="clearfix"></div>
