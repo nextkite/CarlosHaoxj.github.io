@@ -19,7 +19,7 @@
 <meta property="og:description" content="线程安全为什么出现线程不安全？  在多线程状态下，对共享数据（临界资源）的读写操作不同步导致线程不安全  书中定义  当多个线程访问一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或者在调用方法进行任何其他的协调操作，调用这个对象的行为都可以获得正确的结果，那这个对象就是线程安全的。《Java Concurrency In Practice》Brian Go">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/02/17/Java-基础-关键字synchronized/线程安全.png">
-<meta property="og:updated_time" content="2019-07-13T00:47:44.702Z">
+<meta property="og:updated_time" content="2019-08-05T02:44:21.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java-基础-关键字synchronized">
 <meta name="twitter:description" content="线程安全为什么出现线程不安全？  在多线程状态下，对共享数据（临界资源）的读写操作不同步导致线程不安全  书中定义  当多个线程访问一个对象时，如果不用考虑这些线程在运行时环境下的调度和交替执行，也不需要进行额外的同步，或者在调用方法进行任何其他的协调操作，调用这个对象的行为都可以获得正确的结果，那这个对象就是线程安全的。《Java Concurrency In Practice》Brian Go">
@@ -248,7 +248,7 @@
 <h3 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h3><p>相对于使用操作系统互斥量来实现，在没有多线程竞争前提下，减少传统的重量级锁使用操作系统互斥量产生的性能消耗（线程切换）主要是通过 CAS 操作来实现轻量级锁；在锁无竞争情况下，减少线程切换的性能开销，但在竞争情况下，轻量级比重量级更慢（互斥量和 CAS 操作）</p>
 <h4 id="对象头"><a href="#对象头" class="headerlink" title="对象头"></a>对象头</h4><p>对象头是指 HotSpot 虚拟机的对象内存布局，主要分为两部分</p>
 <ol>
-<li>存储对象运行时数据，如 HashCode, GC 分代年龄等，官方称之为 “Marl Word”</li>
+<li>存储对象运行时数据，如 HashCode, GC 分代年龄等，官方称之为 “Mark Word”</li>
 <li>存储对象方法区对象类型数据的指针</li>
 </ol>
 <p>如果是数组，额外加一部分，用于存储数组长度</p>
@@ -637,7 +637,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,7 +645,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,11 +653,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spring-MVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,11 +661,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spring-MVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
             
             <div class="clearfix"></div>
